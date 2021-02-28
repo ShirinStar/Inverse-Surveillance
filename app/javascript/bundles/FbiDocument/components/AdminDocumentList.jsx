@@ -23,6 +23,7 @@ export default function AdminDocumentList(props) {
   return (
     <>
       <h1>Admin Document List</h1>
+      <a href="/turk_documents/new">Go To Digital Document Form</a>
       <table>
         <thead>
           <tr>

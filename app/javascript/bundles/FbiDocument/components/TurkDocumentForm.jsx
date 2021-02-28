@@ -41,13 +41,16 @@ export default function TurkDocumentForm(props) {
       console.log('done submitting field');
     }
   }
+
   return (
     <>
       <h1>Process a Document</h1> 
-      <p><a 
-        target="_blank"
-        href={props.doc_url}>View Original Document
-      </a></p>
+      <p>
+        <a
+          target="_blank"
+          href={props.docUrl}>View Original Documents
+        </a> 
+      </p>
       <div className="form-doc-container">
         <div className="form-container">
           {digitalDocument === null ? (
