@@ -8,7 +8,6 @@ class TurkDocumentsController < ApplicationController
   def create
     p doc_params
     doc = DigitalDocument.create!(
-      document_number: doc_params[:document_serial_number],
       document_date: doc_params[:document_date],
       document_id: doc_params[:doc_id]
     )
@@ -18,6 +17,6 @@ class TurkDocumentsController < ApplicationController
 
   private
   def doc_params
-    params.permit(:document_date, :document_serial_number, :doc_id)
+    params.permit(:document_date, :doc_id)
   end
 end

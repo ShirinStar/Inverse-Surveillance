@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_28_041654) do
+ActiveRecord::Schema.define(version: 2021_02_28_045637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2021_02_28_041654) do
   end
 
   create_table "digital_documents", force: :cascade do |t|
-    t.string "document_number", null: false
     t.date "document_date", null: false
     t.bigint "document_id"
     t.datetime "created_at", precision: 6, null: false
@@ -52,6 +51,17 @@ ActiveRecord::Schema.define(version: 2021_02_28_041654) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "category"
     t.string "status"
+  end
+
+  create_table "fields", force: :cascade do |t|
+    t.string "serial_number"
+    t.string "text_body"
+    t.string "label"
+    t.boolean "is_redacted"
+    t.bigint "digital_document_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["digital_document_id"], name: "index_fields_on_digital_document_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

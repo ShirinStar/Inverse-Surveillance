@@ -13,9 +13,6 @@ export default function DigitalDocumentForm(props) {
       Digital Document Form
     </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input required type="text" name="document_serial_number" ref={register} />
-        <br />
-        <br />
         <input required name="document_date" type="date" ref={register} />
         <br />
         <br />
