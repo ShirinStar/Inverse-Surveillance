@@ -39,6 +39,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'better_errors-pry'
   gem 'pry-rails'
+  gem 'pry'
   gem 'rspec'
   gem 'rspec-rails', '~> 4.0.2'
 

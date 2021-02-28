@@ -6,8 +6,9 @@ import DigitalDocumentForm from './DigitalDocumentForm';
 
 
 export default function TurkDocumentForm(props) {
-  const { doc_id, page_count } = props;
+  const { docId, pageCount, existingFields } = props;
   const [ digitalDocument, setDocument ] = useState(null);
+  const [ fields, setFields ] = useState([]);
 
   async function initialSubmit(formData) {
     try {
@@ -15,7 +16,7 @@ export default function TurkDocumentForm(props) {
         document.querySelector('[name=csrf-token]').content
       axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
-      const resp = await axios.post('/turk_documents', {...formData, doc_id});
+      const resp = await axios.post('/turk_documents', {...formData, docId});
 
       setDocument(resp.data);
     } catch (e) {
@@ -27,13 +28,13 @@ export default function TurkDocumentForm(props) {
 
   async function saveField(field) {
     console.log(field);
-      const token = 
-        document.querySelector('[name=csrf-token]').content
-      axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    const token = 
+      document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
     try {
-
-    const resp = await axios.post(`/turk_documents/${digitalDocument.id}/fields`, field);
+      const resp = await axios.post(`/turk_documents/${digitalDocument.id}/fields`, field);
+      setFields([...fields, resp.data]);
     } catch (e) {
       console.log(e);
     } finally {
@@ -47,16 +48,29 @@ export default function TurkDocumentForm(props) {
         target="_blank"
         href={props.doc_url}>View Original Document
       </a></p>
-      {digitalDocument === null ? (
-      <DigitalDocumentForm 
-        onSubmit={initialSubmit} />
-      ) : (
-        <FieldForm 
-          page_count={page_count}
-          saveField={saveField}
-          digitalDocument={digitalDocument}
-        />
-      )}
+      <div className="form-doc-container">
+        <div className="form-container">
+          {digitalDocument === null ? (
+            <DigitalDocumentForm 
+              onSubmit={initialSubmit} />
+          ) : (
+            <FieldForm 
+              pageCount={pageCount}
+              existingFields={existingFields}
+              saveField={saveField}
+              digitalDocument={digitalDocument}
+            />
+          )}
+        </div>
+        <div className="field-container">
+          {fields.map(field => (
+            <div key={field.id}>
+              <p>{field.label}</p>
+              <p>{field.text_body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 }

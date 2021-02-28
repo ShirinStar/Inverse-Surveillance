@@ -1,3 +1,9 @@
 // Place all the styles related to the TurkDocuments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.form-doc-container {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+}

@@ -1,8 +1,9 @@
 <%= react_component("TurkDocumentForm",
                     props: {
-                      doc_url: @doc_url,
-                      doc_id: @doc_id,
-                      page_count: @page_count,
+                      docUrl: @doc_url,
+                      docId: @doc_id,
+                      pageCount: @page_count,
+                      existingFields: @labels,
                     },
                     prerender: false) %>
   

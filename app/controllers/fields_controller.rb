@@ -1,7 +1,7 @@
 class FieldsController < ApplicationController
   def create
     field = Field.create!(
-      label: field_params[:label],
+      label: field_params[:label].downcase,
       text_body: field_params[:text_body],
       digital_document_id: field_params[:turk_document_id],
     )
