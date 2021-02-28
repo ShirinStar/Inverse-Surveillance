@@ -1,8 +1,9 @@
 class TurkDocumentsController < ApplicationController
   def new
-    doc = Document.first
+    doc = Document.last
     @doc_url = doc.give_public_url
     @doc_id = doc.id
+    @page_count = doc.page_length
   end
 
   def create
@@ -11,7 +12,7 @@ class TurkDocumentsController < ApplicationController
       document_date: doc_params[:document_date],
       document_id: doc_params[:doc_id]
     )
-    render json: true
+    render json: doc
 
   end
 

@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :fbi_documents
   get 'admin/documents', to: 'admin_documents#index'
-  resources :turk_documents
+  resources :turk_documents do 
+    resources :fields
+  end
 end
