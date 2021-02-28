@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_27_193321) do
+ActiveRecord::Schema.define(version: 2021_02_28_041654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,11 +36,22 @@ ActiveRecord::Schema.define(version: 2021_02_27_193321) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "digital_documents", force: :cascade do |t|
+    t.string "document_number", null: false
+    t.date "document_date", null: false
+    t.bigint "document_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_id"], name: "index_digital_documents_on_document_id"
+  end
+
   create_table "documents", force: :cascade do |t|
     t.string "name"
     t.integer "page_length"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "category"
+    t.string "status"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

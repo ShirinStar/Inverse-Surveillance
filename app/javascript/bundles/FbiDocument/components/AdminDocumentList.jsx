@@ -3,14 +3,18 @@ import Form from './Form';
 
 function ListRow({ doc }) {
   return (
-        <tr>
-          <td>{doc.category}</td>
-          <td>{doc.name}</td>
-          <td>{doc.page_length}</td>
-          <td><a href={doc.original_doc_url}>click it</a></td>
-          <td><a href={doc.digital_doc_url}>click to view</a></td>
-          <td>{doc.status}</td>
-        </tr>
+    <tr>
+      <td>{doc.category}</td>
+      <td>{doc.name}</td>
+      <td>{doc.page_length}</td>
+      <td><a target="_blank"
+        href={doc.original_doc_url}>click it</a>
+      </td>
+      <td><a target="_blank"
+        href={doc.digital_doc_url}>click to view</a>
+      </td>
+      <td>{doc.status}</td>
+    </tr>
   )
 }
 
