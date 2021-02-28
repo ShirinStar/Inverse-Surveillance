@@ -1,8 +1,7 @@
 class AdminDocumentsController < ApplicationController
   def index
-    p Document.count
     docs = Document.all.map do |doc|
-      doc.to_json
+      doc.to_admin_json
     end
 
     @props = {

@@ -13,6 +13,22 @@ class Document < ApplicationRecord
 
     doc.save!
   end
+
+  def give_public_url
+    doc_file.blob.service_url
+  end
+
+  def to_admin_json
+    {
+      id: id,
+      category: "PRE-95",
+      name: name,
+      page_length: page_length,
+      original_doc_url: give_public_url,
+      digital_doc_url: "https://docurl.com",
+      status: "NOT STARTED",
+    }.to_json
+  end
 =begin
   fetch documents from s3 with:
   doc.doc_file.blob.service_url
