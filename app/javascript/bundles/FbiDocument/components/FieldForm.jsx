@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
 import { useForm, Controller } from 'react-hook-form'
 
 import LabelAutocomplete from './LabelAutocomplete';
@@ -9,6 +10,7 @@ export default function FieldForm(props) {
     digitalDocument,
     saveField,
     existingFields,
+    clearFields,
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
@@ -20,20 +22,28 @@ export default function FieldForm(props) {
     setValue,
   } = useForm();
   const [ labelValue, setLabelValue ] = useState(null);
+  const [ pageNumber, setPageNumber ] = useState(1);
+
+  function openNewPage() {
+    setValue("serialNumber", "");
+    setPageNumber(pageNumber + 1);
+    clearFields();
+  }
 
   function onSubmit(formData, ev) {
     const { serialNumber } = formData;
-    saveField({...formData, label: labelValue.label}, ev);
+    saveField({...formData, label: labelValue.label, page_number: pageNumber}, ev);
     setLabelValue("");
     reset();
     setValue("serialNumber", serialNumber);
   }
 
   return (
-    <>
+    <div className="field-form-container">
       <h2>Field Form</h2>
       <h3>Document Date: {digitalDocument.document_date}</h3>
-      <h4>Page Count: {pageCount}</h4>
+      <h4>Page Count: {pageCount - pageNumber + 1}</h4>
+      <h4>Current Page: { pageNumber }</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="serial-number">Document Serial Number</label><br />
         <input
@@ -57,10 +67,14 @@ export default function FieldForm(props) {
           id="text-body"
           name="text_body"
           ref={register} />
-
-        <input type="submit" />
+        <br />
+        <input type="submit" value="Save"/>
       </form>
-    </>
-
+      <br />
+      <Button
+      variant="outlined"
+        onClick={openNewPage}
+      >New Page</Button>
+    </div>
   );
 }

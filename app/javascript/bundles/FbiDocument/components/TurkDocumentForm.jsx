@@ -42,6 +42,10 @@ export default function TurkDocumentForm(props) {
     }
   }
 
+  function clearFields() {
+    setFields([]);
+  }
+
   return (
     <>
       <h1>Process a Document</h1> 
@@ -62,6 +66,7 @@ export default function TurkDocumentForm(props) {
               existingFields={existingFields}
               saveField={saveField}
               digitalDocument={digitalDocument}
+              clearFields={clearFields}
             />
           )}
         </div>
