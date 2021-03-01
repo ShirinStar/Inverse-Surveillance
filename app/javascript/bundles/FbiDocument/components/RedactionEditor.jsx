@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import {
   Editor,
-  EditorState,
   RichUtils,
   Modifier,
   CompositeDecorator,
   AtomicBlockUtils,
+  EditorState,
 } from 'draft-js';
 import 'draft-js/dist/Draft.css';
+import RedactionModal from './RedactionModal';
 
 function Redaction(props) {
+  const { entityKey } = props;
+  const { code } = props.contentState.getEntity(entityKey).data;
   return (
-    <span>hey there</span>
+    <span>{code}</span>
   )
 }
 
 
 function styleBlock(contentBlock) {
-   const type = contentBlock.getType();
+  const type = contentBlock.getType();
 
   console.log(type);
   if (type === 'atomic') {
@@ -25,12 +28,13 @@ function styleBlock(contentBlock) {
   } else {
     return 'unstyled-block'
   }
- 
 }
+
 function renderBlock(contentBlock) {
   const type = contentBlock.getType();
 
   if (type === 'atomic') {
+    contentBlock;
     return {
       component: RedactionBlock,
       editable: false
@@ -48,6 +52,7 @@ function findRedactions(contentBlock, callback, contentState) {
   contentBlock.findEntityRanges(
     (char) => {
       const key = char.getEntity();
+      console.log(char)
       console.log(key);
       return (
         key !== null &&
@@ -65,29 +70,11 @@ const decorator = new CompositeDecorator([
   }
 ])
 
-function handleBold(onChange, state) {
-  const ital = RichUtils.toggleInlineStyle(state, 'ITALICS')
-  const bl = RichUtils.toggleInlineStyle(state, 'BOLD')
-  onChange(ital);
-}
-
-function handleCmd(cmd, editorState, onChange) {
-  const newState = RichUtils.handleKeyCommand(editorState, cmd);
-
-  console.log('called');
-  if (newState) {
-    onChange(newState);
-    return 'handled';
-  }
-
-  return 'not-handled';
-}
-
-function handleRedaction(state, setEditorState) {
+function handleRedaction(state, setEditorState, redactionCode) {
   console.log(state);
   const contentState = state.getCurrentContent();
   const stateWithEntity = contentState.createEntity("REDACTION", "IMMUTABLE", {
-    code: 'A3'
+    code: redactionCode
   });
 
   const key = stateWithEntity.getLastCreatedEntityKey();
@@ -105,34 +92,35 @@ function handleRedaction(state, setEditorState) {
   setEditorState(stateWithRedaction);
 }
 
-function Edit() {
+export default function Edit() {
   const [ editorState, setEditorState ] = useState(() => (
     EditorState.createEmpty(decorator)
   ));
 
+  const [ modalOpen, setModalOpen ] = useState(false);
+  const [ currentRedcationCode, setCurrentRedactionCode ] = useState('');
+
   return (
     <>
       <button onClick={() => handleBold(setEditorState, editorState)}>The Big Bad Bold</button>
-      <button onClick={() => handleRedaction(editorState, setEditorState)}>Insert Redaction</button>
+      <button onClick={() => setModalOpen(true)}>Insert Redaction</button>
       <button onClick={() => console.log(editorState.getSelection())}>log selection</button>
+      <p>Redaction Code: {currentRedcationCode}</p>
       <div className="field-editor">
-    <Editor
-      editorState={editorState}
-      handleKeyCommand={(cmd, editorState) => handleCmd(cmd, editorState, setEditorState)}
-      onChange={setEditorState}
-      blockStyleFn={styleBlock}
-      blockRendererFn={renderBlock}
-    />
+        <RedactionModal
+          open={modalOpen}
+          handleClose={() => setModalOpen(false)}
+          onSubmit={({redactionCode}) => {
+            setCurrentRedactionCode(redactionCode)
+            handleRedaction(editorState, setEditorState, redactionCode);
+            setModalOpen(false)
+          }} />
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          blockStyleFn={styleBlock}
+        />
       </div>
-    </>
-  );
-}
-
-export default function(props) {
-  return (
-    <>
-      <div>hey there</div>
-      <Edit />
     </>
   );
 }
