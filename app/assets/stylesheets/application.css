@@ -17,3 +17,20 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+.unstyled-block {
+  display: inline-block;
+}
+
+.field-editor {
+  border: solid 1px black;
+  height: 300px;
+  width: 50%;
+
+}
+
+.atomic {
+  color: blue;
+  display: inline-block;
+  margin: 0;
+}
