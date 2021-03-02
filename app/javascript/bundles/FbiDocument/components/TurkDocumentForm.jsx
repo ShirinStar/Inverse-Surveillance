@@ -7,16 +7,16 @@ import DigitalDocumentForm from './DigitalDocumentForm';
 
 export default function TurkDocumentForm(props) {
   const { docId, pageCount, existingFields } = props;
-  const [ digitalDocument, setDocument ] = useState(null);
-  const [ fields, setFields ] = useState([]);
+  const [digitalDocument, setDocument] = useState(null);
+  const [fields, setFields] = useState([]);
 
   async function initialSubmit(formData) {
     try {
-      const token = 
+      const token =
         document.querySelector('[name=csrf-token]').content
       axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
-      const resp = await axios.post('/turk_documents', {...formData, docId});
+      const resp = await axios.post('/turk_documents', { ...formData, docId });
 
       setDocument(resp.data);
     } catch (e) {
@@ -28,7 +28,7 @@ export default function TurkDocumentForm(props) {
 
   async function saveField(field) {
     console.log(field);
-    const token = 
+    const token =
       document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
@@ -48,35 +48,38 @@ export default function TurkDocumentForm(props) {
 
   return (
     <>
-      <h1>Process a Document</h1> 
+      <h1>Process a Document</h1>
       <p>
         <a
           target="_blank"
           href={props.docUrl}>View Original Documents
-        </a> 
+        </a>
       </p>
       <div className="form-doc-container">
         <div className="form-container">
           {digitalDocument === null ? (
-            <DigitalDocumentForm 
+            <DigitalDocumentForm
               onSubmit={initialSubmit} />
           ) : (
-            <FieldForm 
-              pageCount={pageCount}
-              existingFields={existingFields}
-              saveField={saveField}
-              digitalDocument={digitalDocument}
-              clearFields={clearFields}
-            />
-          )}
+              <FieldForm
+                pageCount={pageCount}
+                existingFields={existingFields}
+                saveField={saveField}
+                digitalDocument={digitalDocument}
+                clearFields={clearFields}
+              />
+            )}
         </div>
-        <div className="field-container">
-          {fields.map(field => (
-            <div key={field.id}>
-              <p>{field.label}</p>
-              <p>{field.text_body}</p>
-            </div>
-          ))}
+        <div className='adding-field'>
+          {digitalDocument != null && fields.length > 0 &&
+            <div className="field-container">
+              {fields.map(field => (
+                <div key={field.id}>
+                  <p>{field.label}</p>
+                  <p>{field.text_body}</p>
+                </div>
+              ))}
+            </div>}
         </div>
       </div>
     </>

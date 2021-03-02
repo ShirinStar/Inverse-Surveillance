@@ -1,5 +1,4 @@
 import React from 'react';
-import Form from './Form';
 
 function ListRow({ doc }) {
   return (

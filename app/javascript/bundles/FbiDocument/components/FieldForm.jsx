@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import { useForm, Controller } from 'react-hook-form'
-
+import { useForm, Controller } from 'react-hook-form';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 import LabelAutocomplete from './LabelAutocomplete';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '100ch',
+    },
+  },
+}));
 
 export default function FieldForm(props) {
   const {
@@ -14,15 +24,15 @@ export default function FieldForm(props) {
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
-  const { 
+  const {
     register,
     handleSubmit,
     reset,
     control,
     setValue,
   } = useForm();
-  const [ labelValue, setLabelValue ] = useState(null);
-  const [ pageNumber, setPageNumber ] = useState(1);
+  const [labelValue, setLabelValue] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
   function openNewPage() {
     setValue("serialNumber", "");
@@ -32,7 +42,7 @@ export default function FieldForm(props) {
 
   function onSubmit(formData, ev) {
     const { serialNumber } = formData;
-    saveField({...formData, label: labelValue.label, page_number: pageNumber}, ev);
+    saveField({ ...formData, label: labelValue.label, page_number: pageNumber }, ev);
     setLabelValue("");
     reset();
     setValue("serialNumber", serialNumber);
@@ -40,26 +50,21 @@ export default function FieldForm(props) {
 
   return (
     <div className="field-form-container">
-      <h2>Field Form</h2>
-      <h3>Document Date: {digitalDocument.document_date}</h3>
-      <h4>Page Count: {pageCount - pageNumber + 1}</h4>
-      <h4>Current Page: { pageNumber }</h4>
+      {/* <h2>Field Form</h2> */}
+      <p>Document Date: <br/>{digitalDocument.document_date}</p>
+      <p>Total page Count: {pageCount - pageNumber + 1}</p>
+      <p>Current Page: {pageNumber}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="serial-number">Document Serial Number</label><br />
-        <input
-          type="text"
-          required
-          name="serialNumber"
-          ref={register} />
-        <br /><br />
+        <TextField name='serial-number' required id="standard-required" label="Required" placeholder="Document Serial Number" inputRef={register} />
+        {/* <label htmlFor="serial-number">Document Serial Number</label><br /> */}
         <Controller
           name="fieldLabel"
           control={control}
           render={props => (
-            <LabelAutocomplete 
+            <LabelAutocomplete
               existingLabels={existingLabels}
-            value={labelValue}
-            setValue={setLabelValue }/>
+              value={labelValue}
+              setValue={setLabelValue} />
           )} />
         <br /><br />
         <label htmlFor="text-body">TextBody</label><br />
@@ -68,13 +73,14 @@ export default function FieldForm(props) {
           name="text_body"
           ref={register} />
         <br />
-        <input type="submit" value="Save"/>
+        <input type="submit" value="Save" />
       </form>
       <br />
       <Button
-      variant="outlined"
+        variant="outlined"
+        color="primary"
         onClick={openNewPage}
-      >New Page</Button>
+      > Add New Page</Button>
     </div>
   );
 }

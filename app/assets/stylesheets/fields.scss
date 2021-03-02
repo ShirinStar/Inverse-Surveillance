@@ -5,5 +5,18 @@
 .field-form-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  padding-right: 5%;
+}
+
+.adding-field {
+  max-width: 70%;
+  min-width: 35%;
+  // border: 1px solid black;
+  padding: 50px;
+}
+
+.MuiFormControl-root.MuiTextField-root {
+  width: 200px;
+  margin-bottom: 40px;
+  margin-top: 5%;
 }
