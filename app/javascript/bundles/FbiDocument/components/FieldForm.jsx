@@ -34,15 +34,15 @@ export default function FieldForm(props) {
   } = useForm();
   const [labelValue, setLabelValue] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [ modalSerialOpen, setModalSerialOpen ] = useState(false);
+  const [modalSerialOpen, setModalSerialOpen] = useState(false);
   const [serialPageNumber, setSerialPageNumber] = useState(digitalDocument.startPageSerialNumber)
 
-console.log(serialPageNumber)
+  console.log(serialPageNumber)
 
-  function openNewPage() {
+  function openNewPage(pageSerialNumber) {
     setValue("serialNumber", "");
     setPageNumber(pageNumber + 1);
-    setSerialPageNumber()
+    setSerialPageNumber(pageSerialNumber)
     clearFields();
   }
 
@@ -93,12 +93,14 @@ console.log(serialPageNumber)
           color="primary"
           onClick={() => setModalSerialOpen(true)}
         > + Add New Page</Button>
-         <SerialNumberModal
-          open={modalSerialOpen} 
-          onSubmit={({pageSerialNumber}) => {
+        <SerialNumberModal
+          open={modalSerialOpen}
+          handleClose={() => setModalSerialOpen(false)}
+          onSubmit={({ pageSerialNumber }) => {
             setSerialPageNumber(pageSerialNumber)
+            openNewPage()
             setModalSerialOpen(false)
-          }}/>
+          }} />
       </div>
     </>
   );
