@@ -79,7 +79,12 @@ export default function DigitalDocumentForm(props) {
                     <HelpOutline fontSize="small"></HelpOutline>
                   </Tooltip>
                 </div>
-                <TextField required id="standard-basic" label="Document serial number" name="startPageSerialNumber"/>
+                <TextField 
+                required 
+                id="standard-basic" 
+                label="Document serial number" 
+                name="startPageSerialNumber" 
+                inputRef={register}/>
               </div>
             </div>
             <div className='btn start'>

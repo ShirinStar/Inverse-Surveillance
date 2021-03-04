@@ -22,6 +22,9 @@ export default function FieldForm(props) {
     saveField,
     existingFields,
     clearFields,
+    hasFields,
+    pageSerialNumber,
+    setPageSerialNumber,
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
@@ -35,20 +38,17 @@ export default function FieldForm(props) {
   const [labelValue, setLabelValue] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [modalSerialOpen, setModalSerialOpen] = useState(false);
-  const [serialPageNumber, setSerialPageNumber] = useState(digitalDocument.startPageSerialNumber)
-
-  console.log(serialPageNumber)
 
   function openNewPage(pageSerialNumber) {
     setValue("serialNumber", "");
     setPageNumber(pageNumber + 1);
-    setSerialPageNumber(pageSerialNumber)
+    setPageSerialNumber(pageSerialNumber)
     clearFields();
   }
 
   function onSubmit(formData, ev) {
     const { serialNumber } = formData;
-    saveField({ ...formData, label: labelValue.label, page_number: pageNumber }, ev);
+    saveField({ ...formData, label: labelValue.label, page_number: pageNumber, pageSerialNumber: pageSerialNumber}, ev);
     setLabelValue("");
     reset();
     setValue("serialNumber", serialNumber);
@@ -62,6 +62,7 @@ export default function FieldForm(props) {
           <a target="_blank" href={props.docUrl}>Link of the Original Document</a>
         </p>
         <p>Document Date: {digitalDocument.document_date}</p>
+        <p>Page Serial Number: {pageSerialNumber}</p>
         <p>Current page: {pageNumber} / {pageCount - pageNumber + 1}</p>
       </div>
 
@@ -91,14 +92,16 @@ export default function FieldForm(props) {
         <Button
           variant="contained"
           color="primary"
+          disabled={!hasFields}
           onClick={() => setModalSerialOpen(true)}
-        > + Add New Page</Button>
+        > + Add New Page</Button> 
+        {/* change maybe to if page complete click here to start a new page */}
         <SerialNumberModal
           open={modalSerialOpen}
           handleClose={() => setModalSerialOpen(false)}
           onSubmit={({ pageSerialNumber }) => {
-            setSerialPageNumber(pageSerialNumber)
-            openNewPage()
+            setPageSerialNumber(pageSerialNumber)
+            openNewPage(pageSerialNumber)
             setModalSerialOpen(false)
           }} />
       </div>

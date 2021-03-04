@@ -9,6 +9,7 @@ export default function TurkDocumentForm(props) {
   const { docId, pageCount, existingFields } = props;
   const [digitalDocument, setDocument] = useState(null);
   const [fields, setFields] = useState([]);
+  const [startSerialNumber, setStartSerialNumber] = useState('')
 
   async function initialSubmit(formData) {
     try {
@@ -19,6 +20,7 @@ export default function TurkDocumentForm(props) {
       const resp = await axios.post('/turk_documents', { ...formData, docId });
 
       setDocument(resp.data);
+      setStartSerialNumber(formData.startPageSerialNumber)
     } catch (e) {
       console.log(e);
     } finally {
@@ -48,18 +50,12 @@ export default function TurkDocumentForm(props) {
 
   return (
     <div>
-      
-      {/* <p>
-        <a
-          target="_blank"
-          href={props.docUrl}>View Original Documents
-        </a>
-      </p> */}
       <div className="form-doc-container">
         <div className="form-container">
           {digitalDocument === null ? (
             <DigitalDocumentForm
-              onSubmit={initialSubmit} />
+              onSubmit={initialSubmit} 
+              docUrl={props.docUrl}/>
           ) : (
               <FieldForm
                 pageCount={pageCount}
@@ -67,6 +63,10 @@ export default function TurkDocumentForm(props) {
                 saveField={saveField}
                 digitalDocument={digitalDocument}
                 clearFields={clearFields}
+                docUrl={props.docUrl}
+                hasFields={fields.length > 0}
+                pageSerialNumber={startSerialNumber}
+                setPageSerialNumber={setStartSerialNumber}
               />
             )}
         </div>
