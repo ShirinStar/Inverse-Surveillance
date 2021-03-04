@@ -1,126 +1,86 @@
-import React, { useState } from 'react';
-import {
-  Editor,
-  RichUtils,
-  Modifier,
-  CompositeDecorator,
-  AtomicBlockUtils,
-  EditorState,
-} from 'draft-js';
-import 'draft-js/dist/Draft.css';
+import React, { useState, useRef } from 'react';
+import Button from '@material-ui/core/Button';
+import ContentEditable from 'react-contenteditable';
 import RedactionModal from './RedactionModal';
 
-function Redaction(props) {
-  const { entityKey } = props;
-  const { code } = props.contentState.getEntity(entityKey).data;
-  return (
-    <span>{code}</span>
-  )
+
+function insertTextAtCaret(text, range) {
+  range.deleteContents();
+
+  const el = document.createElement('span');
+
+  el.contentEditable = false;
+  // TODO: add size specific classes
+  el.classList.add('spanner');
+  el.textContent = text;
+
+  range.insertNode( el   );
+  range.collapse(false);
+  range.insertNode(document.createTextNode(""));
 }
 
-
-function styleBlock(contentBlock) {
-  const type = contentBlock.getType();
-
-  console.log(type);
-  if (type === 'atomic') {
-    return 'atomic';
-  } else {
-    return 'unstyled-block'
-  }
-}
-
-function renderBlock(contentBlock) {
-  const type = contentBlock.getType();
-
-  if (type === 'atomic') {
-    contentBlock;
-    return {
-      component: RedactionBlock,
-      editable: false
-    }
-  }
-}
-
-function RedactionBlock(props) {
-  return (
-    <span>a redaction</span>
-  )
-}
-
-function findRedactions(contentBlock, callback, contentState) {
-  contentBlock.findEntityRanges(
-    (char) => {
-      const key = char.getEntity();
-      console.log(char)
-      console.log(key);
-      return (
-        key !== null &&
-        contentState.getEntity(key).getType() === 'REDACTION'
-      );
-    },
-    callback
-  );
-}
-
-const decorator = new CompositeDecorator([
-  {
-    strategy: findRedactions,
-    component: Redaction,
-  }
-])
-
-function handleRedaction(state, setEditorState, redactionCode) {
-  console.log(state);
-  const contentState = state.getCurrentContent();
-  const stateWithEntity = contentState.createEntity("REDACTION", "IMMUTABLE", {
-    code: redactionCode
-  });
-
-  const key = stateWithEntity.getLastCreatedEntityKey();
-
-  const newState = EditorState.set(state, {
-    currentContent: stateWithEntity
-  });
-
-  const stateWithRedaction = AtomicBlockUtils.insertAtomicBlock(
-    newState,
-    key,
-    " "
-  );
-
-  setEditorState(stateWithRedaction);
+function insertRedaction({ area, code, range}) {
+  area.focus();
+  insertTextAtCaret(code, range);
+  area.blur();
+  area.focus();
+  area.dispatchEvent(new KeyboardEvent('keydown', { code: 39  }))
+  area.focus();
 }
 
 export default function Edit() {
-  const [ editorState, setEditorState ] = useState(() => (
-    EditorState.createEmpty(decorator)
-  ));
-
+  const editableDiv = useRef(null);
   const [ modalOpen, setModalOpen ] = useState(false);
-  const [ currentRedcationCode, setCurrentRedactionCode ] = useState('');
+  const [ currentRedactionCode, setCurrentRedactionCode ] = useState('');
+  const [ redactionSize, setRedactionSize ] = useState(null);
+  const [ range, setRange ] = useState(null);
+
+  const handleRedaction = (code, size) => {
+    insertRedaction({ area: editableDiv.current, code, range }) 
+  }
+
+  const handleRedactionClick = (size)  => {
+    setRange(window.getSelection().getRangeAt(0));
+    setRedactionSize(size);
+    setModalOpen(true);
+  }
 
   return (
     <>
-      <button onClick={() => handleBold(setEditorState, editorState)}>The Big Bad Bold</button>
-      <button onClick={() => setModalOpen(true)}>Insert Redaction</button>
-      <button onClick={() => console.log(editorState.getSelection())}>log selection</button>
-      <p>Redaction Code: {currentRedcationCode}</p>
-      <div className="field-editor">
+      <h1>hey there</h1>
+      <p>Redaction Code: {currentRedactionCode}</p>
         <RedactionModal
           open={modalOpen}
+          range={range}
+          redactionSize={redactionSize}
           handleClose={() => setModalOpen(false)}
-          onSubmit={({redactionCode}) => {
+          onSubmit={({redactionCode, redactionSize, range}) => {
             setCurrentRedactionCode(redactionCode)
-            handleRedaction(editorState, setEditorState, redactionCode);
+            handleRedaction(redactionCode, redactionSize);
             setModalOpen(false)
           }} />
-        <Editor
-          editorState={editorState}
-          onChange={setEditorState}
-          blockStyleFn={styleBlock}
-        />
-      </div>
-    </>
-  );
+
+        <div className="field-editor">
+          <div className="field-editor-controls">
+            <Button
+              onClick={() => handleRedactionClick("WORD")}
+              variant="outlined">A Word Redaction</Button>
+            <Button
+              onClick={() => handleRedactionClick("SMALL")}
+              variant="outlined">Small Redaction</Button>
+            <Button
+              onClick={() => handleRedactionClick("MEDIUM")}
+              variant="outlined">Medium Redaction</Button>
+            <Button
+              onClick={() => handleRedactionClick("LARGE")}
+              variant="outlined">Large Redaction</Button>
+          </div>
+          <div
+            className="editable-div"
+            ref={editableDiv}
+            contentEditable="true">
+          </div>
+        </div>
+      </>
+      );
 }
