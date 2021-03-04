@@ -36,6 +36,8 @@ export default function RedactionModal(props) {
     open,
     handleClose,
     onSubmit,
+    redactionSize,
+    range,
   } = props;
 
   const classes = useStyles();
@@ -49,7 +51,9 @@ export default function RedactionModal(props) {
       onClose={handleClose}>
       <Card className={classes.root}>
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(({redactionCode}) => {
+             onSubmit({redactionCode, redactionSize, range}) 
+            })}>
             <TextField inputRef={register} name="redactionCode" />
             <Button type="submit">Save Code</Button>
           </form>

@@ -1,0 +1,46 @@
+body {
+}
+
+.spanner {
+  background: lightgreen;
+  margin: 0 15px;
+}
+
+.field-editor .editable-div {
+  border: solid 1px #ccc;
+  cursor: text;
+  min-height: 200px;
+  padding: 10px;
+  margin: 15px;
+}
+
+.field-editor-controls {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
+  padding-bottom: 15px;
+  color: #aaa;
+  border-bottom: solid 1px #ddd;
+}
+
+.redaction {
+  &-word {
+    background: #eee;
+    padding: 0 5px;
+  }
+
+  &-small {
+    background: lightblue;
+    padding: 0 30px;
+  }
+
+  &-medium {
+    background: lightgreen;
+    padding: 0 60px;
+  }
+
+  &-large {
+    background: lightyellow;
+    padding: 0 200px;
+  }
+}
