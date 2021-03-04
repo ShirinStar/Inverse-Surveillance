@@ -47,14 +47,14 @@ export default function TurkDocumentForm(props) {
   }
 
   return (
-    <>
-      <h1>Process a Document</h1>
-      <p>
+    <div>
+      
+      {/* <p>
         <a
           target="_blank"
           href={props.docUrl}>View Original Documents
         </a>
-      </p>
+      </p> */}
       <div className="form-doc-container">
         <div className="form-container">
           {digitalDocument === null ? (
@@ -75,13 +75,13 @@ export default function TurkDocumentForm(props) {
             <div className="field-container">
               {fields.map(field => (
                 <div key={field.id}>
-                  <p>{field.label}</p>
+                  <p className='filled-label'>{field.label}</p>
                   <p>{field.text_body}</p>
                 </div>
               ))}
             </div>}
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -11,12 +11,24 @@
 .adding-field {
   max-width: 70%;
   min-width: 35%;
-  // border: 1px solid black;
   padding: 50px;
+}
+
+.document-head-section {
+  border-bottom: 2px solid #C8FA22;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  // background-color: #C8FA22;
+  // padding: 20px;
 }
 
 .MuiFormControl-root.MuiTextField-root {
   width: 200px;
-  margin-bottom: 40px;
-  margin-top: 5%;
+  margin-top: 0;
 }
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
+  width: 250px;
+}
+
+

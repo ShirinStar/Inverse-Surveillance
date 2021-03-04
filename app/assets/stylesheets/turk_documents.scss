@@ -4,12 +4,21 @@
 
 .form-doc-container {
   display: flex;
-  width: 80%;
+  // width: 80%;
   justify-content: space-around;
 }
 
-.field-container-test{
-  border: 1px solid black;
-  width: 500px;
-  height: 500px;
+.field-container{
+  border: 2px solid #aaa;
+  width: 600px;
+  height: 700px;
+  margin-left: -10%;
+  margin-bottom: 10%;
+  padding: 50px;
+  position: fixed;
+}
+
+.filled-label {
+  font-weight: 600;
+  padding-top: 20px;
 }

@@ -48,14 +48,14 @@ export default function RedactionModal(props) {
       open={open}
       onClose={handleClose}>
       <Card className={classes.root}>
+      <Button onClick={handleClose}>X</Button>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField inputRef={register} name="redactionCode" />
-            <Button type="submit">Save Code</Button>
+            <Button variant="contained" type="submit">Save Code</Button>
           </form>
         </CardContent>
         <CardActions>
-          <Button variant="contained" onClick={handleClose}>Close ME</Button>
         </CardActions>
       </Card>
     </Modal>
