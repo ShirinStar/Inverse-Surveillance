@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login'
 
 function ListRow({ doc }) {
   return (
@@ -20,9 +21,8 @@ function ListRow({ doc }) {
 export default function AdminDocumentList(props) {
   const docs = props.docs.map(JSON.parse);
   return (
-    <>
+    <div className='admin-view'>
       <h1>Admin Document List</h1>
-      <a href="/turk_documents/new">Go To Digital Document Form</a>
       <table>
         <thead>
           <tr>
@@ -38,6 +38,6 @@ export default function AdminDocumentList(props) {
           {docs.map(doc => <ListRow key={doc.id} doc={doc}/>)}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

@@ -25,7 +25,7 @@ export default function TurkDocumentForm(props) {
   async function initialSubmit(formData) {
     try {
       const token =
-        document.querySelector('[name=csrf-token]').content
+      document.querySelector('[name=csrf-token]').content
       axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
       const resp = await axios.post('/turk_documents', { ...formData, docId });

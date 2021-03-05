@@ -33,13 +33,17 @@ export default function DigitalDocumentForm(props) {
 
   return (
     <>
+    <div className='header initDocument'>
+      <div className='inner-header'>
       <h1>Process a Document</h1>
-      <p className='original-link'>
-        <a target="_blank" href={props.docUrl}>Open Original Document</a>
-      </p>
+      
+      </div>
+      </div>
       <div className='init-form'>
         <div className='date-form'>
-          <p className='start-title'>To start please fill:</p>
+          <p className='start-title'>To start please <span>
+        <a target="_blank" href={props.docUrl}>view Original Document</a> </span>
+       and fill:</p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='first-form-fields'>
               <div className='seperate-first-fields'>

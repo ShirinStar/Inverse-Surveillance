@@ -8,4 +8,14 @@ class AdminDocumentsController < ApplicationController
       docs: docs
     }
   end
+
+  def login 
+    if admin_params[:admin_password] == '123'
+      redirect_to('/admin/documents')
+  end
+end
+
+  def admin_params
+    params.permit(:admin_password)
+  end 
 end

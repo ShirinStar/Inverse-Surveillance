@@ -16,6 +16,58 @@
 
 body {
   font-family: 'Lato', sans-serif;
+  margin-top: 0 auto;
+  margin-left:  0 auto;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
+}
+
+.login-section{
+  float: right;
+  padding: 20px;
+  margin-top: 0 auto;
+}
+
+.main-title{
+font-family: 'Montserrat', sans-serif;
+text-align: center;
+letter-spacing: 2px;
+margin-top: 10%;
+}
+
+.start-div {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.start-link {
+  border: 2px solid #4050B5;
+  text-decoration:none;
+  box-sizing: border-box;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  margin:0 0.2em 0.2em 0;
+  border-radius:0.2em;
+  padding: 20px;
+  font-size: 20;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.start-link:hover {
+  border: 2px solid #C8FA22;
+  background-color: #C8FA22;
+  text-shadow: 0 0 2em rgba(255,255,255,1);
+  color: black;
+}
+
+.admin-view {
+  margin-top: 4%;
+  margin-left: 4%;
 }
 
 .original-link{
@@ -41,11 +93,38 @@ body {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+  color: rgb(41, 41, 41);
+  border-bottom: 2px solid #4050B5;
+  padding: 5px; 
+  padding-bottom: -5%;
+}
+
+a:hover {
+  color: #4050B5;
+  border-bottom: none;
+  
+}
+
 /* Date document*/
+
+.header.initDocument {
+  text-align: left;
+  display: inline-block;
+  width: 80%;
+  margin-top: 50px;
+  margin-bottom: 15%;
+  line-height: 1.6rem;
+}
+
+.inner-header {
+  margin-left: -100%;
+}
 
 .btn.start {
   text-align: center;
-  margin-top: 10%;
+  margin-top: 12%;
 }
 
 .init-form {
@@ -57,19 +136,21 @@ body {
 }
 
 .date-form {
-  width: 550px;
-  height: 300px;
+  width: 600px;
+  height: 350px;
   padding: 40px;
   position: absolute;
-  top: 20%;
+  top: 25%;
   left: 30%;
   line-height: 2.2rem;
   border: 2px solid #C8FA22;
 }
 
 .start-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 500;
+  margin-bottom: 50px;
+  letter-spacing: 1.2px;
 }
 
 .first-form-fields {
@@ -81,8 +162,8 @@ body {
 }
 
 .seperate-first-fields {
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .form-labels {
