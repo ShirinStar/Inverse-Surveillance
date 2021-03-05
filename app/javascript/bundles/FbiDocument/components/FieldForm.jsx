@@ -25,7 +25,6 @@ export default function FieldForm(props) {
     saveField,
     existingFields,
     clearFields,
-    hasFields,
     pageSerialNumber,
     setPageSerialNumber,
     labelValue,
@@ -37,10 +36,11 @@ export default function FieldForm(props) {
     setValue,
     pageNumber,
     setPageNumber,
+    setModalSerialOpen,
+    modalSerialOpen,
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
-  const [modalSerialOpen, setModalSerialOpen] = useState(false);
 
   function openNewPage(pageSerialNumber) {
     setValue("serialNumber", "");
@@ -90,12 +90,6 @@ export default function FieldForm(props) {
         <br />
         <br />
         <br />
-        <Button
-          variant="contained"
-          color="primary"
-          disabled={!hasFields}
-          onClick={() => setModalSerialOpen(true)}
-        > + Add New Page</Button> 
         {/* change maybe to if page complete click here to start a new page */}
         <SerialNumberModal
           open={modalSerialOpen}

@@ -42,22 +42,31 @@ export default function RedactionModal(props) {
 
   const classes = useStyles();
   const [ modalStyle ] = useState(getModalStyle);
+  const [ redactionCode, setRedactionCode ] = useState('');
 
-  const { control, handleSubmit, register } = useForm();
+  const handleChange = (ev) => {
+    const { value } = ev.target;
+    setRedactionCode(value);
+  }
 
   return (
     <Modal style={modalStyle} className={classes.paper}
       open={open}
       onClose={handleClose}>
       <Card className={classes.root}>
-      <Button onClick={handleClose}>X</Button>
+        <Button onClick={handleClose}>X</Button>
         <CardContent>
-          <form onSubmit={handleSubmit(({redactionCode}) => {
-             onSubmit({redactionCode, redactionSize, range}) 
-            })}>
-            <TextField inputRef={register} name="redactionCode" />
-            <Button variant="contained" type="submit">Save Code</Button>
-          </form>
+          <TextField 
+            onChange={handleChange}
+            value={redactionCode}
+            name="redactionCode" />
+          <Button 
+            onClick={() => {
+              onSubmit({ redactionCode, redactionSize, range })
+              setRedactionCode('');
+            }}
+            variant="contained"
+            type="submit">Save Code</Button>
         </CardContent>
         <CardActions>
         </CardActions>

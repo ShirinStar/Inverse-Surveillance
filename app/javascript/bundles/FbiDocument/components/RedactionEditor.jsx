@@ -40,6 +40,7 @@ export default function Edit(props) {
   }
 
   const handleRedactionClick = (size)  => {
+    editableDiv.current.focus();
     setRange(window.getSelection().getRangeAt(0));
     setRedactionSize(size);
     setModalOpen(true);

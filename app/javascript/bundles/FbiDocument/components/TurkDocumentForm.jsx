@@ -3,7 +3,7 @@ import axios from 'axios';
 import FieldForm from './FieldForm';
 import { useForm, Controller } from 'react-hook-form';
 import DigitalDocumentForm from './DigitalDocumentForm';
-
+import Button from '@material-ui/core/Button';
 
 export default function TurkDocumentForm(props) {
   const { docId, pageCount, existingFields } = props;
@@ -12,6 +12,7 @@ export default function TurkDocumentForm(props) {
   const [startSerialNumber, setStartSerialNumber] = useState('')
   const [labelValue, setLabelValue] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [modalSerialOpen, setModalSerialOpen] = useState(false);
 
   const {
     register,
@@ -58,6 +59,7 @@ export default function TurkDocumentForm(props) {
     setFields([]);
   }
 
+  const hasFields = fields.length > 0;
   console.log('label value: ', labelValue);
   const renderForm = () => (
     <FieldForm
@@ -74,11 +76,12 @@ export default function TurkDocumentForm(props) {
       digitalDocument={digitalDocument}
       clearFields={clearFields}
       docUrl={props.docUrl}
-      hasFields={fields.length > 0}
       pageSerialNumber={startSerialNumber}
       setPageSerialNumber={setStartSerialNumber}
       pageNumber={pageNumber}
       setPageNumber={setPageNumber}
+      setModalSerialOpen={setModalSerialOpen}
+      modalSerialOpen={modalSerialOpen}
     />
   )
   return (
@@ -100,6 +103,13 @@ export default function TurkDocumentForm(props) {
         <p>Document Date: {digitalDocument.document_date}</p>
         <p>Page Serial Number: {startSerialNumber}</p>
         <p>Current page: {pageNumber} / {pageCount - pageNumber + 1}</p>
+
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={!hasFields}
+          onClick={() => setModalSerialOpen(true)}
+        > + Add New Page</Button> 
       </div>
 
               <div className='adding-field'>
