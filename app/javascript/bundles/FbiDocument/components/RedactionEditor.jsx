@@ -35,8 +35,13 @@ export default function Edit(props) {
   const [ redactionSize, setRedactionSize ] = useState(null);
   const [ range, setRange ] = useState(null);
 
+  const {
+    onChange
+  } = props;
+
   const handleRedaction = (code, size) => {
     insertRedaction({ area: editableDiv.current, code, range }) 
+    onChange(editableDiv.current.innerHTML);
   }
 
   const handleRedactionClick = (size)  => {
@@ -76,6 +81,7 @@ export default function Edit(props) {
               variant="outlined">Large Redaction</Button>
           </div>
           <div
+            onInput={() => onChange(editableDiv.current.innerHTML)}
             className="editable-div"
             ref={editableDiv}
             contentEditable="true">

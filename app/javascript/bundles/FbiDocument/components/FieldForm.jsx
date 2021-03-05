@@ -42,6 +42,8 @@ export default function FieldForm(props) {
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
 
+  const [ textBody, setTextBody ] = useState('');
+
   function openNewPage(pageSerialNumber) {
     setValue("serialNumber", "");
     setPageNumber(pageNumber + 1);
@@ -51,7 +53,13 @@ export default function FieldForm(props) {
 
   function onSubmit(formData, ev) {
     const { serialNumber } = formData;
-    saveField({ ...formData, label: labelValue.label, page_number: pageNumber, pageSerialNumber: pageSerialNumber}, ev);
+    saveField({
+      ...formData,
+      label: labelValue.label,
+      page_number: pageNumber,
+      pageSerialNumber: pageSerialNumber,
+      text_body: textBody,
+    }, ev);
     setLabelValue("");
     reset();
     setValue("serialNumber", serialNumber);
@@ -60,7 +68,7 @@ export default function FieldForm(props) {
   const showFields = () => {
     return (
       <>
-        <RedactionEditor />
+        <RedactionEditor onChange={setTextBody} />
         <Button
           variant="contained"
           type="submit"
