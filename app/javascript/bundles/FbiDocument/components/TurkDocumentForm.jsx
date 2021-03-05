@@ -96,17 +96,20 @@ export default function TurkDocumentForm(props) {
           ) : (
             <>
       <div className='document-head-section'>
+        <div className='document-titles'>
         <h2>Document Form</h2>
         <p >
-          <a target="_blank" href={props.docUrl}>Link of the Original Document</a>
+          <a className='orginal-link' target="_blank" href={props.docUrl}>Link of the Original Document</a>
         </p>
-        <p>Document Date: {digitalDocument.document_date}</p>
-        <p>Page Serial Number: {startSerialNumber}</p>
-        <p>Current page: {pageNumber} / {pageCount - pageNumber + 1}</p>
+        </div>
 
+        <div className='document-info'>
+        <p><strong>Document Date:</strong> {digitalDocument.document_date}</p>
+        <p><strong>Page Serial Number:</strong> {startSerialNumber}</p>
+        <p><strong>Current page:</strong> {pageNumber} / {pageCount - pageNumber + 1}</p>
+        </div>
         <Button
           variant="contained"
-          color="primary"
           disabled={!hasFields}
           onClick={() => setModalSerialOpen(true)}
         > + Add New Page</Button> 

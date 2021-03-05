@@ -33,28 +33,27 @@ export default function DigitalDocumentForm(props) {
 
   return (
     <>
-    <div className='header initDocument'>
-      <div className='inner-header'>
-      <h1>Process a Document</h1>
-      
-      </div>
+      <div className='header initDocument'>
+        <div className='inner-header'>
+          <h1>Process a Document</h1>
+        </div>
       </div>
       <div className='init-form'>
         <div className='date-form'>
-          <p className='start-title'>To start please <span>
-        <a target="_blank" href={props.docUrl}>view Original Document</a> </span>
-       and fill:</p>
+          <p className='start-title'>To start please
+            <a target="_blank" href={props.docUrl}>view Original Document</a>
+          and fill:</p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='first-form-fields'>
               <div className='seperate-first-fields'>
                 <div className='title-question'>
                   <p className='form-labels date'>Document date</p>
                   <Tooltip
-                  title={
-                    <React.Fragment>
-                      <img className='hover-image' src={DocumentDate}/>
-                    </React.Fragment>
-                  }>
+                    title={
+                      <React.Fragment>
+                        <img className='hover-image' src={DocumentDate} />
+                      </React.Fragment>
+                    }>
                     <HelpOutline fontSize="small"></HelpOutline>
                   </Tooltip>
                 </div>
@@ -63,7 +62,6 @@ export default function DigitalDocumentForm(props) {
                   inputRef={register}
                   id="date"
                   name="document_date"
-                  // label="Document date"
                   type="date"
                   defaultValue=""
                   className={classes.textField}
@@ -77,18 +75,18 @@ export default function DigitalDocumentForm(props) {
                   <p className='form-labels'>Page Serial Number</p>
                   <Tooltip title={
                     <React.Fragment>
-                      <img className='hover-image' src={DNS}/>
+                      <img className='hover-image' src={DNS} />
                     </React.Fragment>
                   }>
                     <HelpOutline fontSize="small"></HelpOutline>
                   </Tooltip>
                 </div>
-                <TextField 
-                required 
-                id="standard-basic" 
-                label="Document serial number" 
-                name="startPageSerialNumber" 
-                inputRef={register}/>
+                <TextField
+                  required
+                  id="standard-basic"
+                  label="Document serial number"
+                  name="startPageSerialNumber"
+                  inputRef={register} />
               </div>
             </div>
             <div className='btn start'>

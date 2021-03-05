@@ -22,3 +22,30 @@
   font-weight: 600;
   padding-top: 20px;
 }
+
+.document-head-section {
+  background-color: black;
+  color: white;
+  padding: 100px;
+  margin-left: -12%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.document-titles {
+  margin-bottom: 100px;
+}
+
+.orginal-link {
+  color: white;
+  border-bottom: 1px solid #C8FA22;
+}
+
+.orginal-link:hover {
+  color: black;
+}
+
+.document-info {
+  letter-spacing: 1px;
+  margin-bottom: 70px;
+}
