@@ -192,9 +192,18 @@ a:hover {
 .DSN-form {
   width: 300px;
   padding: 20px;
-  
 }
 
 .btn.close {
-  float: right;
+  float: left;
+}
+
+.sure {
+  font-size: 18px;
+  color: #4050B5;
+  padding-bottom: 5px;
+}
+
+.sureTwo {
+
 }

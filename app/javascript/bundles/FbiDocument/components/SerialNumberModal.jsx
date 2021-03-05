@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    // border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -62,13 +61,15 @@ export default function RedactionModal(props) {
       BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500,
-      }}
-      >
+      }}>
       <Card className={classes.root}>
         <Button className='btn close' onClick={handleClose}><Close ></Close></Button>
+        <br/>
         <CardContent>
           <div >
             <div className='DSN-modal-div'>
+              <h2 className='sure'> Are you sure there are no more fields for this page?</h2>
+              <p className='sureTwo'>If yes, please enter the new page Serial Number: </p>
               <form className='DSN-form' onSubmit={handleSubmit(onSubmit)}>
                 <p className='form-labels'>New Page Serial Number </p>
                 <Tooltip title={
@@ -80,13 +81,12 @@ export default function RedactionModal(props) {
                 </Tooltip>
                 <br />
                 <TextField required id="standard-basic" inputRef={register} name="pageSerialNumber" label="New Page Serial Number" />
-                <br />
+                <br /><br />
                 <Button className='btn saveDSN' variant="contained" type="submit">Save and Start New Page</Button>
               </form>
             </div>
           </div>
         </CardContent>
-
       </Card>
     </Modal>
   );

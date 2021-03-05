@@ -53,7 +53,6 @@ export default function Edit(props) {
 
   return (
     <>
-      <p>Redaction Code: {currentRedactionCode}</p>
         <RedactionModal
           open={modalOpen}
           range={range}
@@ -69,17 +68,22 @@ export default function Edit(props) {
           <div className="field-editor-controls">
             <Button
               onClick={() => handleRedactionClick("WORD")}
+              size="small"
               variant="outlined">A Word Redaction</Button>
             <Button
               onClick={() => handleRedactionClick("SMALL")}
+              size="small"
               variant="outlined">Small Redaction</Button>
             <Button
               onClick={() => handleRedactionClick("MEDIUM")}
+              size="small"
               variant="outlined">Medium Redaction</Button>
             <Button
               onClick={() => handleRedactionClick("LARGE")}
+              size="small"
               variant="outlined">Large Redaction</Button>
           </div>
+          {/* <p>Redaction Code: {currentRedactionCode}</p> */}
           <div
             onInput={() => onChange(editableDiv.current.innerHTML)}
             className="editable-div"

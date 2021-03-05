@@ -7,27 +7,36 @@ import TextField from '@material-ui/core/TextField';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import { useForm, Controller } from 'react-hook-form';
+import Backdrop from '@material-ui/core/Backdrop';
+import Close from '@material-ui/icons/Close';
+import HelpOutline from '@material-ui/icons/HelpOutline';
+import Tooltip from '@material-ui/core/Tooltip';
+import markedRedCode from 'images/markedRedCode.png';
+
 
 function getModalStyle() {
-    const top = 50;
-    const left = 50;
+  const top = 50;
+  const left = 50;
 
   return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-      
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+
   };
 }
 
 const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
   paper: {
-        position: 'absolute',
-        width: 400,
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 
@@ -50,17 +59,35 @@ export default function RedactionModal(props) {
   }
 
   return (
-    <Modal style={modalStyle} className={classes.paper}
+    <Modal
       open={open}
-      onClose={handleClose}>
+      onClose={handleClose}
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      className={classes.modal}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}>
       <Card className={classes.root}>
-        <Button onClick={handleClose}>X</Button>
+        <Button className='btn close' onClick={handleClose}><Close ></Close></Button>
         <CardContent>
           <TextField 
             onChange={handleChange}
             value={redactionCode}
-            name="redactionCode" />
-          <Button 
+            name="redactionCode" 
+            label="Redaction code"/>
+             <Tooltip title={
+                  <React.Fragment>
+                    <img className='hover-image instruction' src={markedRedCode} />
+                  </React.Fragment>
+                }>
+                  <HelpOutline fontSize="small"></HelpOutline>
+                </Tooltip>
+            <br/>
+            <br/>
+          <Button className='btn saveDSN'
             onClick={() => {
               onSubmit({ redactionCode, redactionSize, range })
               setRedactionCode('');
@@ -68,8 +95,6 @@ export default function RedactionModal(props) {
             variant="contained"
             type="submit">Save Code</Button>
         </CardContent>
-        <CardActions>
-        </CardActions>
       </Card>
     </Modal>
   );
