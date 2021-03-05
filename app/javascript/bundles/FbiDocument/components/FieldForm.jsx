@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import { useForm, Controller } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import LabelAutocomplete from './LabelAutocomplete';
 import SerialNumberModal from './SerialNumberModal';
+import { Controller } from 'react-hook-form';
+
+import RedactionEditor from './RedactionEditor';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,18 +28,18 @@ export default function FieldForm(props) {
     hasFields,
     pageSerialNumber,
     setPageSerialNumber,
-  } = props;
-
-  const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
-  const {
-    register,
+    labelValue,
+    setLabelValue,
     handleSubmit,
+    register,
     reset,
     control,
     setValue,
-  } = useForm();
-  const [labelValue, setLabelValue] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+    pageNumber,
+    setPageNumber,
+  } = props;
+
+  const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
   const [modalSerialOpen, setModalSerialOpen] = useState(false);
 
   function openNewPage(pageSerialNumber) {
@@ -54,18 +57,22 @@ export default function FieldForm(props) {
     setValue("serialNumber", serialNumber);
   }
 
+  const showFields = () => {
+    return (
+      <>
+        <RedactionEditor />
+        <Button
+          variant="contained"
+          type="submit"
+          value="Save">
+          Save Field
+        </Button>
+      </>
+    );
+  }
+
   return (
     <>
-      <div className='document-head-section'>
-        <h2>Document Form</h2>
-        <p >
-          <a target="_blank" href={props.docUrl}>Link of the Original Document</a>
-        </p>
-        <p>Document Date: {digitalDocument.document_date}</p>
-        <p>Page Serial Number: {pageSerialNumber}</p>
-        <p>Current page: {pageNumber} / {pageCount - pageNumber + 1}</p>
-      </div>
-
       <div className="field-form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
@@ -78,13 +85,7 @@ export default function FieldForm(props) {
                 setValue={setLabelValue} />
             )} />
           <br /><br />
-          <label htmlFor="text-body">TextBody</label><br />
-          <input required
-            id="text-body"
-            name="text_body"
-            ref={register} />
-          <br />
-          <Button variant="contained" type="submit" value="Save">Save Field</Button>
+          { labelValue && labelValue.label.length > 0 && showFields() }
         </form>
         <br />
         <br />

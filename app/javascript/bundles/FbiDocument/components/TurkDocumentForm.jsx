@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import FieldForm from './FieldForm';
-
+import { useForm, Controller } from 'react-hook-form';
 import DigitalDocumentForm from './DigitalDocumentForm';
 
 
@@ -10,6 +10,16 @@ export default function TurkDocumentForm(props) {
   const [digitalDocument, setDocument] = useState(null);
   const [fields, setFields] = useState([]);
   const [startSerialNumber, setStartSerialNumber] = useState('')
+  const [labelValue, setLabelValue] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    setValue,
+  } = useForm();
 
   async function initialSubmit(formData) {
     try {
@@ -48,40 +58,64 @@ export default function TurkDocumentForm(props) {
     setFields([]);
   }
 
+  console.log('label value: ', labelValue);
+  const renderForm = () => (
+    <FieldForm
+      register={register}
+      control={control}
+      handleSubmit={handleSubmit}
+      setValue={setValue}
+      reset={reset}
+      labelValue={labelValue}
+      setLabelValue={setLabelValue}
+      pageCount={pageCount}
+      existingFields={existingFields}
+      saveField={saveField}
+      digitalDocument={digitalDocument}
+      clearFields={clearFields}
+      docUrl={props.docUrl}
+      hasFields={fields.length > 0}
+      pageSerialNumber={startSerialNumber}
+      setPageSerialNumber={setStartSerialNumber}
+      pageNumber={pageNumber}
+      setPageNumber={setPageNumber}
+    />
+  )
   return (
     <div>
       <div className="form-doc-container">
-        <div className="form-container">
           {digitalDocument === null ? (
+        <div className="form-container">
             <DigitalDocumentForm
               onSubmit={initialSubmit} 
               docUrl={props.docUrl}/>
+        </div>
           ) : (
-              <FieldForm
-                pageCount={pageCount}
-                existingFields={existingFields}
-                saveField={saveField}
-                digitalDocument={digitalDocument}
-                clearFields={clearFields}
-                docUrl={props.docUrl}
-                hasFields={fields.length > 0}
-                pageSerialNumber={startSerialNumber}
-                setPageSerialNumber={setStartSerialNumber}
-              />
-            )}
-        </div>
-        <div className='adding-field'>
-          {digitalDocument != null && fields.length > 0 &&
-            <div className="field-container">
-              {fields.map(field => (
-                <div key={field.id}>
-                  <p className='filled-label'>{field.label}</p>
-                  <p>{field.text_body}</p>
-                </div>
-              ))}
-            </div>}
-        </div>
+            <>
+      <div className='document-head-section'>
+        <h2>Document Form</h2>
+        <p >
+          <a target="_blank" href={props.docUrl}>Link of the Original Document</a>
+        </p>
+        <p>Document Date: {digitalDocument.document_date}</p>
+        <p>Page Serial Number: {startSerialNumber}</p>
+        <p>Current page: {pageNumber} / {pageCount - pageNumber + 1}</p>
       </div>
+
+              <div className='adding-field'>
+                <div className="field-container">
+                  {fields.map(field => (
+                    <div key={field.id}>
+                      <p className='filled-label'>{field.label}</p>
+                      <p>{field.text_body}</p>
+                    </div>
+                  ))}
+                  { renderForm() }
+                </div>
+              </div>
+            </>
+          )}
+        </div>
     </div>
   );
 }

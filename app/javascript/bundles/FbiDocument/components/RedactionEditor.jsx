@@ -28,7 +28,7 @@ function insertRedaction({ area, code, range}) {
   area.focus();
 }
 
-export default function Edit() {
+export default function Edit(props) {
   const editableDiv = useRef(null);
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ currentRedactionCode, setCurrentRedactionCode ] = useState('');
@@ -47,7 +47,6 @@ export default function Edit() {
 
   return (
     <>
-      <h1>hey there</h1>
       <p>Redaction Code: {currentRedactionCode}</p>
         <RedactionModal
           open={modalOpen}
