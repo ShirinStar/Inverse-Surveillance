@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LabelAutocomplete from './LabelAutocomplete';
 import SerialNumberModal from './SerialNumberModal';
 import { Controller } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 
 import RedactionEditor from './RedactionEditor';
 
@@ -17,6 +18,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+function computeSize(span) {
+  if (span.classList.contains('small-redaction')) {
+    return "SMALL";
+  } else if (span.classList.contains('word-redaction')) {
+    return "WORD";
+  } else if (span.classList.contains('medium-redaction')) {
+    return "MEDIUM";
+  } else if (span.classList.contains("large-redaction")) {
+    return "LARGE";
+  } else {
+    throw new Error("invalid redaction size or not provided");
+  }
+}
 
 export default function FieldForm(props) {
   const {
@@ -44,6 +59,21 @@ export default function FieldForm(props) {
 
   const [ textBody, setTextBody ] = useState('');
 
+  function handleChange(div) {
+    const newDiv = div.cloneNode(true);
+
+    const codeSpans = newDiv.querySelectorAll('span');
+    codeSpans.forEach(span => {
+      const code = span.textContent;
+      const size = computeSize(span);
+      const id = uuidv4();
+      const codeText = `///REDACTION: ${code} || SIZE: ${size} || UUID: ${id}///`;
+      span.replaceWith(new Text("got a code: " + codeText));
+    });
+
+    setTextBody(newDiv.textContent);
+  }
+
   function openNewPage(pageSerialNumber) {
     setValue("serialNumber", "");
     setPageNumber(pageNumber + 1);
@@ -68,7 +98,7 @@ export default function FieldForm(props) {
   const showFields = () => {
     return (
       <>
-        <RedactionEditor onChange={setTextBody} />
+        <RedactionEditor onChange={handleChange} />
         <Button
           variant="contained"
           type="submit"

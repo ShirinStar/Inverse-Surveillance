@@ -4,14 +4,14 @@ import ContentEditable from 'react-contenteditable';
 import RedactionModal from './RedactionModal';
 
 
-function insertTextAtCaret(text, range) {
+function insertTextAtCaret(text, range, size) {
   range.deleteContents();
 
   const el = document.createElement('span');
 
   el.contentEditable = false;
-  // TODO: add size specific classes
   el.classList.add('spanner');
+  el.classList.add(`${size.toLowerCase()}-redaction`)
   el.textContent = text;
 
   range.insertNode( el   );
@@ -19,9 +19,9 @@ function insertTextAtCaret(text, range) {
   range.insertNode(document.createTextNode(""));
 }
 
-function insertRedaction({ area, code, range}) {
+function insertRedaction({ area, code, range, redactionSize }) {
   area.focus();
-  insertTextAtCaret(code, range);
+  insertTextAtCaret(code, range, redactionSize);
   area.blur();
   area.focus();
   area.dispatchEvent(new KeyboardEvent('keydown', { code: 39  }))
@@ -40,8 +40,8 @@ export default function Edit(props) {
   } = props;
 
   const handleRedaction = (code, size) => {
-    insertRedaction({ area: editableDiv.current, code, range }) 
-    onChange(editableDiv.current.innerHTML);
+    insertRedaction({ area: editableDiv.current, code, range, redactionSize }) 
+    onChange(editableDiv.current);
   }
 
   const handleRedactionClick = (size)  => {
@@ -85,7 +85,7 @@ export default function Edit(props) {
           </div>
           {/* <p>Redaction Code: {currentRedactionCode}</p> */}
           <div
-            onInput={() => onChange(editableDiv.current.innerHTML)}
+            onInput={() => onChange(editableDiv.current)}
             className="editable-div"
             ref={editableDiv}
             contentEditable="true">

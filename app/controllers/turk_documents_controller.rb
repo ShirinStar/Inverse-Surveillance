@@ -8,7 +8,6 @@ class TurkDocumentsController < ApplicationController
   end
 
   def create
-    p doc_params
     doc = DigitalDocument.create!(
       document_date: doc_params[:document_date],
       document_id: doc_params[:docId]
