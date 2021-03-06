@@ -64,6 +64,10 @@ export default function TurkDocumentForm(props) {
     setFields([]);
   }
 
+  function hunadleDone() {
+    console.log('done')
+  }
+
   const hasFields = fields.length > 0;
   console.log('label value: ', labelValue);
   const renderForm = () => (
@@ -111,7 +115,7 @@ export default function TurkDocumentForm(props) {
                 <div className='document-info'>
                   <p><strong>Document Date:</strong> {digitalDocument.document_date}</p>
                   <p><strong>Page Serial Number:</strong> {startSerialNumber}</p>
-                  <p><strong>Current page:</strong> {pageNumber} / {pageCount - pageNumber + 1}</p>
+                  <p><strong>Current page:</strong> {pageNumber} / {pageCount}</p>
                 </div>
 
                 <div className='document-instruction-div'>
@@ -145,13 +149,20 @@ export default function TurkDocumentForm(props) {
                 For further help <a className='link-instruction' href='/'>click here </a>.
                  </p>
                 </div>
+                 { (pageNumber == pageCount) ?
+                <Button
+                variant="contained"
+                onClick={hunadleDone}> SUBMIT</Button> 
+                :
                 <Button
                   variant="contained"
                   disabled={!hasFields}
                   onClick={() => setModalSerialOpen(true)}
                 > + Add New Page</Button>
+                 }
               </div>
               
+
               <div className='adding-field'>
                 <div className="field-container">
                   {fields.map(field => (
