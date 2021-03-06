@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_28_223947) do
+ActiveRecord::Schema.define(version: 2021_03_06_003654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 2021_02_28_223947) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "page_number"
     t.index ["digital_document_id"], name: "index_fields_on_digital_document_id"
+  end
+
+  create_table "redactions", force: :cascade do |t|
+    t.integer "client_id"
+    t.string "code"
+    t.string "size"
+    t.bigint "field_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_id"], name: "index_redactions_on_field_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
