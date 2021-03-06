@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import LabelAutocomplete from './LabelAutocomplete';
 import SerialNumberModal from './SerialNumberModal';
 import { Controller } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 
 import RedactionEditor from './RedactionEditor';
 
@@ -19,19 +18,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function computeSize(span) {
-  if (span.classList.contains('small-redaction')) {
-    return "SMALL";
-  } else if (span.classList.contains('word-redaction')) {
-    return "WORD";
-  } else if (span.classList.contains('medium-redaction')) {
-    return "MEDIUM";
-  } else if (span.classList.contains("large-redaction")) {
-    return "LARGE";
-  } else {
-    throw new Error("invalid redaction size or not provided");
-  }
-}
 
 export default function FieldForm(props) {
   const {
@@ -98,7 +84,7 @@ export default function FieldForm(props) {
   const showFields = () => {
     return (
       <>
-        <RedactionEditor onChange={handleChange} />
+        <RedactionEditor onChange={setTextBody} />
         <Button
           variant="contained"
           type="submit"

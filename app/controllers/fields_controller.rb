@@ -1,6 +1,6 @@
 class FieldsController < ApplicationController
   def create
-    body = field_params[:text_body]
+    body = field_params[:parsed_body]
 
     matches = body.scan(/\/\/\/REDACTION: ([\w\- ]+) \|\| SIZE: ([\w\- ]+) \|\| UUID: ([\w\- ]+)\/\/\//)
       .map { |match| { code: match[0], size: match[1], client_id: match[2] } }
@@ -19,9 +19,10 @@ class FieldsController < ApplicationController
   def field_params
     params.permit(
       :label,
-      :text_body,
+      :parsed_body,
+      :raw_html,
       :turk_document_id,
-      :serialNumber,
+      :pageSerialNumber,
       :page_number
     )
   end

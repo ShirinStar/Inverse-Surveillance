@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import markedSample from 'images/markedSample.png';
 import markedFields from 'images/markedFields.jpg';
 import markedRedCode from 'images/markedRedCode.png';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function TurkDocumentForm(props) {
   const { docId, pageCount, existingFields } = props;
@@ -44,14 +45,53 @@ export default function TurkDocumentForm(props) {
     }
   }
 
+
+  function computeSize(span) {
+    if (span.classList.contains('small-redaction')) {
+      return "SMALL";
+    } else if (span.classList.contains('word-redaction')) {
+      return "WORD";
+    } else if (span.classList.contains('medium-redaction')) {
+      return "MEDIUM";
+    } else if (span.classList.contains("large-redaction")) {
+      return "LARGE";
+    } else {
+      throw new Error("invalid redaction size or not provided");
+    }
+  }
+
+  function parseTextBody(div) {
+    const newDiv = div.cloneNode(true);
+
+    const codeSpans = newDiv.querySelectorAll('span');
+    codeSpans.forEach(span => {
+      const code = span.textContent;
+      const size = computeSize(span);
+      const id = uuidv4();
+      const codeText = `///REDACTION: ${code} || SIZE: ${size} || UUID: ${id}///`;
+      span.replaceWith(new Text("got a code: " + codeText));
+    });
+
+    return newDiv.textContent;
+  }
+
   async function saveField(field) {
     console.log(field);
     const token =
       document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
+    const raw_html = field.text_body.innerHTML;
+    const parsed_body = parseTextBody(field.text_body);
+    const { field_label, text_body, ...postData } = field;
+
+    const postBody = {
+      ...postData,
+      raw_html,
+      parsed_body,
+    }
     try {
-      const resp = await axios.post(`/turk_documents/${digitalDocument.id}/fields`, field);
+      const resp = await axios.post(`/turk_documents/${digitalDocument.id}/fields`, postBody);
       setFields([...fields, resp.data]);
     } catch (e) {
       console.log(e);
