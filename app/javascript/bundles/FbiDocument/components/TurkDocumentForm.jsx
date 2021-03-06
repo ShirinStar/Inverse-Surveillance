@@ -104,10 +104,6 @@ export default function TurkDocumentForm(props) {
     setFields([]);
   }
 
-  function hunadleDone() {
-    console.log('done')
-  }
-
   const hasFields = fields.length > 0;
   console.log('label value: ', labelValue);
   const renderForm = () => (
@@ -190,9 +186,13 @@ export default function TurkDocumentForm(props) {
                  </p>
                 </div>
                 {(pageNumber == pageCount) ?
-                  <Button
-                    variant="contained"
-                    onClick={hunadleDone}> SUBMIT</Button>
+                  <form action="/turk_documents/complete" method="POST">
+                    <input type="hidden" name="authenticity_token" value={document.querySelector('[name=csrf-token]').content} />
+                    <input type="hidden" name="doc_id" value={docId} />
+                    <Button
+                      variant="contained"
+                      type="submit">SUBMIT</Button>
+                  </form>
                   :
                   <Button
                     variant="contained"

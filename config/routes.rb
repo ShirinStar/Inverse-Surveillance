@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'admin/documents', to: 'admin_documents#index'
   get 'editor', to: 'editor#index'
   post 'admin', to: 'admin_documents#login'
+  post '/turk_documents/complete', to: 'turk_documents#complete'
   resources :turk_documents do 
     resources :fields
   end
