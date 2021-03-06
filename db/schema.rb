@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_003654) do
+ActiveRecord::Schema.define(version: 2021_03_06_180022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_003654) do
   end
 
   create_table "redactions", force: :cascade do |t|
-    t.integer "client_id"
+    t.string "client_id"
     t.string "code"
     t.string "size"
     t.bigint "field_id"
