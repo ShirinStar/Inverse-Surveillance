@@ -149,19 +149,19 @@ export default function TurkDocumentForm(props) {
                 For further help <a className='link-instruction' href='/'>click here </a>.
                  </p>
                 </div>
-                 { (pageNumber == pageCount) ?
-                <Button
-                variant="contained"
-                onClick={hunadleDone}> SUBMIT</Button> 
-                :
-                <Button
-                  variant="contained"
-                  disabled={!hasFields}
-                  onClick={() => setModalSerialOpen(true)}
-                > + Add New Page</Button>
-                 }
+                {(pageNumber == pageCount) ?
+                  <Button
+                    variant="contained"
+                    onClick={hunadleDone}> SUBMIT</Button>
+                  :
+                  <Button
+                    variant="contained"
+                    disabled={!hasFields}
+                    onClick={() => setModalSerialOpen(true)}
+                  > + Add New Page</Button>
+                }
               </div>
-              
+
 
               <div className='adding-field'>
                 <div className="field-container">
