@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_180022) do
+ActiveRecord::Schema.define(version: 2021_03_06_181205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_180022) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "page_number"
+    t.string "raw_html"
     t.index ["digital_document_id"], name: "index_fields_on_digital_document_id"
   end
 

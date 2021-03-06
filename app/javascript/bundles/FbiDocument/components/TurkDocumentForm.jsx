@@ -208,7 +208,7 @@ export default function TurkDocumentForm(props) {
                   {fields.map(field => (
                     <div key={field.id}>
                       <p className='filled-label'>{field.label}</p>
-                      <p className='filled-text'>{field.text_body}</p>
+                      <p className='filled-text' dangerouslySetInnerHTML={{__html: field.raw_html}}></p>
                     </div>
                   ))}
                   {renderForm()}

@@ -2,17 +2,19 @@ class FieldsController < ApplicationController
   def create
     body = field_params[:parsed_body]
 
-    matches = body.scan(/\/\/\/REDACTION: ([\w\- ]+) \|\| SIZE: ([\w\- ]+) \|\| UUID: ([\w\- ]+)\/\/\//)
-      .map { |match| { code: match[0], size: match[1], client_id: match[2] } }
-    p matches
+    redactions = body.scan(/\/\/\/REDACTION: ([\w\- ]+) \|\| SIZE: ([\w\- ]+) \|\| UUID: ([\w\- ]+)\/\/\//)
+      .map { |match| Redaction.new( code: match[0], size: match[1], client_id: match[2] ) }
 
     field = Field.create!(
       label: field_params[:label].downcase,
       page_number: field_params[:page_number],
-      serial_number: field_params[:serialNumber],
-      text_body: field_params[:text_body],
+      serial_number: field_params[:pageSerialNumber],
+      text_body: field_params[:parsed_body],
+      raw_html: field_params[:raw_html],
       digital_document_id: field_params[:turk_document_id],
+      redactions: redactions,
     )
+    
     render json: field
   end
 
