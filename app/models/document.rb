@@ -27,7 +27,7 @@ class Document < ApplicationRecord
       page_length: page_length,
       original_doc_url: give_public_url,
       digital_doc_url: "https://docurl.com",
-      status: "NOT STARTED",
+      status: status,
     }.to_json
   end
 =begin
