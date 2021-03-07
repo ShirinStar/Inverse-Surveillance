@@ -198,3 +198,46 @@ a:hover {
   color: #4050B5;
   padding-bottom: 5px;
 }
+
+/* Admin view approval*/
+.approval-view {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  background-color: #ddd;
+  padding: 50px;
+  margin-top: 50px;
+}
+
+.view-header {
+  font-size: 18px;
+  margin-bottom: 50px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin-btn {
+  margin-bottom: 15px;
+  margin-top: 40px;
+}
+
+.inner-view {
+ margin-bottom: 50px;
+}
+
+.view-page {
+  border: 1px solid black;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.label-view {
+  font-weight: 600;
+}
+
+.btn.nextPage {
+  float: right;
+}
+
+

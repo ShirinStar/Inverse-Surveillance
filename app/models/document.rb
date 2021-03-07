@@ -26,9 +26,9 @@ class Document < ApplicationRecord
       name: name,
       page_length: page_length,
       original_doc_url: give_public_url,
-      digital_doc_url: "https://docurl.com",
+      digital_doc_url: "/admin/documents/#{id}/approval",
       status: status,
-    }.to_json
+  }.to_json
   end
 =begin
   fetch documents from s3 with:

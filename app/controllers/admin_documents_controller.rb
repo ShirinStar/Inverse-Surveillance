@@ -20,6 +20,8 @@ def review
   doc = Document.find(reviews_params[:id])
   @date = doc.digital_document.document_date
   @fields = doc.digital_document.fields.to_json
+  @page_count = doc.page_length
+  @doc_url = doc.give_public_url
 end
 
   def admin_params

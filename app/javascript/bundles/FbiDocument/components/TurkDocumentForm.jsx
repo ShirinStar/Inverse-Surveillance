@@ -185,7 +185,7 @@ export default function TurkDocumentForm(props) {
                 For further help <a className='link-instruction' href='/'>click here </a>.
                  </p>
                 </div>
-                {(pageNumber == pageCount) ?
+                {(pageNumber == 1) ?
                   <form action="/turk_documents/complete" method="POST">
                     <input type="hidden" name="authenticity_token" value={document.querySelector('[name=csrf-token]').content} />
                     <input type="hidden" name="doc_id" value={docId} />
