@@ -19,6 +19,15 @@ class Document < ApplicationRecord
     doc_file.blob.service_url
   end
 
+  def reject
+    digital_document&.destroy!
+    update!(status: "Not Started")
+  end
+
+  def approve
+    update!(status: "Approve")
+  end
+
   def to_admin_json
     {
       id: id,

@@ -16,12 +16,27 @@ class AdminDocumentsController < ApplicationController
 end
 
 def review
-  p reviews_params[:id]
+  @page =  reviews_params[:page]&.to_i || 1
   doc = Document.find(reviews_params[:id])
   @date = doc.digital_document.document_date
-  @fields = doc.digital_document.fields.to_json
+  @fields = doc.digital_document.fields.where(page_number: @page).to_json
   @page_count = doc.page_length
   @doc_url = doc.give_public_url
+  @doc_id = doc.id
+end
+
+def approve
+  doc = Document.find(reviews_params[:id])
+  doc.approve
+
+  redirect_to admin_documents_path
+end
+
+def reject
+  doc = Document.find(reviews_params[:id])
+  doc.reject
+
+  redirect_to admin_documents_path
 end
 
   def admin_params
@@ -29,6 +44,6 @@ end
   end 
 
   def reviews_params
-    params.permit(:id)
+    params.permit(:id, :page)
   end
 end

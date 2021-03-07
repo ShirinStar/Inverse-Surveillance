@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 
 export default function AdminApprovalView(props) {
-  const { date, fields, page_count, doc_url } = props;
+  const { date, fields, page_count, doc_url, doc_id, currentPage } = props;
   const [pageNumber, setPageNumber] = useState()
   const [serialNumber, setSerialNumber] = useState()
 
   useEffect(() => {
-    parsedFields.map(field => (
-      setPageNumber(field.page_number),
-      setSerialNumber(field.serial_number)
-
-    ))
+      setSerialNumber(fields[0].serial_number)
   })
 
   const parsedFields = JSON.parse(fields);
@@ -24,15 +20,34 @@ export default function AdminApprovalView(props) {
         <div className='view-info'>
           <p><a target="_blank" href={doc_url}>Original Document Link</a></p>
           <p>Document Date: {date}</p>
-          <p>Page Number: {pageNumber} / {page_count} </p>
+          <p>Page Number: {currentPage} / {page_count} </p>
           <p>Page Serial Number: {serialNumber}</p>
         </div>
         <div>
           <div className='admin-btn'>
-            <Button variant="contained" color="primary">APPROVE</Button>
+            <form action={`/admin/documents/${doc_id}/approve`} method="POST">
+            <input 
+              type="hidden" 
+              name="authenticity_token" 
+              value={document.querySelector('[name=csrf-token]').content} />
+
+              <Button 
+                type="submit"
+                variant="contained" 
+                color="primary">APPROVE</Button>
+            </form>
           </div>
           <div className='admin-btn'>
-            <Button variant="contained" color="secondary">SEND BACK</Button>
+          <form action={`/admin/documents/${doc_id}/reject`} method="POST">
+            <input 
+              type="hidden" 
+              name="authenticity_token" 
+              value={document.querySelector('[name=csrf-token]').content} />
+            <Button 
+              variant="contained" 
+              color="secondary"
+              type="submit">SEND BACK</Button>
+            </form>
           </div>
         </div>
       </div>
@@ -46,9 +61,10 @@ export default function AdminApprovalView(props) {
         </div>
       ))}
       </div>
-      { (pageNumber != page_count) ?
+      { (currentPage != page_count) ?
         <div className='btn nextPage'>
-          <Button variant="contained">NEXT PAGE ➝</Button>
+          <a href={`http://localhost:3000/admin/documents/${doc_id}/approval?page=${currentPage-1}`}><Button variant="contained">⟵PREVIOUS PAGE</Button></a>
+          <a href={`http://localhost:3000/admin/documents/${doc_id}/approval?page=${currentPage+1}`}><Button variant="contained">NEXT PAGE⟶</Button></a>
         </div>
         :
         ''

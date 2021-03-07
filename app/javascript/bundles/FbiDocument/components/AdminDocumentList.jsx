@@ -10,8 +10,13 @@ function ListRow({ doc }) {
       <td><a target="_blank"
         href={doc.original_doc_url}>click it</a>
       </td>
-      <td><a target="_blank"
+      <td>
+        { (doc.status == 'Complete') ?
+        <a target="_blank"
         href={doc.digital_doc_url}>click to view</a>
+        :
+        "Not Ready"
+        }
       </td>
       <td>{doc.status}</td>
     </tr>
