@@ -13,14 +13,14 @@ import markedRedCode from 'images/markedRedCode.png';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function TurkDocumentForm(props) {
-  const { docId, pageCount, existingFields, modalSubmitOpen } = props;
+  const { docId, pageCount, existingFields } = props;
   const [digitalDocument, setDocument] = useState(null);
   const [fields, setFields] = useState([]);
   const [startSerialNumber, setStartSerialNumber] = useState('')
   const [labelValue, setLabelValue] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [modalSerialOpen, setModalSerialOpen] = useState(false);
-  const [SubmitModal, setSubmitModel] = useState(false)
+  const [submitModalOpen, setSubmitModelOpen] = useState(false)
 
   const {
     register,
@@ -46,7 +46,6 @@ export default function TurkDocumentForm(props) {
       console.log('all done');
     }
   }
-
 
   function computeSize(span) {
     if (span.classList.contains('small-redaction')) {
@@ -187,15 +186,13 @@ export default function TurkDocumentForm(props) {
                 For further help <a className='link-instruction' href='/'>click here </a>.
                  </p>
               </div>
-              {(pageNumber == 1) ?
-                <form action="/turk_documents/complete" method="POST">
-                  <input type="hidden" name="authenticity_token" value={document.querySelector('[name=csrf-token]').content} />
-                  <input type="hidden" name="doc_id" value={docId} />
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    onClick={() => setSubmitModel(true)}>SUBMIT</Button>
-                </form>
+              {(pageNumber == pageCount) ?
+
+                <Button
+                  variant="contained"
+                  type="submit"
+                  onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
+
                 :
                 <Button
                   variant="contained"
@@ -204,6 +201,12 @@ export default function TurkDocumentForm(props) {
                 > + Add New Page</Button>
               }
             </div>
+
+            <SubmitModal
+              open={submitModalOpen}
+              handleClose={() => setSubmitModelOpen(false)}
+              docId={docId}
+            />
 
             <div className='adding-field'>
               <div className="field-container">
@@ -218,7 +221,6 @@ export default function TurkDocumentForm(props) {
             </div>
           </>
         )}
-
       </div>
     </div>
   );

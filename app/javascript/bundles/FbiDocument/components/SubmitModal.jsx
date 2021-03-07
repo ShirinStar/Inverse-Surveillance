@@ -40,6 +40,7 @@ export default function SubmitModal(props) {
   const {
     open,
     handleClose,
+    docId,
     onSubmit,
   } = props;
 
@@ -66,8 +67,10 @@ export default function SubmitModal(props) {
           <div >
             <div className='DSN-modal-div'>
               <h2 className='sure'> Are you sure you would like to submit the document?</h2>
-              <form className='DSN-form' onSubmit={handleSubmit(onSubmit)}>
-                <Button className='btn saveDSN' variant="contained" type="submit">Yes, I'm all done</Button>
+                <form action="/turk_documents/complete" method="POST">
+                  <input type="hidden" name="authenticity_token" value={document.querySelector('[name=csrf-token]').content} />
+                  <input type="hidden" name="doc_id" value={docId} />
+                  <Button className='btn saveDSN' variant="contained" type="submit">Yes, I'm all done</Button>
               </form>
             </div>
           </div>
