@@ -15,17 +15,19 @@ function insertTextAtCaret(text, range, size) {
   el.textContent = text;
 
   range.insertNode( el   );
-  range.collapse(false);
   range.insertNode(document.createTextNode(""));
 }
 
 function insertRedaction({ area, code, range, redactionSize }) {
   area.focus();
   insertTextAtCaret(code, range, redactionSize);
-  area.blur();
-  area.focus();
   area.dispatchEvent(new KeyboardEvent('keydown', { code: 39  }))
-  area.focus();
+
+  // move cursor to end of inserted redaction
+  range.collapse(false);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
 }
 
 export default function Edit(props) {
