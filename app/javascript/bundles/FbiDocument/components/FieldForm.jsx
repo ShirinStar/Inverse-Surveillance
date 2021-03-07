@@ -114,7 +114,6 @@ export default function FieldForm(props) {
         <br />
         <br />
         <br />
-        {/* change maybe to if page complete click here to start a new page */}
         <SerialNumberModal
           open={modalSerialOpen}
           handleClose={() => setModalSerialOpen(false)}

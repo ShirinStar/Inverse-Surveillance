@@ -7,9 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import { useForm, Controller } from 'react-hook-form';
-import DNS from 'images/DSN.png';
-import HelpOutline from '@material-ui/icons/HelpOutline';
-import Tooltip from '@material-ui/core/Tooltip';
 import Backdrop from '@material-ui/core/Backdrop';
 import Close from '@material-ui/icons/Close';
 
@@ -39,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SerialNumberModal(props) {
+export default function SubmitModal(props) {
   const {
     open,
     handleClose,
@@ -68,21 +65,9 @@ export default function SerialNumberModal(props) {
         <CardContent>
           <div >
             <div className='DSN-modal-div'>
-              <h2 className='sure'> Are you sure there are no more fields for this page?</h2>
-              <p className='sureTwo'>If yes, please enter the new page Serial Number: </p>
+              <h2 className='sure'> Are you sure you would like to submit the document?</h2>
               <form className='DSN-form' onSubmit={handleSubmit(onSubmit)}>
-                <p className='form-labels'>New Page Serial Number </p>
-                <Tooltip title={
-                  <React.Fragment>
-                    <img className='hover-image' src={DNS} />
-                  </React.Fragment>
-                }>
-                  <HelpOutline fontSize="small"></HelpOutline>
-                </Tooltip>
-                <br />
-                <TextField required id="standard-basic" inputRef={register} name="pageSerialNumber" label="New Page Serial Number" />
-                <br /><br />
-                <Button className='btn saveDSN' variant="contained" type="submit">Save and Start New Page</Button>
+                <Button className='btn saveDSN' variant="contained" type="submit">Yes, I'm all done</Button>
               </form>
             </div>
           </div>
