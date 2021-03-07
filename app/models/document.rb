@@ -1,6 +1,7 @@
 class Document < ApplicationRecord
   has_one_attached :doc_file
   has_one :digital_document
+  validates :public_id, uniqueness: true, presence: true
 
   def self.ingest_document(file_name)
     page_count = PDF::Reader.new(file_name)

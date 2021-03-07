@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_035928) do
+ActiveRecord::Schema.define(version: 2021_03_07_043351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_035928) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "category"
     t.string "status", default: "Not Started"
+    t.uuid "public_id", default: -> { "uuid_generate_v4()" }, null: false
   end
 
   create_table "fields", force: :cascade do |t|
