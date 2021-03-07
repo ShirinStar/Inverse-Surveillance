@@ -3,10 +3,12 @@ import AdminDocumentList from '../bundles/FbiDocument/components/AdminDocumentLi
 import TurkDocumentForm from '../bundles/FbiDocument/components/TurkDocumentForm';
 import RedactionEditor from '../bundles/FbiDocument/components/RedactionEditor';
 import Main from '../bundles/FbiDocument/components/Main';
+import AdminApprovalView from '../bundles/FbiDocument/components/AdminApprovalView';
 
 ReactOnRails.register({
   TurkDocumentForm,
   RedactionEditor,
   AdminDocumentList,
   Main,
+  AdminApprovalView,
 });

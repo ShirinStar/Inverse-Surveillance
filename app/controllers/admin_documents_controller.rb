@@ -15,7 +15,18 @@ class AdminDocumentsController < ApplicationController
   end
 end
 
+def review
+  p reviews_params[:id]
+  doc = Document.find(reviews_params[:id])
+  @date = doc.digital_document.document_date
+  @fields = doc.digital_document.fields.to_json
+end
+
   def admin_params
     params.permit(:admin_password)
   end 
+
+  def reviews_params
+    params.permit(:id)
+  end
 end
