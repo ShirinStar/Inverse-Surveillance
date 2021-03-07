@@ -1,10 +1,17 @@
 class TurkDocumentsController < ApplicationController
   def new
     doc = Document.last
+    redirect_to edit_turk_document_path(doc.public_id)
+  end
+
+  def edit
+    doc = Document.find_by(public_id: edit_params[:id])
     @doc_url = doc.give_public_url
     @doc_id = doc.id
     @page_count = doc.page_length
     @labels = Field.pluck(:label).uniq.compact
+
+    render "turk_documents/new"
   end
 
   def complete
@@ -37,5 +44,9 @@ class TurkDocumentsController < ApplicationController
 
   def complete_params
     params.permit(:doc_id)
+  end
+
+  def edit_params
+    params.permit(:id)
   end
 end
