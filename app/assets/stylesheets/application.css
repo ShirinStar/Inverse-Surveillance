@@ -25,6 +25,18 @@ h1, h2 {
   letter-spacing: 2px;
 }
 
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.page-header {
+  float: right;
+  padding: 20px;
+}
+
 .login-section{
   float: right;
   padding: 20px;

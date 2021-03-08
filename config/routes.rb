@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'admin/documents/:id/approve', to: 'admin_documents#approve'
   post 'admin/documents/:id/reject', to: 'admin_documents#reject'
   get '/admin/documents/:id/approval', to: 'admin_documents#review'
+  get '/help', to: 'help#index'
   get 'editor', to: 'editor#index'
   post 'admin', to: 'admin_documents#login'
   post '/turk_documents/complete', to: 'turk_documents#complete'

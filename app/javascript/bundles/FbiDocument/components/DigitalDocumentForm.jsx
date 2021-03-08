@@ -32,7 +32,7 @@ export default function DigitalDocumentForm(props) {
   const { onSubmit } = props;
 
   return (
-    <>
+    <div>
       <div className='header initDocument'>
         <div className='inner-header'>
           <h1>Process a Document</h1>
@@ -95,6 +95,6 @@ export default function DigitalDocumentForm(props) {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }

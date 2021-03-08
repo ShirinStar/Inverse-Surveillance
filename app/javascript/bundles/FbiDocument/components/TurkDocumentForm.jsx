@@ -132,7 +132,11 @@ export default function TurkDocumentForm(props) {
   )
   return (
     <div>
+      <div className='page-header'>
+        <a href='/help'> How to use this</a>
+      </div>
       <div className="form-doc-container">
+
         {digitalDocument === null ? (
           <div className="form-container">
             <DigitalDocumentForm
