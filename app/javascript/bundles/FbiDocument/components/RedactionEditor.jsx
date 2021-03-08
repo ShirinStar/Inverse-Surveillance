@@ -22,8 +22,6 @@ function insertRedaction({ area, code, range, redactionSize }) {
   area.focus();
   insertTextAtCaret(code, range, redactionSize);
   area.dispatchEvent(new KeyboardEvent('keydown', { code: 39  }))
-
-  // move cursor to end of inserted redaction
   range.collapse(false);
   const sel = window.getSelection();
   sel.removeAllRanges();
