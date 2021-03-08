@@ -1,6 +1,7 @@
 class Document < ApplicationRecord
   has_one_attached :doc_file
   has_one :digital_document
+  attribute :public_id, :uuid, default: -> { SecureRandom.uuid }
   validates :public_id, uniqueness: true, presence: true
 
   def self.ingest_document(file_name)
@@ -9,6 +10,7 @@ class Document < ApplicationRecord
 
     doc = Document.new()
     doc.page_length = page_count
+    doc.name = File.basename(file_name)
     doc.doc_file.attach(io: 
                         File.open(file_name),
                         filename: File.basename(file_name))
