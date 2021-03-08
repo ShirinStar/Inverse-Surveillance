@@ -83,7 +83,6 @@ export default function Edit(props) {
               size="small"
               variant="outlined">Large Redaction</Button>
           </div>
-          {/* <p>Redaction Code: {currentRedactionCode}</p> */}
           <div
             onInput={() => onChange(editableDiv.current)}
             className="editable-div"

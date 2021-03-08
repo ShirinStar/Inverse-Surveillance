@@ -8,10 +8,19 @@
   padding-right: 5%;
 }
 
+.field-form-container .form-controls {
+  display: flex;
+  justify-content: space-around;
+}
+
 .adding-field {
   max-width: 70%;
   min-width: 35%;
   padding: 50px;
+}
+
+.btn.save-field {
+  margin-top: 5%;
 }
 
 .MuiFormControl-root.MuiTextField-root {

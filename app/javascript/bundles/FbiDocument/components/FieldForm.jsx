@@ -43,7 +43,7 @@ export default function FieldForm(props) {
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
 
-  const [ textBody, setTextBody ] = useState('');
+  const [textBody, setTextBody] = useState('');
 
   function handleChange(div) {
     const newDiv = div.cloneNode(true);
@@ -77,6 +77,7 @@ export default function FieldForm(props) {
       text_body: textBody,
     }, ev);
     setLabelValue("");
+    setTextBody("");
     reset();
     setValue("serialNumber", serialNumber);
   }
@@ -85,31 +86,39 @@ export default function FieldForm(props) {
     return (
       <>
         <RedactionEditor onChange={setTextBody} />
-        <Button
-          variant="contained"
-          type="submit"
-          value="Save">
-          Save Field
-        </Button>
+        <div className='btn save-field'>
+        </div>
       </>
     );
   }
 
+  console.log(textBody);
   return (
     <>
       <div className="field-form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="fieldLabel"
-            control={control}
-            render={props => (
-              <LabelAutocomplete
-                existingLabels={existingLabels}
-                value={labelValue}
-                setValue={setLabelValue} />
-            )} />
+          <div className="form-controls">
+
+            <Controller
+              name="fieldLabel"
+              control={control}
+              render={props => (
+                <LabelAutocomplete
+                  existingLabels={existingLabels}
+                  value={labelValue}
+                  setValue={setLabelValue} />
+              )} />
+            <Button
+              disabled={textBody.length < 1}
+              variant="contained"
+              type="submit"
+              value="Save">
+              Save Field
+        </Button>
+          </div>
+
           <br /><br />
-          { labelValue && labelValue.label.length > 0 && showFields() }
+          {labelValue && labelValue.label.length > 0 && showFields()}
         </form>
         <br />
         <br />
