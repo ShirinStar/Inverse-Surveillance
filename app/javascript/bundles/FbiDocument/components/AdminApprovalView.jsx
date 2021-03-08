@@ -15,7 +15,7 @@ export default function AdminApprovalView(props) {
   return (
     <div className='approval-view'>
       <div className='admin-header'>
-        <a href='/admin/documents'>Go Back</a>
+        <a href='/admin/documents'>⟵Go Back</a>
       </div>
       <h1 className='approval-title'> Admin Document View</h1>
 

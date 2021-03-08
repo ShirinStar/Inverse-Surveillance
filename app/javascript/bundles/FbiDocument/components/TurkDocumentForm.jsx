@@ -6,6 +6,7 @@ import DigitalDocumentForm from './DigitalDocumentForm';
 import SubmitModal from './SubmitModal';
 import Button from '@material-ui/core/Button';
 import HelpOutline from '@material-ui/icons/HelpOutline';
+import Help from '@material-ui/icons/Help';
 import Tooltip from '@material-ui/core/Tooltip';
 import markedSample from 'images/markedSample.png';
 import markedFields from 'images/markedFields.jpg';
@@ -133,7 +134,7 @@ export default function TurkDocumentForm(props) {
   return (
     <div>
       <div className='page-header'>
-        <a href='/help'> How to use this</a>
+        <a href='/help' className='a help'><Help fontSize="large" ></Help></a>
       </div>
       <div className="form-doc-container">
 
@@ -186,8 +187,8 @@ export default function TurkDocumentForm(props) {
                   }>
                     <HelpOutline fontSize="small"></HelpOutline>
                   </Tooltip> <br />
-                4• Do that to all the original document's field you received. <br /><br />
-                For further help <a className='link-instruction' href='/'>click here </a>.
+                4• Do that to all the original document's field you received. <br /> <br/>
+                Please watch and read the instructions <a className='link-instruction' href='/help'>here </a><br/><br/>
                  </p>
               </div>
               {(pageNumber == pageCount) ?

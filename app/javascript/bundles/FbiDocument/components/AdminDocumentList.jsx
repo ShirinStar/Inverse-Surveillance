@@ -52,7 +52,7 @@ export default function AdminDocumentList(props) {
   return (
     <>
       <div className='admin-header'>
-        <a href='/'>Go Back</a>
+        <a href='/'>⟵Go Back</a>
       </div>
       <div className='admin-view'>
         <h1>Admin Document List</h1>

@@ -36,6 +36,15 @@ h1, h2 {
   padding: 20px;
 }
 
+.a.help {
+  border:none;
+}
+
+.a.help:hover {
+  background-color: transparent;
+  color: #4050B5;
+}
+
 .page-header {
   float: right;
   padding: 20px;
@@ -108,6 +117,7 @@ td {
 
 .field-editor {
   height: 300px;
+  width: 100%
 }
 
 .hover-image {

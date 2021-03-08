@@ -1,12 +1,13 @@
 import React from 'react';
 import Login from './Login';
+import Help from '@material-ui/icons/Help';
 
 export default function AdminDocumentList() {
   return (
     <div>
       <div className='main-header'>
-      <Login />
-      <a href='/help'> How to use this</a>
+        <Login />
+        <a href='/help' className='a help'><Help fontSize="large" ></Help></a>
       </div>
       <h1 className='main-title'>INVERSE SURVEILLANCE</h1>
       <div className='start-div'>

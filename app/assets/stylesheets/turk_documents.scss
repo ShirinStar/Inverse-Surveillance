@@ -1,17 +1,17 @@
 
 .form-doc-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   text-align: left;
 }
 
 .field-container{
   border: 1px solid #aaa;
   border-bottom: none;
-  /* change this width for different screens*/ 
-  width: 680px;
+  width: 900px;
   min-height: 800px;
   margin-bottom: 5%;
+  margin-top: 30px;
   padding: 50px;
   border-radius: 0.3rem;
   box-shadow: 5px 2px rgba(221, 221, 221, 0.3);
@@ -19,20 +19,41 @@
 
 .filled-label {
   font-weight: 600;
-  padding-top: 20px;
+  text-transform: capitalize;
 }
 
 .filled-text {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .document-head-section {
   background-color: black;
   color: white;
-  padding: 100px;
-  margin-left: -8%;
+  padding: 80px;
+  margin-left: -2%;
+  min-height: 100%;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+@media (max-width: 1500px) {
+  .document-head-section {
+    padding: 70px;
+    margin-left: -2%;
+  }
+  .field-container{ 
+    width: 700px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .document-head-section {
+    padding: 50px;
+    margin-left: -1%;
+  }
+  .field-container{ 
+    width: 500px;
+  }
 }
 
 .document-titles {
