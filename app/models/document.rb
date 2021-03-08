@@ -39,6 +39,7 @@ class Document < ApplicationRecord
       page_length: page_length,
       original_doc_url: give_public_url,
       digital_doc_url: "/admin/documents/#{id}/approval",
+      public_id: public_id,
       status: status,
   }.to_json
   end

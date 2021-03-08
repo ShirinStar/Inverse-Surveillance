@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Login from './Login'
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const STATUSES = {
   COMPLETE: "Complete",
@@ -21,10 +23,11 @@ function ListRow({ doc }) {
         {(doc.status == 'Complete') ?
           <a target="_blank"
             href={doc.digital_doc_url}>click to view</a>
-          :
-          "Not Ready"
+            :
+            "Not Ready"
         }
       </td>
+      <td><a href={`/turk_documents/${doc.public_id}/edit`}>Edit Document</a></td>
       <td>{doc.status}</td>
     </tr>
   )
@@ -33,7 +36,7 @@ function ListRow({ doc }) {
 function DocList(props) {
   const { docs, statusFilter } = props;
 
-  const docList = statusFilter !== null ? (
+  const docList = statusFilter !== '' ? (
     docs.filter(doc => doc.status === statusFilter)) : docs;
 
   return (
@@ -45,7 +48,7 @@ function DocList(props) {
 
 export default function AdminDocumentList(props) {
   const docs = props.docs.map(JSON.parse);
-  const [statusFilter, setStatusFilter] = useState(null);
+  const [ statusFilter, setStatusFilter ] = useState('');
   return (
     <>
       <div className='admin-header'>
@@ -54,10 +57,15 @@ export default function AdminDocumentList(props) {
       <div className='admin-view'>
         <h1>Admin Document List</h1>
         <div className="filter-buttons">
-          <Button variant="outlined" onClick={() => setStatusFilter(STATUSES.COMPLETE)}>Show Only Completed</Button>
-          <Button variant="outlined" onClick={() => setStatusFilter(STATUSES.IN_PROGRESS)}>Show Only In Progress</Button>
-          <Button variant="outlined" onClick={() => setStatusFilter(STATUSES.NOT_STARTED)}>Show Only Not Started</Button>
-          <Button variant="outlined" onClick={() => setStatusFilter(null)}>Show All</Button>
+          <Select
+            displayEmpty
+            value={statusFilter}
+            onChange={(ev) => setStatusFilter(ev.target.value)}>
+            <MenuItem value={''}>Show All</MenuItem>
+            <MenuItem value={STATUSES.NOT_STARTED}>Not Started</MenuItem>
+            <MenuItem value={STATUSES.IN_PROGRESS}>In Progress</MenuItem>
+            <MenuItem value={STATUSES.COMPLETE}>Complete</MenuItem>
+          </Select>
         </div>
         <table>
           <thead>
@@ -67,6 +75,7 @@ export default function AdminDocumentList(props) {
               <th>Page Length</th>
               <th>[Original] Document URL</th>
               <th>Digitized Document URL</th>
+              <th>TESTING edit url</th>
               <th>Status</th>
             </tr>
           </thead>
