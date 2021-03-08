@@ -59,7 +59,9 @@ export default function SubmitModal(props) {
       BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500,
-      }}>
+      }}
+      style={{display:'flex',alignItems:'center',justifyContent:'center'}}
+      >
       <Card className={classes.root}>
         <Button className='btn close' onClick={handleClose}><Close ></Close></Button>
         <br/>

@@ -187,9 +187,9 @@ export default function TurkDocumentForm(props) {
                   }>
                     <HelpOutline fontSize="small"></HelpOutline>
                   </Tooltip> <br />
-                4• Do that to all the original document's field you received. <br /> <br/>
-                Please watch and read the instructions <a className='link-instruction' href='/help'>here </a><br/><br/>
-                 </p>
+                4• Do that to all the original document's field you received. <br /> <br />
+                Please watch and read the instructions <a className='link-instruction' href='/help'>here </a><br /><br />
+                </p>
               </div>
               {(pageNumber == pageCount) ?
 

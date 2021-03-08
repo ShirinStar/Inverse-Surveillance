@@ -117,7 +117,6 @@ td {
 
 .field-editor {
   height: 300px;
-  width: 100%
 }
 
 .hover-image {
@@ -216,13 +215,10 @@ a:hover {
   margin-top: 10%;
 }
 
-.DSN-modal-div {
-  text-align: left;
-}
-
 .DSN-form {
-  width: 300px;
+  width: 500px;
   padding: 20px;
+  text-align: center;
 }
 
 .btn.close {
@@ -240,7 +236,7 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
-  background-color: rgb(232, 232, 232);
+  /* background-color: rgb(232, 232, 232); */
   padding: 50px;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -274,7 +270,8 @@ a:hover {
 }
 
 .btn.nextPage {
-  float: right;
+  display: flex;
+  justify-content: space-between;
 }
 
 
@@ -284,4 +281,16 @@ a:hover {
 
 .filter-buttons button {
   margin-right: 20px;
+}
+
+.help-cointainer {
+  width: 80%;
+  margin-left: 0 auto;
+  margin-right: 0 auto;
+  text-align: center;
+}
+
+.help-view {
+  margin-left: 40%;
+  text-align: left;
 }
