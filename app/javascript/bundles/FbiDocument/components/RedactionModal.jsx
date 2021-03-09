@@ -79,6 +79,7 @@ export default function RedactionModal(props) {
             onChange={handleChange}
             value={redactionCode}
             name="redactionCode" 
+            autoFocus
             label="Redaction code"/>
              <Tooltip title={
                   <React.Fragment>
