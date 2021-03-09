@@ -3,6 +3,7 @@ import axios from 'axios';
 import FieldForm from './FieldForm';
 import { useForm, Controller } from 'react-hook-form';
 import DigitalDocumentForm from './DigitalDocumentForm';
+import FieldRow from './FieldRow';
 import SubmitModal from './SubmitModal';
 import Button from '@material-ui/core/Button';
 import HelpOutline from '@material-ui/icons/HelpOutline';
@@ -212,16 +213,14 @@ export default function TurkDocumentForm(props) {
               handleClose={() => setSubmitModelOpen(false)}
               docId={docId}
             />
-
             <div className='adding-field'>
               <div className="field-container">
                 {fields.map(field => (
-                  <div key={field.id}>
-                    <p className='filled-label'>{field.label}</p>
-                    <p className='filled-text' dangerouslySetInnerHTML={{ __html: field.raw_html }}></p>
-                  </div>
+                  <FieldRow key={field.id}
+                    label={field.label}
+                    rawHtml={field.raw_html} />
                 ))}
-                {renderForm()}
+            {renderForm()}
               </div>
             </div>
           </>

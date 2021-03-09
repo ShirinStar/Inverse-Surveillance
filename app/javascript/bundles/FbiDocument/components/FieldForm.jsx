@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import LabelAutocomplete from './LabelAutocomplete';
 import SerialNumberModal from './SerialNumberModal';
-import { Controller } from 'react-hook-form';
+import Editor from './Editor';
 
 import RedactionEditor from './RedactionEditor';
 
@@ -84,41 +83,24 @@ export default function FieldForm(props) {
 
   const showFields = () => {
     return (
-      <>
         <RedactionEditor onChange={setTextBody} />
-        <div className='btn save-field'>
-        </div>
-      </>
     );
   }
 
-  console.log(textBody);
   return (
     <>
       <div className="field-form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-controls">
-
-            <Controller
-              name="fieldLabel"
+            <Editor
               control={control}
-              render={props => (
-                <LabelAutocomplete
-                  existingLabels={existingLabels}
-                  value={labelValue}
-                  setValue={setLabelValue} />
-              )} />
-            <Button
-              disabled={textBody.length < 1}
-              variant="contained"
-              type="submit"
-              value="Save">
-              Save Field
-        </Button>
-          </div>
-
+              existingLabels={existingLabels}
+              value={labelValue}
+              setLabelValue={setLabelValue}
+              textBody />
           <br /><br />
-          {labelValue && labelValue.label.length > 0 && showFields()}
+          {labelValue && labelValue.label.length > 0 && (
+            <RedactionEditor onChange={setTextBody} />
+          )}
         </form>
         <br />
         <br />
