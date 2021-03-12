@@ -2,6 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import Button from '@material-ui/core/Button';
 import LabelAutocomplete from './LabelAutocomplete';
+import RedactionEditor from './RedactionEditor';
 
 export default function Editor(props) {
   const {
@@ -10,9 +11,12 @@ export default function Editor(props) {
     labelValue,
     setLabelValue,
     textBody,
+    setTextBody,
+    isUpdate
   } = props;
 
   return (
+    
     <>
       <div className="form-controls">
         <Controller

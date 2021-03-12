@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import SerialNumberModal from './SerialNumberModal';
 import Editor from './Editor';
-
-import RedactionEditor from './RedactionEditor';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,51 +16,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FieldForm(props) {
   const {
-    pageCount,
-    digitalDocument,
     saveField,
     existingFields,
-    clearFields,
     pageSerialNumber,
-    setPageSerialNumber,
     labelValue,
     setLabelValue,
     handleSubmit,
-    register,
     reset,
     control,
     setValue,
     pageNumber,
-    setPageNumber,
-    setModalSerialOpen,
-    modalSerialOpen,
+    setTextBody,
+    textBody,
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
-
-  const [textBody, setTextBody] = useState('');
-
-  function handleChange(div) {
-    const newDiv = div.cloneNode(true);
-
-    const codeSpans = newDiv.querySelectorAll('span');
-    codeSpans.forEach(span => {
-      const code = span.textContent;
-      const size = computeSize(span);
-      const id = uuidv4();
-      const codeText = `///REDACTION: ${code} || SIZE: ${size} || UUID: ${id}///`;
-      span.replaceWith(new Text("got a code: " + codeText));
-    });
-
-    setTextBody(newDiv.textContent);
-  }
-
-  function openNewPage(pageSerialNumber) {
-    setValue("serialNumber", "");
-    setPageNumber(pageNumber + 1);
-    setPageSerialNumber(pageSerialNumber)
-    clearFields();
-  }
 
   function onSubmit(formData, ev) {
     const { serialNumber } = formData;
@@ -75,16 +41,7 @@ export default function FieldForm(props) {
       pageSerialNumber: pageSerialNumber,
       text_body: textBody,
     }, ev);
-    setLabelValue("");
-    setTextBody("");
-    reset();
     setValue("serialNumber", serialNumber);
-  }
-
-  const showFields = () => {
-    return (
-        <RedactionEditor onChange={setTextBody} />
-    );
   }
 
   return (
@@ -94,25 +51,14 @@ export default function FieldForm(props) {
             <Editor
               control={control}
               existingLabels={existingLabels}
-              value={labelValue}
+              labelValue={labelValue}
               setLabelValue={setLabelValue}
-              textBody />
-          <br /><br />
-          {labelValue && labelValue.label.length > 0 && (
-            <RedactionEditor onChange={setTextBody} />
-          )}
+              setTextBody={setTextBody}
+              textBody={textBody} />
         </form>
         <br />
         <br />
         <br />
-        <SerialNumberModal
-          open={modalSerialOpen}
-          handleClose={() => setModalSerialOpen(false)}
-          onSubmit={({ pageSerialNumber }) => {
-            setPageSerialNumber(pageSerialNumber)
-            openNewPage(pageSerialNumber)
-            setModalSerialOpen(false)
-          }} />
       </div>
     </>
   );

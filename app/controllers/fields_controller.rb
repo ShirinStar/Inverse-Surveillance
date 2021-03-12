@@ -18,6 +18,13 @@ class FieldsController < ApplicationController
     render json: field
   end
 
+  def update
+    body = field_params[:parsed_body]
+    p body
+
+    render status: 200
+  end
+
   def field_params
     params.permit(
       :label,
