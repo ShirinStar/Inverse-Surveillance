@@ -13,7 +13,7 @@ export default function Editor(props) {
     textBody,
     setTextBody,
     cancel,
-    isUpdate
+    isEditing,
   } = props;
 
   return (
@@ -29,12 +29,14 @@ export default function Editor(props) {
               value={labelValue}
               setValue={setLabelValue} />
           )} />
+        {isEditing &&
         <Button
           variant="contained"
           onClick={cancel}
           value="Cancel">
-          Cancel
+          Undo Changes
         </Button>
+        }
         <Button
           disabled={textBody.length < 1}
           variant="contained"

@@ -1,6 +1,7 @@
 import React from 'react';
 import FieldForm from './FieldForm';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 function FieldRow(props) {
   const { label, raw_html: rawHtml } = props.field;
@@ -57,11 +58,27 @@ function FieldRow(props) {
           setPageSerialNumber={setStartSerialNumber}
           pageNumber={pageNumber}
           textBody={textBody}
+          isEditing={isEditing}
           setTextBody={setTextBody} /> )
       : (
         <>
           <p className='filled-label'>{label}</p>
           <p className='filled-text' dangerouslySetInnerHTML={{ __html: rawHtml  }}></p>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={ () => {
+              if (fieldEdit && field && (fieldEdit.id === field.id)) {
+                return;
+              }
+              setLabelValue({label: field.label});
+              setTextBody(field.raw_html);
+              props.beginUpdate({
+                id: field.id,
+                textBody: field.raw_html,
+                textLabel: field.label,
+              });
+              setIsEditing(true)}}>Edit Field</Button>
         </>
       )}
     </div>

@@ -79,7 +79,6 @@ function insertRedaction({ area, code, range, redactionSize }) {
 
         <div className="field-editor">
           <div className="field-editor-controls">
-            <pre> the props: {props.body} {props.label && props.label.value} {props.id}</pre>
             <Button
               onClick={() => handleRedactionClick("WORD")}
               size="small"

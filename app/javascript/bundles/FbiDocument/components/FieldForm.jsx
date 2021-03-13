@@ -30,6 +30,7 @@ function FieldForm(props) {
     setTextBody,
     textBody,
     fieldEdit,
+    isEditing,
     cancel
   } = props;
 
@@ -65,6 +66,7 @@ function FieldForm(props) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <Editor
               cancel={cancel}
+              isEditing={isEditing}
               control={control}
               existingLabels={existingLabels}
               labelValue={labelValue}
@@ -72,9 +74,6 @@ function FieldForm(props) {
               setTextBody={setTextBody}
               textBody={textBody} />
         </form>
-        <br />
-        <br />
-        <br />
       </div>
     </>
   );
