@@ -10,11 +10,20 @@ import SerialNumberModal from './SerialNumberModal';
 import Button from '@material-ui/core/Button';
 import Help from '@material-ui/icons/Help';
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
 
-export default function TurkDocumentForm(props) {
-  const { docId, pageCount, existingFields, docUrl } = props;
-  const [digitalDocument, setDocument] = useState(null);
-  const [fields, setFields] = useState([]);
+function TurkDocumentForm(props) {
+  const {
+    docId,
+    pageCount,
+    existingFields,
+    docUrl,
+    digitalDoc,
+    oldFields
+  } = props;
+
+  const [digitalDocument, setDocument] = useState(digitalDoc);
+  const [fields, setFields] = useState(JSON.parse(oldFields) || []);
   const [startSerialNumber, setStartSerialNumber] = useState('')
   const [labelValue, setLabelValue] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -77,6 +86,29 @@ export default function TurkDocumentForm(props) {
     return newDiv.textContent;
   }
 
+  async function updateField(id, field) {
+    const token =
+      document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+
+    const postBody = extractPostBody(field);
+
+    try {
+      const resp = await axios.put(`/turk_documents/${digitalDocument.id}/fields`, postBody);
+      setFields(fields.map(field => {
+        return field.id === id ? resp.data : field;
+      }));
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLabelValue("");
+      resetStore();
+      setTextBody("");
+      reset();
+      console.log('done submitting field');
+    }
+
+  }
   async function saveField(field) {
     const token =
       document.querySelector('[name=csrf-token]').content
@@ -98,7 +130,6 @@ export default function TurkDocumentForm(props) {
   }
 
   function extractPostBody(field) {
-
     const raw_html = field.text_body.innerHTML;
     const parsed_body = parseTextBody(field.text_body);
     const { field_label, text_body, ...postData } = field;
@@ -112,7 +143,7 @@ export default function TurkDocumentForm(props) {
     return postBody;
   }
 
-  async function updateField(field, fieldId) {
+  async function updateField(fieldId, field) {
     const token =
       document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
@@ -166,13 +197,13 @@ export default function TurkDocumentForm(props) {
     setIsEditing(false);
     clearFields();
   }
+
   return (
     <div>
       <div className='page-header'>
         <a href='/help' className='a help'><Help fontSize="large" ></Help></a>
       </div>
       <div className="form-doc-container">
-
         {digitalDocument === null ? (
           <div className="form-container">
             <DigitalDocumentForm
@@ -214,6 +245,7 @@ export default function TurkDocumentForm(props) {
               <div className="field-container">
                 {fields.map(field => (
                   <FieldRow key={field.id}
+                    updateField={updateField}
                     control={control}
                     handleSubmit={handleSubmit}
                     setValue={setValue}
@@ -247,3 +279,11 @@ export default function TurkDocumentForm(props) {
     </div>
   );
 }
+
+export default connect(
+  (state) => {
+    return {foo: state.main.foo}
+  },
+  { doFoo: (data) => ({type: "FOO", payload: "fooby"}),
+    resetStore: () => ({type: 'RESET', payload: {}})})
+  (TurkDocumentForm);

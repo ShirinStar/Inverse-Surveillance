@@ -1,12 +1,14 @@
 import React from 'react';
 import FieldForm from './FieldForm';
+import { connect } from 'react-redux';
 
-export default function FieldRow(props) {
+function FieldRow(props) {
   const { label, raw_html: rawHtml } = props.field;
   const {
     isEditing,
     setIsEditing,
     saveField,
+    updateField,
     existingFields,
     pageSerialNumber,
     labelValue,
@@ -26,10 +28,16 @@ export default function FieldRow(props) {
     <div onClick={() => {
       setLabelValue({label: field.label});
       setTextBody(field.raw_html);
+      props.beginUpdate({
+        id: field.id,
+        textBody: field.raw_html,
+        textLabel: field.label,
+      });
       setIsEditing(true)}}>
       {isEditing ? (
         <FieldForm
           control={control}
+          updateField={updateField}
           handleSubmit={handleSubmit}
           setValue={setValue}
           reset={reset}
@@ -52,3 +60,14 @@ export default function FieldRow(props) {
     </div>
   );
 }
+
+const beginUpdate = ({id, textBody, textLabel}) => ({
+  type: 'BEGIN_UPDATE',
+  payload: {
+    id,
+    textBody,
+    textLabel,
+  },
+});
+
+export default connect(null, { beginUpdate })(FieldRow);
