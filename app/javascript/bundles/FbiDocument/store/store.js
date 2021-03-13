@@ -12,6 +12,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         foo: state.foo + 1,
       };
+    case 'FINISH_EDIT':
+      return initialState;
+    case 'RESET':
+      return initialState;
     case 'BEGIN_UPDATE':
       const {
         textBody,

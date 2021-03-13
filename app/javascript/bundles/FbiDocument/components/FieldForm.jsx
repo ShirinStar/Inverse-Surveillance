@@ -24,13 +24,13 @@ function FieldForm(props) {
     labelValue,
     setLabelValue,
     handleSubmit,
-    reset,
     control,
     setValue,
     pageNumber,
     setTextBody,
     textBody,
     fieldEdit,
+    cancel
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
@@ -64,6 +64,7 @@ function FieldForm(props) {
       <div className="field-form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
             <Editor
+              cancel={cancel}
               control={control}
               existingLabels={existingLabels}
               labelValue={labelValue}

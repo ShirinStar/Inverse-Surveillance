@@ -22,10 +22,16 @@ function FieldRow(props) {
     textBody,
     setStartSerialNumber,
     field,
+    fieldEdit,
+    cancel,
   } = props;
 
   return (
     <div onClick={() => {
+      // ignore if already editing this doc
+      if (fieldEdit && field && (fieldEdit.id === field.id)) {
+        return;
+      }
       setLabelValue({label: field.label});
       setTextBody(field.raw_html);
       props.beginUpdate({
@@ -34,8 +40,9 @@ function FieldRow(props) {
         textLabel: field.label,
       });
       setIsEditing(true)}}>
-      {isEditing ? (
+      {isEditing && fieldEdit && fieldEdit.id === field.id ? (
         <FieldForm
+          cancel={cancel}
           control={control}
           updateField={updateField}
           handleSubmit={handleSubmit}
@@ -70,4 +77,8 @@ const beginUpdate = ({id, textBody, textLabel}) => ({
   },
 });
 
-export default connect(null, { beginUpdate })(FieldRow);
+export default connect((state) => {
+  return {
+    fieldEdit: state.main.fieldEdit,
+  };
+}, { beginUpdate })(FieldRow);

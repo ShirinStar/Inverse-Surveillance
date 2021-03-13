@@ -20,13 +20,24 @@ class FieldsController < ApplicationController
 
   def update
     body = field_params[:parsed_body]
-    p body
 
-    render status: 200
+    redactions = body.scan(/\/\/\/REDACTION: ([\w\- ]+) \|\| SIZE: ([\w\- ]+) \|\| UUID: ([\w\- ]+)\/\/\//)
+      .map { |match| Redaction.new( code: match[0], size: match[1], client_id: match[2] ) }
+
+    field = Field.find(field_params[:id])
+    field.update(
+      label: field_params[:label].downcase,
+      text_body: field_params[:parsed_body],
+      raw_html: field_params[:raw_html],
+      redactions: redactions
+    )
+
+    render json: field
   end
 
   def field_params
     params.permit(
+      :id,
       :label,
       :parsed_body,
       :raw_html,

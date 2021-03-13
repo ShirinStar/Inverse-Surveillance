@@ -11,18 +11,21 @@ import Button from '@material-ui/core/Button';
 import Help from '@material-ui/icons/Help';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 function TurkDocumentForm(props) {
   const {
     docId,
     pageCount,
+    finishEdit,
     existingFields,
     docUrl,
     digitalDoc,
-    oldFields
+    oldFields,
+    resetStore,
   } = props;
 
-  const [digitalDocument, setDocument] = useState(digitalDoc);
+  const [digitalDocument, setDocument] = useState(JSON.parse(digitalDoc));
   const [fields, setFields] = useState(JSON.parse(oldFields) || []);
   const [startSerialNumber, setStartSerialNumber] = useState('')
   const [labelValue, setLabelValue] = useState(null);
@@ -109,6 +112,15 @@ function TurkDocumentForm(props) {
     }
 
   }
+
+  function resetEditor() {
+    setLabelValue("");
+    setTextBody("");
+    reset();
+    setIsEditing(false);
+    resetStore();
+  }
+
   async function saveField(field) {
     const token =
       document.querySelector('[name=csrf-token]').content
@@ -122,9 +134,7 @@ function TurkDocumentForm(props) {
     } catch (e) {
       console.log(e);
     } finally {
-      setLabelValue("");
-      setTextBody("");
-      reset();
+      resetEditor();
       console.log('done submitting field');
     }
   }
@@ -154,7 +164,9 @@ function TurkDocumentForm(props) {
       const resp = await axios.put(
         `/turk_documents/${digitalDocument.id}/fields/${fieldId}`,
         postBody);
-      setFields([...fields, resp.data]);
+      setFields(fields.map(field => (
+        field.id === fieldId ? resp.data : field
+      )));
     } catch (e) {
       console.log(e);
     } finally {
@@ -162,6 +174,7 @@ function TurkDocumentForm(props) {
       setLabelValue("");
       setTextBody("");
       reset();
+      finishEdit();
       console.log('done submitting field');
     }
   }
@@ -175,6 +188,7 @@ function TurkDocumentForm(props) {
 
   const renderForm = () => (
     <FieldForm
+      cancel={resetEditor}
       control={control}
       handleSubmit={handleSubmit}
       setValue={setValue}
@@ -243,8 +257,9 @@ function TurkDocumentForm(props) {
             />
             <div className='adding-field'>
               <div className="field-container">
-                {fields.map(field => (
+                {_.sortBy(fields, field => new Date(field.created_at)).map(field => (
                   <FieldRow key={field.id}
+                    cancel={resetEditor}
                     updateField={updateField}
                     control={control}
                     handleSubmit={handleSubmit}
@@ -285,5 +300,6 @@ export default connect(
     return {foo: state.main.foo}
   },
   { doFoo: (data) => ({type: "FOO", payload: "fooby"}),
+    finishEdit: () => ({type: "FINISH_EDIT", payload: {}}),
     resetStore: () => ({type: 'RESET', payload: {}})})
   (TurkDocumentForm);

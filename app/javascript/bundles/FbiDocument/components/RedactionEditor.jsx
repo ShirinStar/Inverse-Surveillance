@@ -50,7 +50,7 @@ function insertRedaction({ area, code, range, redactionSize }) {
        editableDiv.current.innerHTML = fieldEdit.textBody;
        console.log(fieldEdit);
      }
-   }, null)
+   }, []);
 
   const handleRedaction = (code, size) => {
     insertRedaction({ area: editableDiv.current, code, range, redactionSize }) 
