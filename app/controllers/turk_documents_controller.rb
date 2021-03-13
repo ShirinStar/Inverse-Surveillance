@@ -38,6 +38,7 @@ class TurkDocumentsController < ApplicationController
       document_id: doc_params[:docId]
     )
     doc.document.update!(status: 'In Progress')
+
     render json: doc
 
   end
