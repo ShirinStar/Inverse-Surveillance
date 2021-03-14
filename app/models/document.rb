@@ -34,7 +34,7 @@ class Document < ApplicationRecord
   def to_admin_json
     {
       id: id,
-      category: "PRE-95",
+      category: category,
       name: name,
       page_length: page_length,
       original_doc_url: give_public_url,
