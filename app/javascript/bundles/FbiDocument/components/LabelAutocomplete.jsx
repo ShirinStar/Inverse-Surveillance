@@ -2,6 +2,7 @@ import React from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import _ from 'lodash';
 
 const filter = createFilterOptions();
 
@@ -32,7 +33,7 @@ export default function LabelAutocomplete(props) {
 
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
-        if (params.inputValue !== '') {
+        if (params.inputValue !== '' && _.find(filtered, (label) => label.label !== params.inputValue)) {
           filtered.push({
             inputValue: params.inputValue,
             label: `Add "${params.inputValue}"`,

@@ -5,10 +5,15 @@ class TurkDocumentsController < ApplicationController
   end
 
   def edit
-    doc = Document.find_by(public_id: edit_params[:id])
+    doc = Document
+      .includes(:digital_document)
+      .find_by(public_id: edit_params[:id])
+    
     @doc_url = doc.give_public_url
     @doc_id = doc.id
     @page_count = doc.page_length
+    @digital_doc = doc.digital_document&.to_json
+    @fields = doc.digital_document&.fields&.to_json
     @labels = Field.pluck(:label).uniq.compact
 
     render "turk_documents/new"
@@ -33,6 +38,7 @@ class TurkDocumentsController < ApplicationController
       document_id: doc_params[:docId]
     )
     doc.document.update!(status: 'In Progress')
+
     render json: doc
 
   end

@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import ContentEditable from 'react-contenteditable';
 import RedactionModal from './RedactionModal';
+import { connect } from 'react-redux';
 
 
 function insertTextAtCaret(text, range, size) {
@@ -28,7 +29,7 @@ function insertRedaction({ area, code, range, redactionSize }) {
   sel.addRange(range);
 }
 
-export default function Edit(props) {
+ function Edit(props) {
   const editableDiv = useRef(null);
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ currentRedactionCode, setCurrentRedactionCode ] = useState('');
@@ -36,8 +37,20 @@ export default function Edit(props) {
   const [ range, setRange ] = useState(null);
 
   const {
-    onChange
+    onChange,
+    fieldEdit,
   } = props;
+
+   useEffect(() => {
+     console.log('props are: ', props);
+     if (fieldEdit !== null) {
+       const el = document.createElement('div');
+       el.innerHTML = fieldEdit.textBody;
+       onChange(el);
+       editableDiv.current.innerHTML = fieldEdit.textBody;
+       console.log(fieldEdit);
+     }
+   }, []);
 
   const handleRedaction = (code, size) => {
     insertRedaction({ area: editableDiv.current, code, range, redactionSize }) 
@@ -93,3 +106,7 @@ export default function Edit(props) {
       </>
       );
 }
+
+export default connect((state) => ({
+  fieldEdit: state.main.fieldEdit,
+}), null)(Edit);

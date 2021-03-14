@@ -1,9 +1,11 @@
-<%= react_component("TurkDocumentForm",
+<%= react_component("TurkDocumentFormContainer",
                     props: {
                       docUrl: @doc_url,
                       docId: @doc_id,
                       pageCount: @page_count,
                       existingFields: @labels,
+                      digitalDoc: @digital_doc,
+                      oldFields: @fields
                     },
                     prerender: false) %>
   

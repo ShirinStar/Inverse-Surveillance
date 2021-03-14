@@ -4,7 +4,8 @@ export default function Help() {
   return (
     <>
       <div className='admin-header'>
-        <a href='/'>Go Back</a>
+        <a onClick={() => window.history.back() }
+        >Go Back</a>
       </div>
       <div className='help-cointainer'>
       <div className='help-view'>
