@@ -24,8 +24,8 @@ export default function InstructionInfo(props) {
         <p><strong>Page Serial Number:</strong> {startSerialNumber}</p>
         <p className='document-info-last'><strong>Current page:</strong> {pageNumber} / {pageCount}</p>
       </div>
-      
-      <Categories docCat={docCat}/>
+
+      <Categories docCat={docCat} />
     </>
   );
 }
