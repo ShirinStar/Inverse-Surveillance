@@ -231,6 +231,7 @@ function TurkDocumentForm(props) {
             <div className='document-head-section'>
               <InstructionInfo
                 docUrl={docUrl}
+                docCat={docCat}
                 digitalDocument={digitalDocument}
                 startSerialNumber={startSerialNumber}
                 pageNumber={pageNumber}
