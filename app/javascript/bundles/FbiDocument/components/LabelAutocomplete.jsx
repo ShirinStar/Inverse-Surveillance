@@ -59,7 +59,15 @@ export default function LabelAutocomplete(props) {
           },
           {
             label: "Summary",
-            id: 2,
+            id: 3,
+          },
+          {
+            label: "Main-Section",
+            id: 4,
+          },
+          {
+            label: "Details",
+            id: 5,
           },
         ]
       }

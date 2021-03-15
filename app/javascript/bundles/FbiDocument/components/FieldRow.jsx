@@ -2,6 +2,7 @@ import React from 'react';
 import FieldForm from './FieldForm';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import Edit from '@material-ui/icons/Edit';
 
 function FieldRow(props) {
   const { label, raw_html: rawHtml } = props.field;
@@ -28,7 +29,7 @@ function FieldRow(props) {
   } = props;
 
   return (
-    <div onClick={() => {
+    <div className='close-editor' onClick={() => {
       // ignore if already editing this doc
       if (fieldEdit && field && (fieldEdit.id === field.id)) {
         return;
@@ -41,6 +42,22 @@ function FieldRow(props) {
         textLabel: field.label,
       });
       setIsEditing(true)}}>
+        <div className='btn-edit'>
+         <Button
+            color="primary"
+            onClick={ () => {
+              if (fieldEdit && field && (fieldEdit.id === field.id)) {
+                return;
+              }
+              setLabelValue({label: field.label});
+              setTextBody(field.raw_html);
+              props.beginUpdate({
+                id: field.id,
+                textBody: field.raw_html,
+                textLabel: field.label,
+              });
+              setIsEditing(true)}}><Edit>Edit Field</Edit></Button>
+        </div>
       {isEditing && fieldEdit && fieldEdit.id === field.id ? (
         <FieldForm
           cancel={cancel}
@@ -64,22 +81,7 @@ function FieldRow(props) {
         <>
           <p className='filled-label'>{label}</p>
           <p className='filled-text' dangerouslySetInnerHTML={{ __html: rawHtml  }}></p>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={ () => {
-              if (fieldEdit && field && (fieldEdit.id === field.id)) {
-                return;
-              }
-              setLabelValue({label: field.label});
-              setTextBody(field.raw_html);
-              props.beginUpdate({
-                id: field.id,
-                textBody: field.raw_html,
-                textLabel: field.label,
-              });
-              setIsEditing(true)}}>Edit Field</Button>
-        </>
+         </>
       )}
     </div>
   );
