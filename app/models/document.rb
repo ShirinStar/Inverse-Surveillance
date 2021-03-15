@@ -4,13 +4,14 @@ class Document < ApplicationRecord
   attribute :public_id, :uuid, default: -> { SecureRandom.uuid }
   validates :public_id, uniqueness: true, presence: true
 
-  def self.ingest_document(file_name)
+  def self.ingest_document(file_name, category)
     page_count = PDF::Reader.new(file_name)
       .page_count
 
     doc = Document.new()
     doc.page_length = page_count
     doc.name = File.basename(file_name)
+    doc.category = category
     doc.doc_file.attach(io: 
                         File.open(file_name),
                         filename: File.basename(file_name))
