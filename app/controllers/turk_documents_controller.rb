@@ -11,6 +11,7 @@ class TurkDocumentsController < ApplicationController
     
     @doc_url = doc.give_public_url
     @doc_id = doc.id
+    @doc_cat = doc.category
     @page_count = doc.page_length
     @digital_doc = doc.digital_document&.to_json
     @fields = doc.digital_document&.fields&.to_json

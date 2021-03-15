@@ -23,6 +23,7 @@ function TurkDocumentForm(props) {
     digitalDoc,
     oldFields,
     resetStore,
+    docCat
   } = props;
 
   const [digitalDocument, setDocument] = useState(JSON.parse(digitalDoc));
@@ -179,6 +180,7 @@ function TurkDocumentForm(props) {
     }
   }
 
+  
 
   function clearFields() {
     setFields([]);

@@ -4,6 +4,7 @@ import markedSample from 'images/markedSample.png';
 import markedFields from 'images/markedFields.jpg';
 import markedRedCode from 'images/markedRedCode.png';
 import HelpOutline from '@material-ui/icons/HelpOutline';
+import Categories from './Categories';
 
 export default function InstructionInfo(props) {
   const {
@@ -12,6 +13,7 @@ export default function InstructionInfo(props) {
     startSerialNumber,
     pageNumber,
     pageCount,
+    docCat
   } = props;
 
   return (
@@ -27,10 +29,12 @@ export default function InstructionInfo(props) {
         <p><strong>Page Serial Number:</strong> {startSerialNumber}</p>
         <p><strong>Current page:</strong> {pageNumber} / {pageCount}</p>
       </div>
+      
+      <Categories docCat={docCat}/> <br/><br/>
 
       <div className='document-instruction-div'>
-        <p className='document-instruction'>How to start? <br />
-          1• Please select a section title
+        <p className='document-instruction'>General instructions <br />
+          1• Please type or select a section lable.
           <Tooltip title={
             <React.Fragment>
               <img className='hover-image instruction' src={markedSample} />
@@ -54,9 +58,10 @@ export default function InstructionInfo(props) {
             </React.Fragment>
             }>
             <HelpOutline fontSize="small"></HelpOutline>
-          </Tooltip> <br />
-          4• Do that to all the original document's field you received. <br /> <br />
-          Please watch and read the instructions <a className='link-instruction' href='/help'>here </a><br /><br />
+          </Tooltip>
+         <br /> 
+         <br />
+          Please watch & read the instructions <a className='link-instruction' href='/help'>here </a><br /><br />
         </p>
       </div>
     </>
