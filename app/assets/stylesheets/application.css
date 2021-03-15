@@ -20,6 +20,11 @@ body {
   margin-left:  0 auto;
 }
 
+::selection {
+  color: black;
+  background-color: #C8FA22;
+}
+
 h1, h2 {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 2px;
@@ -135,7 +140,7 @@ a {
   color: rgb(41, 41, 41);
   border-bottom: 2px solid #C8FA22;
   padding-right: 5px; 
-  padding-left: 5px;
+  padding-left: 2px;
   transition: all 0.15s;
   border-radius: 0.12rem;
   margin-left: 5px;
@@ -148,13 +153,35 @@ a:hover {
 
 /* Date document*/
 
+.welcome {
+  margin-top: 60px;
+  text-align: center;
+  width: 100%;
+  color: black;
+  line-height: 1.5rem;
+}
+
+.a.welcome {
+  color: black;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 2px;
+  padding-right: 0;
+}
+
 .header.initDocument {
   text-align: left;
-  display: inline-block;
-  width: 80%;
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 8%;
   line-height: 1.6rem;
+  background-color: #C8FA22;
+  display: flex;
+  padding-left: 100px;
+}
+
+.start-url-div {
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .btn.start {
@@ -177,15 +204,15 @@ a:hover {
   top: 15%;
   left: 30%;
   line-height: 2.2rem;
-  border: 4px solid black;
+  border: 2px solid #E0E0DA;
   /* background-color: rgb(232, 232, 232); */
 }
 
 .start-title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 500;
   margin-bottom: 50px;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.4px;
 }
 
 .first-form-fields {

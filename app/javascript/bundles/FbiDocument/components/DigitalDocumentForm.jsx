@@ -35,14 +35,17 @@ export default function DigitalDocumentForm(props) {
     <div>
       <div className='header initDocument'>
         <div className='inner-header'>
-          <h1>Process a Document</h1>
+          <h1>Start Process a Document</h1>
         </div>
       </div>
       <div className='init-form'>
         <div className='date-form'>
-          <p className='start-title'>To start please
+          <div className='start-url-div'>
+            <p className='start-title'>To start please
             <a target="_blank" href={props.docUrl}>view Original Document</a>
-          and fill:</p>
+              <br /> and fill:</p>
+          </div>
+
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='first-form-fields'>
               <div className='seperate-first-fields'>
@@ -94,6 +97,10 @@ export default function DigitalDocumentForm(props) {
             </div>
           </form>
         </div>
+      </div>
+      <div className='welcome'>
+        <p>Welcome & Thank you for taking part in this research!<br/>
+        for any questions please visit the<a href='/help' className='a welcome'> Help page</a> or<a href="mailto: isp@gmail.com" className='a welcome'> contact us.</a></p>
       </div>
     </div>
   );
