@@ -29,40 +29,22 @@
 .document-head-section {
   background-color: black;
   color: white;
-  padding: 80px;
-  margin-left: -2%;
+  padding: 70px;
+  margin-left: -4%;
   min-height: 100%;
-  margin-top: 0;
+  margin-top: -1%;
   margin-bottom: 0;
 }
 
-@media (max-width: 1500px) {
-  .document-head-section {
-    padding: 70px;
-    margin-left: -2%;
-  }
-  .field-container{ 
-    width: 700px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .document-head-section {
-    padding: 50px;
-    margin-left: -1%;
-  }
-  .field-container{ 
-    width: 500px;
-  }
-}
-
 .document-titles {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
 .orginal-link {
-  color: white;
-  border-bottom: 1px solid #C8FA22;
+  color: #C8FA22;
+  border-bottom: none;
+  font-size: 20px;
+  margin-left: 0;
 }
 
 .orginal-link:hover {
@@ -72,16 +54,31 @@
 .document-info {
   letter-spacing: 1px;
   margin-bottom: 50px;
+  border-bottom: 2px solid #E0E0DA;
+}
+
+.document-info-last {
+  margin-bottom: 30px;
 }
 
 .document-instruction {
   max-width: 300px;
-  line-height: 1.4rem;
+  line-height: 1.5rem;
   color: #ddd;
 }
 
 .document-instruction-div {
   margin-bottom: 100px;
+}
+
+.doc-type {
+  font-size: 18px;
+}
+
+.instruction-start{
+  text-transform: uppercase;
+  font-style: italic;
+  line-height: 2.5rem;
 }
 
 .link-instruction {
@@ -95,4 +92,28 @@
 .hover-image.instruction {
   height: 500px;
   margin-left: 0;
+}
+
+@media (max-width: 1500px) {
+  .document-head-section {
+    padding: 70px;
+    margin-left: -3%;
+  }
+  .field-container{ 
+    width: 700px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .document-head-section {
+    padding: 50px;
+    margin-left: -2%;
+  }
+  .field-container{ 
+    width: 500px;
+  }
+
+  .orginal-link {
+  font-size: 18px;
+  }
 }
