@@ -29,21 +29,27 @@ export default function Editor(props) {
               value={labelValue}
               setValue={setLabelValue} />
           )} />
+        <div className='btn-edit'>
         {isEditing &&
+        <div className='btn-unsave'>
         <Button
-          variant="contained"
+          color='secondary'
+          size='small'
           onClick={cancel}
           value="Cancel">
           Undo Changes
         </Button>
+        </div>
         }
         <Button
           disabled={textBody.length < 1}
           variant="contained"
+          size='small'
           type="submit"
           value="Save">
           Save Field
         </Button>
+        </div>
       </div>
       <br /><br />
       {labelValue && labelValue.label.length > 0 && (

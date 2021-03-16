@@ -7,6 +7,7 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 import DNS from 'images/DSN.png';
 import DocumentDate from 'images/DocumentDate.png';
+import { saveAs } from 'file-saver'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,8 +43,8 @@ export default function DigitalDocumentForm(props) {
         <div className='date-form'>
           <div className='start-url-div'>
             <p className='start-title'>To start please
-            <a target="_blank" href={props.docUrl}>view Original Document</a>
-              <br /> and fill:</p>
+            <a target="_blank" href={props.docUrl} download>view Original Document</a>
+            <br /> and fill:</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
