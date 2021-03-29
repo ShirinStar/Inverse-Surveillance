@@ -110,6 +110,7 @@ GEM
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
     libv8 (8.4.255.0-x86_64-darwin-19)
+    libv8 (8.4.255.0-x86_64-linux)
     listen (3.5.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -127,6 +128,8 @@ GEM
     msgpack (1.4.2)
     nio4r (2.5.7)
     nokogiri (1.11.2-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.11.2-x86_64-linux)
       racc (~> 1.4)
     pdf-reader (2.4.2)
       Ascii85 (~> 1.0)
@@ -255,6 +258,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-19
+  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-s3
