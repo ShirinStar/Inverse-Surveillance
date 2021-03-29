@@ -83,5 +83,4 @@ production:
   database: ""
   username: postgres
   password: <%= ENV['FBI_DATABASE_PASSWORD'] %>
-  hostname: <%= ENV['DB_HOST_NAME']
-
+  host: <%= ENV['DB_HOST_NAME']
