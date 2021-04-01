@@ -80,7 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: ""
-  username: postgres
-  password: <%= ENV['FBI_DATABASE_PASSWORD'] %>
-  host: <%= ENV['DB_HOST_NAME']
+  url: <%= ENV['DATABASE_URL'] %>
