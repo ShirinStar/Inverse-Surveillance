@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'hello_world', to: 'hello_world#index'
   root 'main#index'
   get 'foo/index'
+  get '/.well-known/pki-validation/:name', to: 'auth#show'
   resources :fbi_documents
   get 'admin/documents', to: 'admin_documents#index'
   post 'admin/documents/:id/approve', to: 'admin_documents#approve'
