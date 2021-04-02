@@ -66,8 +66,8 @@ export default function AdminApprovalView(props) {
       </div>
       { (currentPage != page_count) ?
         <div className='btn nextPage'>
-          <a href={`http://localhost:3000/admin/documents/${doc_id}/approval?page=${currentPage - 1}`}><Button variant="contained">⟵PREVIOUS PAGE</Button></a>
-          <a href={`http://localhost:3000/admin/documents/${doc_id}/approval?page=${currentPage + 1}`}><Button variant="contained">NEXT PAGE⟶</Button></a>
+          <a href={`/admin/documents/${doc_id}/approval?page=${currentPage - 1}`}><Button variant="contained">⟵PREVIOUS PAGE</Button></a>
+          <a href={`/admin/documents/${doc_id}/approval?page=${currentPage + 1}`}><Button variant="contained">NEXT PAGE⟶</Button></a>
         </div>
         :
         ''
