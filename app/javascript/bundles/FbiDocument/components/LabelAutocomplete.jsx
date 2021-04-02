@@ -33,7 +33,7 @@ export default function LabelAutocomplete(props) {
 
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
-        if (params.inputValue !== '' && _.find(filtered, (label) => label.label !== params.inputValue)) {
+        if (params.inputValue !== '' && !_.find(filtered, (label) => label.label === params.inputValue)) {
           filtered.push({
             inputValue: params.inputValue,
             label: `Add "${params.inputValue}"`,
