@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Help from '@material-ui/icons/Help';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
+import HelpModal from './HelpModal';
 import _ from 'lodash';
 
 function TurkDocumentForm(props) {
@@ -219,6 +220,7 @@ function TurkDocumentForm(props) {
       <div className='page-header'>
         <a href='/help' className='a help'><Help fontSize="large" ></Help></a>
       </div>
+      <HelpModal />
       <div className="form-doc-container">
         {digitalDocument === null ? (
           <div className="form-container">
