@@ -61,7 +61,7 @@ export default function Categories(props) {
         6• For the bottom section, please fill the labels of each row.<br />
         7• Sometimes, your document may contain addional fields before and after, please
           include them as well.<br />
-        8• Before starting, please make sure to visit the instruction page <a className='link-instruction' href='/help'>here </a>.
+        8• Before starting, please make sure to visit the help page (at the top right).
       </p>
       </div>
     )
@@ -113,7 +113,7 @@ export default function Categories(props) {
         6• Sometimes, your document may contain addional fields before and after, please
          include them as well.<br />
         7• Sometime there will be a bottom section, please fill the labels of each row.<br />
-        8• Before starting, please make sure to visit the instruction page <a className='link-instruction' href='/help'>here </a>.
+        8• Before starting, please make sure to visit the help page (at the top right).
         </p>
       </div>
     )
@@ -161,7 +161,7 @@ export default function Categories(props) {
           <br />
           4• Please do that for each new field you're adding.<br />
           5• Usually the label 'Details' contains long text that might continue to a more than one page.<br />
-          6• Before starting, please make sure to visit the instruction page <a className='link-instruction' href='/help'>here </a>.
+          6• Before starting, please make sure to visit the help page (at the top right).
         </p>
       </div>
     )
@@ -210,7 +210,7 @@ export default function Categories(props) {
           <br />
         4• Please do that for each new field you're adding.<br />
         5• Usually the label 'Details' contains long text that might continue to a more than one page.<br />
-        6• Before starting, please make sure to visit the instruction page <a className='link-instruction' href='/help'>here </a>.
+        6• Before starting, please make sure to visit the help page (at the top right).
         </p>
       </div>
     )

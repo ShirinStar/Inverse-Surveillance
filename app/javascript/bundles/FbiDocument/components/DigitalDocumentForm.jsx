@@ -101,7 +101,7 @@ export default function DigitalDocumentForm(props) {
       </div>
       <div className='welcome'>
         <p>Welcome & Thank you for taking part in this research!<br/>
-        for any questions please visit the<a href='/help' className='a welcome'> Help page</a> or<a href="mailto: isp@gmail.com" className='a welcome'> contact us.</a></p>
+        for any questions please visit the Help page or<a href="mailto: isp@gmail.com" className='a welcome'> contact us.</a></p>
       </div>
     </div>
   );

@@ -8,7 +8,6 @@ import InstructionInfo from './InstructionInfo';
 import SubmitModal from './SubmitModal';
 import SerialNumberModal from './SerialNumberModal';
 import Button from '@material-ui/core/Button';
-import Help from '@material-ui/icons/Help';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import HelpModal from './HelpModal';
@@ -35,7 +34,8 @@ function TurkDocumentForm(props) {
   const [modalSerialOpen, setModalSerialOpen] = useState(false);
   const [submitModalOpen, setSubmitModelOpen] = useState(false)
   const [textBody, setTextBody] = useState('');
-  const [ isEditing, setIsEditing ] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [showHelpModal, setHelpModal] = useState(false);
 
   console.log('text body: ', textBody);
   const {
@@ -181,7 +181,7 @@ function TurkDocumentForm(props) {
     }
   }
 
-  
+
 
   function clearFields() {
     setFields([]);
@@ -218,9 +218,9 @@ function TurkDocumentForm(props) {
   return (
     <div>
       <div className='page-header'>
-        <a href='/help' className='a help'><Help fontSize="large" ></Help></a>
+        <HelpModal />
       </div>
-      <HelpModal />
+
       <div className="form-doc-container">
         {digitalDocument === null ? (
           <div className="form-container">
@@ -302,9 +302,11 @@ function TurkDocumentForm(props) {
 
 export default connect(
   (state) => {
-    return {foo: state.main.foo}
+    return { foo: state.main.foo }
   },
-  { doFoo: (data) => ({type: "FOO", payload: "fooby"}),
-    finishEdit: () => ({type: "FINISH_EDIT", payload: {}}),
-    resetStore: () => ({type: 'RESET', payload: {}})})
+  {
+    doFoo: (data) => ({ type: "FOO", payload: "fooby" }),
+    finishEdit: () => ({ type: "FINISH_EDIT", payload: {} }),
+    resetStore: () => ({ type: 'RESET', payload: {} })
+  })
   (TurkDocumentForm);
