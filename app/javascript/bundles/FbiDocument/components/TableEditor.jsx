@@ -9,6 +9,7 @@ function TableRow(props) {
     numColumns,
     handleChange,
     markRedacted,
+    saveTableField,
   } = props;
 
   return (
@@ -91,6 +92,7 @@ export default function TableView(props) {
         handleChange={handleRowChange}
         numColumns={numColumns} />)}
       <Button onClick={addRow}>Add Row</Button>
+      <Button onClick={saveTableField}>Save Table</Button>
     </>
   );
 }

@@ -10,6 +10,7 @@ RSpec.describe "TableFields", type: :request do
   let(:payload) {
     {
       digital_document_id: DigitalDocument.first.id,
+      serial_number: 'a serial number',
       table_fields: [
         {
           id: 0,
@@ -27,6 +28,7 @@ RSpec.describe "TableFields", type: :request do
         {
           id: 1,
           digital_document_id: DigitalDocument.first.id,
+          serial_number: 'page serial',
           inputs: [
             {
               is_redacted: true,
