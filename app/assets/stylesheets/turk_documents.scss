@@ -5,6 +5,15 @@
   text-align: left;
 }
 
+.table-row {
+  display: flex;
+  justify-content: space-around;
+
+  input.redacted {
+    background: yellow;
+  }
+}
+
 .field-container{
   border: 1px solid #aaa;
   border-bottom: none;

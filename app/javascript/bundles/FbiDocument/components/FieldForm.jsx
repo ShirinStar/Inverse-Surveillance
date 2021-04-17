@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
+import TableEditor from './TableEditor';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Editor from './Editor';
@@ -35,6 +36,7 @@ function FieldForm(props) {
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
+  const [tableView, setTableView] = useState(true);
 
   function onSubmit(formData, ev) {
     const { serialNumber } = formData;
@@ -63,8 +65,14 @@ function FieldForm(props) {
   return (
     <>
       <div className="field-form-container">
+        {tableView ? (
+          <TableEditor
+            setEditorView={() => setTableView(false)}
+          />
+        ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Editor
+              setTableView={() => setTableView(true)}
               cancel={cancel}
               isEditing={isEditing}
               control={control}
@@ -74,6 +82,7 @@ function FieldForm(props) {
               setTextBody={setTextBody}
               textBody={textBody} />
         </form>
+        )}
       </div>
     </>
   );

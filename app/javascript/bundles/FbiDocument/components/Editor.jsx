@@ -14,6 +14,7 @@ export default function Editor(props) {
     setTextBody,
     cancel,
     isEditing,
+    setTableView,
   } = props;
 
   return (
@@ -29,6 +30,7 @@ export default function Editor(props) {
               value={labelValue}
               setValue={setLabelValue} />
           )} />
+        <Button onClick={() => setTableView() }>Set Table</Button>
         <div className='btn-edit'>
         {isEditing &&
         <div className='btn-unsave'>
