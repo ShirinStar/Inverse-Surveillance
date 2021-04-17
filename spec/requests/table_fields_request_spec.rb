@@ -74,5 +74,6 @@ RSpec.describe "TableFields", type: :request do
     second = TableField.last(2).first
     expect(second.row_idx).to be 1
     expect(second.col_idx).to be 0
+    expect(second.is_redacted).to be true
   end
 end

@@ -13,6 +13,12 @@ import { connect } from 'react-redux';
 import HelpModal from './HelpModal';
 import _ from 'lodash';
 
+function setToken() {
+  const token =
+    document.querySelector('[name=csrf-token]').content
+  axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+}
+
 function TurkDocumentForm(props) {
   const {
     docId,
@@ -188,6 +194,22 @@ function TurkDocumentForm(props) {
   }
 
 
+  async function handleSaveTableField(postData) {
+    setToken();
+
+    try {
+      const resp = await axios.post(
+        `/table_fields`, {
+          digital_document_id: docId,
+          table_fields: postData.tableData,
+          page_number: postData.page_number,
+          serial_number: startSerialNumber,
+        } 
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   function clearFields() {
     setFields([]);
@@ -210,6 +232,7 @@ function TurkDocumentForm(props) {
       pageNumber={pageNumber}
       textBody={textBody}
       setTextBody={setTextBody}
+      handleSaveTableField={handleSaveTableField}
     />
   );
 

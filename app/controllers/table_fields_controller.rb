@@ -22,7 +22,7 @@ class TableFieldsController < ApplicationController
     })
 
     if field.save
-      render json: field
+      render json: field.to_json({ include: :table_fields })
     else
       render json: field.errors, status: 400
     end

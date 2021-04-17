@@ -32,7 +32,8 @@ function FieldForm(props) {
     textBody,
     fieldEdit,
     isEditing,
-    cancel
+    cancel,
+    handleSaveTableField,
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
@@ -62,11 +63,29 @@ function FieldForm(props) {
     setValue("serialNumber", serialNumber);
   }
 
+
+  function saveTableField(tableData) {
+    const tableFields = tableData.map(row => ({
+      ...row,
+      inputs: row.inputs.map(input => ({
+        ...input,
+        is_redacted: input.isRedacted,
+      }))
+    }));
+
+    handleSaveTableField({
+      tableData: tableFields,
+      page_number: pageNumber,
+      serial_number: pageSerialNumber,
+    })
+  }
+
   return (
     <>
       <div className="field-form-container">
         {tableView ? (
           <TableEditor
+            saveTableField={saveTableField}
             setEditorView={() => setTableView(false)}
           />
         ) : (

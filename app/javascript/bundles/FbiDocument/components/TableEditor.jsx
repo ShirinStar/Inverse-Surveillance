@@ -9,7 +9,6 @@ function TableRow(props) {
     numColumns,
     handleChange,
     markRedacted,
-    saveTableField,
   } = props;
 
   return (
@@ -28,6 +27,7 @@ function TableRow(props) {
 export default function TableView(props) {
   const {
     setEditorView,
+    saveTableField,
   } = props;
 
   const [numColumns, setNumColumns] = useState(0);
@@ -50,10 +50,10 @@ export default function TableView(props) {
   function addRow() {
     setRowCounter(rowCounter + 1);
     const rowId = rowCounter;
-    const row = { id: rowId, inputs: [], isRedacted: false };
+    const row = { id: rowId, inputs: [], };
 
     for (let i = 0; i < numColumns; i++) {
-      row.inputs.push({key: i, value: ''});
+      row.inputs.push({key: i, value: '', isRedacted: false});
     }
     const newRows = inputRows.concat([row]);
 
@@ -92,7 +92,7 @@ export default function TableView(props) {
         handleChange={handleRowChange}
         numColumns={numColumns} />)}
       <Button onClick={addRow}>Add Row</Button>
-      <Button onClick={saveTableField}>Save Table</Button>
+      <Button onClick={() => saveTableField(inputRows)}>Save Table</Button>
     </>
   );
 }
