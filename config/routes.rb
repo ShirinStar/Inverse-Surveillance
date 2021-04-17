@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   resources :turk_documents do 
     resources :fields
   end
+
+  resources :table_fields
 end

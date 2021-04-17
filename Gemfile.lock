@@ -222,6 +222,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    seed_dump (3.3.1)
+      activerecord (>= 4)
+      activesupport (>= 4)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -280,6 +283,7 @@ DEPENDENCIES
   rspec
   rspec-rails (~> 4.0.2)
   sass-rails (>= 6)
+  seed_dump
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

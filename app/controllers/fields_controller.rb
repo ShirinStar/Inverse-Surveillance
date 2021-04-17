@@ -13,6 +13,7 @@ class FieldsController < ApplicationController
       raw_html: field_params[:raw_html],
       digital_document_id: field_params[:turk_document_id],
       redactions: redactions,
+      field_type: Field::INPUT_TYPE,
     )
     
     render json: field

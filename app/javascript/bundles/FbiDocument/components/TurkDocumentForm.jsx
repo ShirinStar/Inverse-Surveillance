@@ -28,7 +28,9 @@ function TurkDocumentForm(props) {
 
   const [digitalDocument, setDocument] = useState(JSON.parse(digitalDoc));
   const [fields, setFields] = useState(JSON.parse(oldFields) || []);
-  const [startSerialNumber, setStartSerialNumber] = useState('')
+
+  const currentSerialNumber = fields.length > 0 ? fields[fields.length - 1].serial_number : ''
+  const [startSerialNumber, setStartSerialNumber] = useState(currentSerialNumber)
   const [labelValue, setLabelValue] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [modalSerialOpen, setModalSerialOpen] = useState(false);
@@ -36,7 +38,9 @@ function TurkDocumentForm(props) {
   const [textBody, setTextBody] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [showHelpModal, setHelpModal] = useState(false);
+  console.log(currentSerialNumber);
 
+  console.log('serial number: ', startSerialNumber);
   console.log('text body: ', textBody);
   const {
     handleSubmit,
@@ -46,6 +50,7 @@ function TurkDocumentForm(props) {
   } = useForm();
 
   async function initialSubmit(formData) {
+    debugger
     try {
       const token =
         document.querySelector('[name=csrf-token]').content
@@ -145,6 +150,7 @@ function TurkDocumentForm(props) {
     const raw_html = field.text_body.innerHTML;
     const parsed_body = parseTextBody(field.text_body);
     const { field_label, text_body, ...postData } = field;
+    console.log('serial number: ', startSerialNumber)
 
     const postBody = {
       ...postData,
@@ -196,11 +202,11 @@ function TurkDocumentForm(props) {
       handleSubmit={handleSubmit}
       setValue={setValue}
       reset={reset}
+      pageSerialNumber={startSerialNumber}
       labelValue={labelValue}
       setLabelValue={setLabelValue}
       existingFields={existingFields}
       saveField={saveField}
-      setPageSerialNumber={setStartSerialNumber}
       pageNumber={pageNumber}
       textBody={textBody}
       setTextBody={setTextBody}
@@ -213,6 +219,7 @@ function TurkDocumentForm(props) {
     setStartSerialNumber(pageSerialNumber)
     setIsEditing(false);
     clearFields();
+    console.log('yay');
   }
 
   return (
