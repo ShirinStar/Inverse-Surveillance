@@ -15,3 +15,4 @@ ActiveStorage::Blob.create!([
 ActiveStorage::Attachment.create!([
   {name: "doc_file", record_type: "Document", record_id: 1, blob_id: ActiveStorage::Blob.first.id},
   {name: "doc_file", record_type: "Document", record_id: 2, blob_id: ActiveStorage::Blob.second.id},
+])
