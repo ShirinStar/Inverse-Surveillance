@@ -206,6 +206,7 @@ function TurkDocumentForm(props) {
           serial_number: startSerialNumber,
         } 
       );
+      setFields([...fields, resp.data]);
     } catch (e) {
       console.log(e);
     }

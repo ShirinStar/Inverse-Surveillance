@@ -14,7 +14,7 @@ class TurkDocumentsController < ApplicationController
     @doc_cat = doc.category
     @page_count = doc.page_length
     @digital_doc = doc.digital_document&.to_json
-    @fields = doc.digital_document&.fields&.to_json
+    @fields = doc.digital_document&.fields&.to_json({ include: :table_fields })
     @labels = Field.pluck(:label).uniq.compact
 
     render "turk_documents/new"

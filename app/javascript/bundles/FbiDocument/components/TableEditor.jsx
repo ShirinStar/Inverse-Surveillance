@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Close from '@material-ui/icons/Close';
+import Add from '@material-ui/icons/Add';
+import Box from '@material-ui/core/Box';
+
 
 function TableRow(props) {
   const {
@@ -14,11 +19,21 @@ function TableRow(props) {
   return (
     <div className="table-row">
       {row.inputs.map((input) => (
-        <div key={input.key} >
-          <Button onClick={() => markRedacted(row.id, input.key, !input.isRedacted)}>Mark Redacted</Button>
-          <input className={input.isRedacted ? 'redacted' : ''} type="text" value={input.value}
+        <Box display="flex" flexDirection="column" key={input.key} >
+          <Button 
+            variant="outlined"
+            color="secondary"
+            size="small"
+            onClick={() => markRedacted(row.id, input.key, !input.isRedacted)}>
+            Mark As Redacted
+            </Button>
+          <TextField 
+            placeholder={input.isRedacted ? "Insert Redaction Code" : "Enter Text"}
+            multiline={true}
+            className={input.isRedacted ? 'redacted' : ''} type="text" value={input.value}
+            variant="outlined"
             onChange={(ev) => handleChange(row.id, input.key, ev.target.value)} />
-        </div>
+        </Box>
       ))}
     </div>
   )
@@ -36,7 +51,13 @@ export default function TableView(props) {
 
   function updateInputs(num) {
     setRowCounter(0);
-    setInputRows([]);
+    const row = { id: 1, inputs: [], };
+
+    for (let i = 0; i < num; i++) {
+      row.inputs.push({key: i, value: '', isRedacted: false});
+    }
+
+    setInputRows([row]);
   }
 
   function handleRowChange(rowId, inputIdx, value) {
@@ -71,28 +92,42 @@ export default function TableView(props) {
 
   return (
     <>
-      <Button onClick={() => setEditorView()}>Go Back To Editor View</Button>
+      <div className="edit-header">
+        <p className="table-title">Table Edit Mode</p>
+        <div>
+          {numColumns > 0 && (
+            <Button 
+              color="primary"
+              variant="contained"
+              onClick={() => saveTableField(inputRows)}>Save Table</Button>
+          )}
+          <Button onClick={() => setEditorView()}><Close></Close></Button>
+        </div>
+      </div>
       <Select
+        className="table-edit-col-select"
+        id="demo-simple-select-error"
+        displayEmpty
         value={numColumns}
         onChange={(ev) => {
           const num = ev.target.value;
           setNumColumns(num)
           updateInputs(num);
         }}>
+        <MenuItem value={0} disabled>Select Number of Columns</MenuItem>
         <MenuItem value={1}>1 Column</MenuItem>
         <MenuItem value={2}>2 Columns</MenuItem>
         <MenuItem value={3}>3 Columns</MenuItem>
         <MenuItem value={4}>4 Columns</MenuItem>
-        <MenuItem value={5}>5 Columns</MenuItem>
       </Select>
       {inputRows.map(row => <TableRow 
+        className="table-row"
         markRedacted={markRedacted}
         key={row.id} 
         row={row} 
         handleChange={handleRowChange}
         numColumns={numColumns} />)}
-      <Button onClick={addRow}>Add Row</Button>
-      <Button onClick={() => saveTableField(inputRows)}>Save Table</Button>
+      {numColumns > 0 && <Button onClick={addRow}><Add />Add Row</Button>}
     </>
   );
 }

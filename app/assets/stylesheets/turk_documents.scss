@@ -10,7 +10,20 @@
   justify-content: space-around;
 
   input.redacted {
-    background: yellow;
+    background: rgba(91, 91, 91, 0.8);
+    color: white;
+    textarea {
+      color: white;
+    }
+
+  }
+}
+
+.redacted {
+  background: rgba(91, 91, 91, 0.8);
+  color: white;
+  textarea {
+    color: white;
   }
 }
 

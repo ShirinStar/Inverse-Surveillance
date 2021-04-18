@@ -30,7 +30,6 @@ export default function Editor(props) {
               value={labelValue}
               setValue={setLabelValue} />
           )} />
-        <Button onClick={() => setTableView() }>Set Table</Button>
         <div className='btn-edit'>
         {isEditing &&
         <div className='btn-unsave'>
@@ -42,15 +41,22 @@ export default function Editor(props) {
           Undo Changes
         </Button>
         </div>
-        }
-        <Button
-          disabled={textBody.length < 1}
-          variant="contained"
-          size='small'
-          type="submit"
-          value="Save">
-          Save Field
-        </Button>
+          }
+          {labelValue === null ? (
+            <Button 
+              variant="contained"
+              size="medium"
+              onClick={() => setTableView() }>Click to Add Table</Button>
+          ): (
+
+            <Button
+              variant="contained"
+              size='small'
+              type="submit"
+              value="Save">
+              Save Field
+            </Button>
+          )}
         </div>
       </div>
       <br /><br />
