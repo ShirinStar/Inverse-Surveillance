@@ -20,11 +20,15 @@ function rootReducer(state = initialState, action) {
       const {
         textBody,
         textLabel,
+        fieldType,
+        tableFields,
         id,
+        field,
       } = action.payload;
       return {
         ...state,
         fieldEdit: {
+          field,
           textBody,
           textLabel,
           id,

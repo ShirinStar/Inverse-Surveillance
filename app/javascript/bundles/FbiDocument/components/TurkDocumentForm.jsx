@@ -44,10 +44,12 @@ function TurkDocumentForm(props) {
   const [textBody, setTextBody] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [showHelpModal, setHelpModal] = useState(false);
-  console.log(currentSerialNumber);
 
-  console.log('serial number: ', startSerialNumber);
-  console.log('text body: ', textBody);
+  // table editor state
+  const [numColumns, setNumColumns] = useState(0);
+  const [inputRows, setInputRows] = useState([]);
+  const [rowCounter, setRowCounter] = useState(0);
+
   const {
     handleSubmit,
     reset,
@@ -56,7 +58,6 @@ function TurkDocumentForm(props) {
   } = useForm();
 
   async function initialSubmit(formData) {
-    debugger
     try {
       const token =
         document.querySelector('[name=csrf-token]').content
@@ -193,6 +194,9 @@ function TurkDocumentForm(props) {
     }
   }
 
+  function updateTableField(tableData) {
+    console.log("we gon' update a field!");
+  }
 
   async function handleSaveTableField(postData) {
     setToken();
@@ -234,6 +238,12 @@ function TurkDocumentForm(props) {
       textBody={textBody}
       setTextBody={setTextBody}
       handleSaveTableField={handleSaveTableField}
+      numColumns={numColumns}
+      setNumColumns={setNumColumns}
+      inputRows={inputRows}
+      setInputRows={setInputRows}
+      rowCounter={rowCounter}
+      setRowCounter={setRowCounter}
     />
   );
 
@@ -311,6 +321,13 @@ function TurkDocumentForm(props) {
                     setTextBody={setTextBody}
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
+                    numColumns={numColumns}
+                    setNumColumns={setNumColumns}
+                    inputRows={inputRows}
+                    setInputRows={setInputRows}
+                    rowCounter={rowCounter}
+                    setRowCounter={setRowCounter}
+                    updateTableField={updateTableField}
                     field={field} />
                 ))}
                 {!isEditing && renderForm()}

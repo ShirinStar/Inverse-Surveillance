@@ -31,9 +31,16 @@ function FieldForm(props) {
     setTextBody,
     textBody,
     fieldEdit,
+    fieldType,
     isEditing,
     cancel,
     handleSaveTableField,
+    numColumns,
+    setNumColumns,
+    inputRows,
+    setInputRows,
+    rowCounter,
+    setRowCounter,
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
@@ -41,7 +48,7 @@ function FieldForm(props) {
 
   function onSubmit(formData, ev) {
     const { serialNumber } = formData;
-    if (fieldEdit !== null) {
+    if (!!fieldEdit) {
       updateField(fieldEdit.id, {
         ...formData,
         label: labelValue.label,
@@ -80,11 +87,21 @@ function FieldForm(props) {
     })
   }
 
+  function computeShouldRenderTable() {
+    return !isEditing || fieldType === 'TABLE'; 
+  }
+
   return (
     <>
       <div className="field-form-container">
-        {tableView ? (
+        {computeShouldRenderTable() ? (
           <TableEditor
+            numColumns={numColumns}
+            setNumColumns={setNumColumns}
+            inputRows={inputRows}
+            setInputRows={setInputRows}
+            rowCounter={rowCounter}
+            setRowCounter={setRowCounter}
             saveTableField={saveTableField}
             setEditorView={() => setTableView(false)}
           />

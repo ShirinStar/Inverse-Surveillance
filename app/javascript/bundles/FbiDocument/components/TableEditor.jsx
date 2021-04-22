@@ -6,52 +6,27 @@ import TextField from '@material-ui/core/TextField';
 import Close from '@material-ui/icons/Close';
 import Add from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
+import { connect } from 'react-redux';
+import TableRowInputs from './TableRowInputs';
 
-
-function TableRow(props) {
-  const {
-    row,
-    numColumns,
-    handleChange,
-    markRedacted,
-  } = props;
-
-  return (
-    <div className="table-row">
-      {row.inputs.map((input) => (
-        <Box display="flex" flexDirection="column" key={input.key} >
-          <Button 
-            variant="outlined"
-            color="secondary"
-            size="small"
-            onClick={() => markRedacted(row.id, input.key, !input.isRedacted)}>
-            Mark As Redacted
-            </Button>
-          <TextField 
-            placeholder={input.isRedacted ? "Insert Redaction Code" : "Enter Text"}
-            multiline={true}
-            className={input.isRedacted ? 'redacted' : ''} type="text" value={input.value}
-            variant="outlined"
-            onChange={(ev) => handleChange(row.id, input.key, ev.target.value)} />
-        </Box>
-      ))}
-    </div>
-  )
-}
-
-export default function TableView(props) {
+function TableView(props) {
   const {
     setEditorView,
     saveTableField,
+    numColumns,
+    setNumColumns,
+    inputRows,
+    setInputRows,
+    rowCounter,
+    setRowCounter,
+    fieldEdit,
+    isEditing,
   } = props;
 
-  const [numColumns, setNumColumns] = useState(0);
-  const [inputRows, setInputRows] = useState([]);
-  const [rowCounter, setRowCounter] = useState(0);
 
   function updateInputs(num) {
     setRowCounter(0);
-    const row = { id: 1, inputs: [], };
+    const row = { id: 0, inputs: [], };
 
     for (let i = 0; i < num; i++) {
       row.inputs.push({key: i, value: '', isRedacted: false});
@@ -69,8 +44,9 @@ export default function TableView(props) {
   }
 
   function addRow() {
-    setRowCounter(rowCounter + 1);
-    const rowId = rowCounter;
+    const newRowCount = rowCounter + 1;
+    setRowCounter(newRowCount);
+    const rowId = newRowCount;
     const row = { id: rowId, inputs: [], };
 
     for (let i = 0; i < numColumns; i++) {
@@ -89,6 +65,33 @@ export default function TableView(props) {
     setInputRows(inputRows.slice(0, rowIdx).concat([{...row, inputs}]).concat(inputRows.slice(rowIdx + 1)));
   }
   console.log(inputRows);
+  if (fieldEdit !== null) {
+  }
+
+  function renderSelect() {
+    if (!isEditing) {
+      return (
+        <Select
+          className="table-edit-col-select"
+          id="demo-simple-select-error"
+          displayEmpty
+          value={numColumns}
+          onChange={(ev) => {
+            const num = ev.target.value;
+            setNumColumns(num)
+            updateInputs(num);
+          }}>
+          <MenuItem value={0} disabled>Select Number of Columns</MenuItem>
+          <MenuItem value={1}>1 Column</MenuItem>
+          <MenuItem value={2}>2 Columns</MenuItem>
+          <MenuItem value={3}>3 Columns</MenuItem>
+          <MenuItem value={4}>4 Columns</MenuItem>
+        </Select>
+      );
+    } else {
+      return null;
+    }
+  }
 
   return (
     <>
@@ -101,26 +104,11 @@ export default function TableView(props) {
               variant="contained"
               onClick={() => saveTableField(inputRows)}>Save Table</Button>
           )}
-          <Button onClick={() => setEditorView()}><Close></Close></Button>
+          {setEditorView !== null && <Button onClick={() => setEditorView()}><Close></Close></Button>}
         </div>
       </div>
-      <Select
-        className="table-edit-col-select"
-        id="demo-simple-select-error"
-        displayEmpty
-        value={numColumns}
-        onChange={(ev) => {
-          const num = ev.target.value;
-          setNumColumns(num)
-          updateInputs(num);
-        }}>
-        <MenuItem value={0} disabled>Select Number of Columns</MenuItem>
-        <MenuItem value={1}>1 Column</MenuItem>
-        <MenuItem value={2}>2 Columns</MenuItem>
-        <MenuItem value={3}>3 Columns</MenuItem>
-        <MenuItem value={4}>4 Columns</MenuItem>
-      </Select>
-      {inputRows.map(row => <TableRow 
+      {renderSelect()}
+      {inputRows.map(row => <TableRowInputs 
         className="table-row"
         markRedacted={markRedacted}
         key={row.id} 
@@ -131,3 +119,8 @@ export default function TableView(props) {
     </>
   );
 }
+export default connect((state) => {
+  return {
+    fieldEdit: state.main.fieldEdit,
+  };
+}, { })(TableView);

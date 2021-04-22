@@ -3,7 +3,10 @@ import FieldForm from './FieldForm';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Edit from '@material-ui/icons/Edit';
+import TableRow from './TableRow';
+import TableEditor from './TableEditor';
 import lodash from 'lodash';
+import { convertToInputs } from './table';
 
 function FieldRow(props) {
   const { label, raw_html: rawHtml } = props.field;
@@ -22,11 +25,18 @@ function FieldRow(props) {
     setValue,
     pageNumber,
     setTextBody,
+    fieldEdit,
     textBody,
     setStartSerialNumber,
     field,
-    fieldEdit,
     cancel,
+    numColumns,
+    setNumColumns,
+    inputRows,
+    setInputRows,
+    rowCounter,
+    setRowCounter,
+    updateTableField,
   } = props;
 
   function handleBeginEdit() {
@@ -34,13 +44,38 @@ function FieldRow(props) {
     if (fieldEdit && field && (fieldEdit.id === field.id)) {
       return;
     }
-    setLabelValue({label: field.label});
-    setTextBody(field.raw_html);
-    props.beginUpdate({
-      id: field.id,
-      textBody: field.raw_html,
-      textLabel: field.label,
-    });
+
+    const fieldType = field.field_type;
+
+    if (field.field_type === 'INPUT') {
+
+      setLabelValue({label: field.label});
+      setTextBody(field.raw_html);
+      const fieldType = field.field_type;
+      const tableFields = field.table_fields;
+      props.beginUpdate({
+        field,
+        id: field.id,
+        fieldType,
+        tableFields,
+        textBody: field.raw_html,
+        textLabel: field.label,
+      });
+    } else {
+      const inputFields = convertToInputs(field.table_fields);
+      setInputRows(inputFields);
+      debugger;
+      
+      props.beginUpdate({
+        field: {
+          ...field,
+          inputFields,
+        },
+        id: field.id,
+        fieldType,
+        inputFields,
+      })
+    }
     setIsEditing(true)
   }
 
@@ -56,6 +91,7 @@ function FieldRow(props) {
             setLabelValue({label: field.label});
             setTextBody(field.raw_html);
             props.beginUpdate({
+              field,
               id: field.id,
               textBody: field.raw_html,
               textLabel: field.label,
@@ -84,38 +120,34 @@ function FieldRow(props) {
         pageNumber={pageNumber}
         textBody={textBody}
         isEditing={isEditing}
+        fieldType={!!field ? field.field_type : null }
         setTextBody={setTextBody} />
     )
   }
 
   function renderTableRow() {
-    const { table_fields } = field;
-    const inputs = _.sortBy(
-      _.groupBy(table_fields, (row) => row.row_idx),
-      (row) => row.row_idx);
-    return (
-      <>
-      <div>table rows</div>
-        <table>
-          <thead>
-            <tr>
-              {inputs.length > 0 && _.sortBy(inputs[0], (input) => input.col_idx).map((input, idx) => (
-            <th key={idx}>{input.value}</th>
-          ))}
-            </tr>
-          </thead>
-          <tbody>
-            {inputs.slice(1).map((row, rowIdx) => (
-              <tr key={rowIdx}>
-                {_.sortBy(row, (el) => el.col_idx).map(col => (
-                  <td className={col.is_redacted ? "redacted" : ""} key={col.id}>{col.value}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </>
-    )
+    if (isEditing && fieldEdit.id === field.id) {
+      return (
+        <TableEditor
+          numColumns={numColumns}
+          setNumColumns={setNumColumns}
+          inputRows={inputRows}
+          setInputRows={setInputRows}
+          rowCounter={rowCounter}
+          setRowCounter={setRowCounter}
+          saveTableField={updateTableField}
+          isEditing={isEditing}
+          fieldEdit={fieldEdit}
+          setEditorView={null} />
+      );
+    } else {
+      return (<TableRow 
+        fieldEdit={fieldEdit}
+        isEditing={isEditing}
+        field={field} 
+      /> 
+      );
+    }
   }
 
   function renderInputRow() {
@@ -137,15 +169,17 @@ function FieldRow(props) {
   return (
     <div className='close-editor' onClick={handleBeginEdit}>
       { field.field_type == 'INPUT' ? renderInputRow() : renderTableRow() }
-        
     </div>
   );
 }
 
-const beginUpdate = ({id, textBody, textLabel}) => ({
+const beginUpdate = ({id, field, textBody, textLabel, fieldType, tableFields}) => ({
   type: 'BEGIN_UPDATE',
   payload: {
     id,
+    field,
+    fieldType,
+    tableFields,
     textBody,
     textLabel,
   },
@@ -154,5 +188,6 @@ const beginUpdate = ({id, textBody, textLabel}) => ({
 export default connect((state) => {
   return {
     fieldEdit: state.main.fieldEdit,
+
   };
 }, { beginUpdate })(FieldRow);
