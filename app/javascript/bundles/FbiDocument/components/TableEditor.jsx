@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -21,6 +21,7 @@ function TableView(props) {
     setRowCounter,
     fieldEdit,
     isEditing,
+    handleUpdate,
   } = props;
 
 
@@ -97,6 +98,7 @@ function TableView(props) {
     <>
       <div className="edit-header">
         <p className="table-title">Table Edit Mode</p>
+        <Button onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>
         <div>
           {numColumns > 0 && (
             <Button 

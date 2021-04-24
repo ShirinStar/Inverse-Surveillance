@@ -74,6 +74,10 @@ function TurkDocumentForm(props) {
     }
   }
 
+  async function handleTableUpdate() {
+    console.log(inputRows);
+  }
+
   function computeSize(span) {
     if (span.classList.contains('small-redaction')) {
       return "SMALL";
@@ -194,7 +198,24 @@ function TurkDocumentForm(props) {
     }
   }
 
-  function updateTableField(tableData) {
+  async function updateTableField(tableData) {
+    setToken();
+    const { fieldId } = tableData;
+    try {
+      const postBody = {
+        inputRows,
+        msg: 'hey there'
+      };
+      const resp = await axios.put(
+        `/table_fields/${fieldId}`,
+        postBody
+      );
+      console.log('resp', resp);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log('all done');
+    }
     console.log("we gon' update a field!");
   }
 
@@ -305,6 +326,7 @@ function TurkDocumentForm(props) {
               <div className="field-container">
                 {_.sortBy(fields, field => new Date(field.created_at)).map(field => (
                   <FieldRow key={field.id}
+                    handleTableUpdate={updateTableField}
                     cancel={resetEditor}
                     updateField={updateField}
                     control={control}
@@ -327,7 +349,6 @@ function TurkDocumentForm(props) {
                     setInputRows={setInputRows}
                     rowCounter={rowCounter}
                     setRowCounter={setRowCounter}
-                    updateTableField={updateTableField}
                     field={field} />
                 ))}
                 {!isEditing && renderForm()}

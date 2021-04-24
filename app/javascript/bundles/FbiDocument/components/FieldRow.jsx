@@ -20,6 +20,7 @@ function FieldRow(props) {
     labelValue,
     setLabelValue,
     handleSubmit,
+    handleTableUpdate,
     reset,
     control,
     setValue,
@@ -64,7 +65,6 @@ function FieldRow(props) {
     } else {
       const inputFields = convertToInputs(field.table_fields);
       setInputRows(inputFields);
-      debugger;
       
       props.beginUpdate({
         field: {
@@ -129,6 +129,7 @@ function FieldRow(props) {
     if (isEditing && fieldEdit.id === field.id) {
       return (
         <TableEditor
+          handleUpdate={handleTableUpdate}
           numColumns={numColumns}
           setNumColumns={setNumColumns}
           inputRows={inputRows}
