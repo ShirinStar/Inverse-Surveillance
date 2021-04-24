@@ -1,0 +1,2 @@
+export const TABLE_DOCUMENT_CATEGORY = "ORGS-PPL";
+

@@ -34,7 +34,7 @@ function TurkDocumentForm(props) {
   } = props;
 
   const [digitalDocument, setDocument] = useState(JSON.parse(digitalDoc));
-  const parsedFields = JSON.parse(oldFields).map(field => {
+  const parsedFields = oldFields === null ? [] : JSON.parse(oldFields).map(field => {
     if (field.field_type === 'INPUT') {
       return field;
     } else if (field.field_type === 'TABLE') {
@@ -258,7 +258,7 @@ function TurkDocumentForm(props) {
     try {
       const resp = await axios.post(
         `/table_fields`, {
-          digital_document_id: docId,
+          digital_document_id: digitalDocument.id,
           table_fields: postData.tableData,
           page_number: postData.page_number,
           serial_number: startSerialNumber,
@@ -302,6 +302,7 @@ function TurkDocumentForm(props) {
       setInputRows={setInputRows}
       rowCounter={rowCounter}
       setRowCounter={setRowCounter}
+      documentCategory={docCat}
     />
   );
 
