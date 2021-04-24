@@ -33,6 +33,7 @@ function TurkDocumentForm(props) {
     docCat
   } = props;
 
+
   const [digitalDocument, setDocument] = useState(JSON.parse(digitalDoc));
   const parsedFields = oldFields === null ? [] : JSON.parse(oldFields).map(field => {
     if (field.field_type === 'INPUT') {
@@ -145,6 +146,13 @@ function TurkDocumentForm(props) {
 
   }
 
+  function resetTableEditor() {
+    setInputRows([]);
+    setIsEditing(false);
+    reset();
+    setNumColumns(0);
+    resetStore();
+  }
   function resetEditor() {
     setLabelValue(null);
     setTextBody("");
@@ -315,6 +323,32 @@ function TurkDocumentForm(props) {
     console.log('yay');
   }
 
+  const hasNextPage = _.some(fields, field => field.page_number > pageNumber);
+  const hasPrevPage = _.some(fields, field => field.page_number < pageNumber);
+
+  function renderPageNavButtons() {
+    return (
+      <>
+      {pageNumber === pageCount && (
+        <Button
+          variant="contained"
+          type="submit"
+          onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
+      )}
+      {hasNextPage && (
+        <Button
+          variant="contained"
+          onClick={() => setPageNumber(pageNumber + 1)}>Go To Next Page</Button>)
+      }
+      {hasPrevPage && (
+        <Button
+          variant="contained"
+          onClick={() => setPageNumber(pageNumber - 1)}>Go To Previous Page</Button>)
+        }
+      </>
+    );
+  }
+
   return (
     <div>
       <div className='page-header'>
@@ -339,20 +373,8 @@ function TurkDocumentForm(props) {
                 pageNumber={pageNumber}
                 pageCount={pageCount} />
 
-              {(pageNumber == pageCount) ?
+              {renderPageNavButtons()}
 
-                <Button
-                  variant="contained"
-                  type="submit"
-                  onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
-
-                :
-                <Button
-                  variant="contained"
-                  disabled={!hasFields}
-                  onClick={() => setModalSerialOpen(true)}
-                > + Add New Page</Button>
-              }
             </div>
 
             <SubmitModal
@@ -362,10 +384,13 @@ function TurkDocumentForm(props) {
             />
             <div className='adding-field'>
               <div className="field-container">
-                {_.sortBy(fields, field => new Date(field.created_at)).map(field => (
+                {_.sortBy(fields, field => new Date(field.created_at))
+                    .filter(field => field.page_number === pageNumber)
+                    .map(field => (
                   <FieldRow key={field.id}
                     handleTableUpdate={updateTableField}
                     cancel={resetEditor}
+                    cancelTableUpdate={resetTableEditor}
                     updateField={updateField}
                     control={control}
                     handleSubmit={handleSubmit}

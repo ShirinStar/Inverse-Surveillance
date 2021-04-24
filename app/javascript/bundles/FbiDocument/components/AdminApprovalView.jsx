@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
+import TableRow from './TableRow';
 
 export default function AdminApprovalView(props) {
   const { date, fields, page_count, doc_url, doc_id, currentPage } = props;
@@ -11,7 +12,7 @@ export default function AdminApprovalView(props) {
   })
 
   const parsedFields = JSON.parse(fields);
-  console.log(fields[0])
+
   return (
     <div className='approval-view'>
       <div className='admin-header'>
@@ -56,23 +57,33 @@ export default function AdminApprovalView(props) {
       </div>
 
       <div className='inner-view'>{parsedFields.map(field => (
-        <div key={field.id}>
-          <div className='view-page'>
-            <p className='label-view'>{field.label}</p>
-            <p dangerouslySetInnerHTML={{ __html: field.raw_html }}></p>
-          </div>
+        <div className="view-page" key={field.id}>
+          {field.field_type === 'INPUT' && (
+            <>
+              <p className='label-view'>{field.label}</p>
+              <p dangerouslySetInnerHTML={{ __html: field.raw_html }}></p>
+            </>
+          )}
+          {field.field_type === 'TABLE' && (
+            <TableRow
+              isEditing={false}
+              fieldEdit={null}
+              field={field}
+            />
+          )}
         </div>
       ))}
       </div>
-      { (currentPage != page_count) ?
-        <div className='btn nextPage'>
+      <div className='btn nextPage'>
+        {currentPage > 1 && (
           <a href={`/admin/documents/${doc_id}/approval?page=${currentPage - 1}`}><Button variant="contained">⟵PREVIOUS PAGE</Button></a>
+        )}
+        {currentPage !== page_count && (
           <a href={`/admin/documents/${doc_id}/approval?page=${currentPage + 1}`}><Button variant="contained">NEXT PAGE⟶</Button></a>
-        </div>
-        :
-        ''
-      }
+        )}
+      </div>
     </div>
-  )
+  );
+
 }
 

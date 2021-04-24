@@ -10,7 +10,6 @@ export default function TableRow({ field, fieldEdit, isEditing }) {
   function renderTablePreview() {
     return (
       <>
-        <div>table rows</div>
         <table>
           <thead>
             <tr>

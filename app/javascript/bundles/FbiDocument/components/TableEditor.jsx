@@ -22,6 +22,7 @@ function TableView(props) {
     fieldEdit,
     isEditing,
     handleUpdate,
+    cancel
   } = props;
 
   function updateInputs(num) {
@@ -105,7 +106,18 @@ function TableView(props) {
               variant="contained"
               onClick={() => saveTableField(inputRows)}>Save Table</Button>
           )}
-          {<Button onClick={setEditorView}><Close></Close></Button>}
+          {isEditing ? (
+            <div className='btn-unsave'>
+              <Button
+                color='secondary'
+                size='small'
+                onClick={cancel}
+                value="Cancel">
+                Undo Changes
+              </Button>
+            </div>
+          ): (
+          <Button onClick={setEditorView}><Close></Close></Button>)}
         </div>
       </div>
       {renderSelect()}

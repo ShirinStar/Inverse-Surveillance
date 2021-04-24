@@ -31,6 +31,7 @@ function FieldRow(props) {
     setStartSerialNumber,
     field,
     cancel,
+    cancelTableUpdate,
     numColumns,
     setNumColumns,
     inputRows,
@@ -132,6 +133,7 @@ function FieldRow(props) {
     if (isEditing && fieldEdit.id === field.id) {
       return (
         <TableEditor
+          cancel={cancelTableUpdate}
           handleUpdate={handleTableUpdate}
           numColumns={numColumns}
           setNumColumns={setNumColumns}
