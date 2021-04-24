@@ -8,6 +8,7 @@ import InstructionInfo from './InstructionInfo';
 import SubmitModal from './SubmitModal';
 import SerialNumberModal from './SerialNumberModal';
 import Button from '@material-ui/core/Button';
+import { convertToInputs } from './table';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import HelpModal from './HelpModal';
@@ -72,10 +73,6 @@ function TurkDocumentForm(props) {
     } finally {
       console.log('all done');
     }
-  }
-
-  async function handleTableUpdate() {
-    console.log(inputRows);
   }
 
   function computeSize(span) {
@@ -210,6 +207,18 @@ function TurkDocumentForm(props) {
         `/table_fields/${fieldId}`,
         postBody
       );
+      const updatedFields = convertToInputs(resp.data);
+      const newFields = fields.map(field => (
+        (field.id === fieldId) ? (
+          {
+            ...field,
+            table_fields: updatedFields[0].inputs,
+          }) : field));
+      setFields(newFields);
+      setInputRows([]);
+      setIsEditing(false);
+      reset();
+      finishEdit();
       console.log('resp', resp);
     } catch (err) {
       console.log(err);

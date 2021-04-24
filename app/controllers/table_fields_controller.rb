@@ -4,7 +4,7 @@ class TableFieldsController < ApplicationController
     field_id = update_field_params["id"]
     field = Field.find(field_id)
     field.update!(table_fields: table_fields)
-    render json: field
+    render json: field.table_fields
   end
 
   def create
