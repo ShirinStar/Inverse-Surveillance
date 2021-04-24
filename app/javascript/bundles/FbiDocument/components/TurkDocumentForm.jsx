@@ -123,13 +123,14 @@ function TurkDocumentForm(props) {
       resetStore();
       setTextBody("");
       reset();
+      setLabelValue(null);
       console.log('done submitting field');
     }
 
   }
 
   function resetEditor() {
-    setLabelValue("");
+    setLabelValue(null);
     setTextBody("");
     reset();
     setIsEditing(false);
@@ -218,6 +219,7 @@ function TurkDocumentForm(props) {
       setInputRows([]);
       setIsEditing(false);
       reset();
+      setNumColumns(0);
       finishEdit();
       console.log('resp', resp);
     } catch (err) {
@@ -241,6 +243,10 @@ function TurkDocumentForm(props) {
         } 
       );
       setFields([...fields, resp.data]);
+      setInputRows([]);
+      setIsEditing(false);
+      setNumColumns(0);
+      reset();
     } catch (e) {
       console.log(e);
     }

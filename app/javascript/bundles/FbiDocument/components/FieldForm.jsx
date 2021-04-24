@@ -88,9 +88,8 @@ function FieldForm(props) {
   }
 
   function computeShouldRenderTable() {
-    return !isEditing || fieldType === 'TABLE'; 
+    return (!isEditing || fieldType === 'TABLE') && tableView;
   }
-
   return (
     <>
       <div className="field-form-container">

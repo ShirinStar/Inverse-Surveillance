@@ -98,7 +98,7 @@ function TableView(props) {
     <>
       <div className="edit-header">
         <p className="table-title">Table Edit Mode</p>
-        <Button onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>
+        {isEditing && <Button onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>}
         <div>
           {numColumns > 0 && (
             <Button 
@@ -106,7 +106,7 @@ function TableView(props) {
               variant="contained"
               onClick={() => saveTableField(inputRows)}>Save Table</Button>
           )}
-          {setEditorView !== null && <Button onClick={() => setEditorView()}><Close></Close></Button>}
+          {<Button onClick={setEditorView}><Close></Close></Button>}
         </div>
       </div>
       {renderSelect()}
