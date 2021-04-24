@@ -65,6 +65,9 @@ function FieldRow(props) {
     } else {
       const inputFields = convertToInputs(field.table_fields);
       setInputRows(inputFields);
+      const columnNum = (inputFields.length > 0 && inputFields[0].inputs.length > 0) ? inputFields[0].inputs.length : 0;
+      setNumColumns(columnNum);
+      setRowCounter(inputFields.length - 1);
       
       props.beginUpdate({
         field: {
@@ -189,6 +192,5 @@ const beginUpdate = ({id, field, textBody, textLabel, fieldType, tableFields}) =
 export default connect((state) => {
   return {
     fieldEdit: state.main.fieldEdit,
-
   };
 }, { beginUpdate })(FieldRow);

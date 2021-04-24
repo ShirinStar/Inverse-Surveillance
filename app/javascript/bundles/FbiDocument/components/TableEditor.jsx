@@ -24,7 +24,6 @@ function TableView(props) {
     handleUpdate,
   } = props;
 
-
   function updateInputs(num) {
     setRowCounter(0);
     const row = { id: 0, inputs: [], };
@@ -100,7 +99,7 @@ function TableView(props) {
         <p className="table-title">Table Edit Mode</p>
         {isEditing && <Button onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>}
         <div>
-          {numColumns > 0 && (
+          {numColumns > 0 && !isEditing && (
             <Button 
               color="primary"
               variant="contained"

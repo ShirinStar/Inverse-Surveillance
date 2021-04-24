@@ -34,7 +34,23 @@ function TurkDocumentForm(props) {
   } = props;
 
   const [digitalDocument, setDocument] = useState(JSON.parse(digitalDoc));
-  const [fields, setFields] = useState(JSON.parse(oldFields) || []);
+  const parsedFields = JSON.parse(oldFields).map(field => {
+    if (field.field_type === 'INPUT') {
+      return field;
+    } else if (field.field_type === 'TABLE') {
+      const parsedTableFields = field.table_fields.map(tableField => ({
+        ...tableField,
+        isRedacted: tableField.is_redacted,
+      }));
+      const tableField = {
+        ...field,
+        table_fields: parsedTableFields,
+      };
+
+      return tableField;
+    }
+  })
+  const [fields, setFields] = useState(parsedFields || []);
 
   const currentSerialNumber = fields.length > 0 ? fields[fields.length - 1].serial_number : ''
   const [startSerialNumber, setStartSerialNumber] = useState(currentSerialNumber)
@@ -200,20 +216,26 @@ function TurkDocumentForm(props) {
     setToken();
     const { fieldId } = tableData;
     try {
+      const inputRowsDto = inputRows.map(row => ({
+        ...row,
+        inputs: row.inputs.map(input => ({
+          ...input,
+          is_redacted: input.isRedacted,
+        }))
+      }));
       const postBody = {
-        inputRows,
+        inputRows: inputRowsDto,
         msg: 'hey there'
       };
       const resp = await axios.put(
         `/table_fields/${fieldId}`,
         postBody
       );
-      const updatedFields = convertToInputs(resp.data);
       const newFields = fields.map(field => (
         (field.id === fieldId) ? (
           {
             ...field,
-            table_fields: updatedFields[0].inputs,
+            table_fields: resp.data,
           }) : field));
       setFields(newFields);
       setInputRows([]);
