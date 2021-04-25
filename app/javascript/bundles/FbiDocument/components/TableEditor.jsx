@@ -97,8 +97,15 @@ function TableView(props) {
   return (
     <>
       <div className="edit-header">
-        <p className="table-title">Table Edit Mode</p>
+        <p className="table-title"></p>
         <div className="table-edit-section">
+      
+          {numColumns > 0 && !isEditing && (
+            <Button 
+              color="primary"
+              variant="contained"
+              onClick={() => saveTableField(inputRows)}>Save Table</Button>
+          )}
         {isEditing ? (
               <Button
                 color='secondary'
@@ -110,15 +117,9 @@ function TableView(props) {
               </Button>
           ): (
           <Button onClick={setEditorView}><Close></Close></Button>)}
-        {isEditing && <Button  
+            {isEditing && <Button  
           variant="contained"
           size='small' onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>}
-          {numColumns > 0 && !isEditing && (
-            <Button 
-              color="primary"
-              variant="contained"
-              onClick={() => saveTableField(inputRows)}>Save Table</Button>
-          )}
           </div>
         </div>
       {renderSelect()}

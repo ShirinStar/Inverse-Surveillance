@@ -51,13 +51,19 @@ export default function Editor(props) {
               onClick={() => setTableView()}>Click to Add Table</Button>
           ) : (
 
+            <>
+            { labelValue !== null && (
+
             <Button
               variant="contained"
+              disabled={labelValue === null}
               size='small'
               type="submit"
               value="Save">
               Save Field
             </Button>
+            )}
+            </>
           )}
         </div>
         </div>
