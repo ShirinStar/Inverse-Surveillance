@@ -64,7 +64,9 @@ function TurkDocumentForm(props) {
 
   // determine current serial number
   const currentPageFields = fields.filter(field => field.page_number === pageNumber)
-  const currentSerialNumber = currentPageFields.length > 0 ? currentPageFields[currentPageFields.length - 1].serial_number : ''
+
+  const currentSerialNumber = currentPageFields.length > 0 ? currentPageFields[currentPageFields.length - 1].serial_number : (
+    digitalDocument === null ? '' : digitalDocument.start_serial_number);
   const [startSerialNumber, setStartSerialNumber] = useState(currentSerialNumber)
 
   // table editor state
@@ -360,7 +362,7 @@ function TurkDocumentForm(props) {
               refreshSerialNumber(pageNumber - 1);
             }}>Go To Previous Page</Button>
         )}
-        {!hasNextPage && pageNumber !== pageCount && (
+        {!hasNextPage && (pageNumber !== pageCount) && (
           <Button
             variant="contained"
             disabled={!hasFields}
