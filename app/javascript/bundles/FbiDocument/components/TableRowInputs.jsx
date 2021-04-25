@@ -15,12 +15,13 @@ export default function TableRowInputs(props) {
     markRedacted,
   } = props;
 
+  // TODO: clean up key/id of new rows.  this is super hacky
   return (
     <div className="table-row">
       {row.inputs.map((input) => (
         <Box
-          key={input.id}
-          display="flex" flexDirection="column" key={input.id} >
+          key={input.id || input.key}
+          display="flex" flexDirection="column" key={input.id || input.key} >
           <Button
             variant="outlined"
             color="secondary"

@@ -3,6 +3,7 @@ import { Controller } from 'react-hook-form';
 import Button from '@material-ui/core/Button';
 import LabelAutocomplete from './LabelAutocomplete';
 import RedactionEditor from './RedactionEditor';
+import { TABLE_DOCUMENT_CATEGORY } from '../util/categories';
 
 export default function Editor(props) {
   const {
@@ -15,6 +16,7 @@ export default function Editor(props) {
     cancel,
     isEditing,
     setTableView,
+    documentCategory,
   } = props;
 
   return (
@@ -42,7 +44,7 @@ export default function Editor(props) {
         </Button>
         </div>
           }
-          {labelValue === null ? (
+          {labelValue === null && documentCategory === TABLE_DOCUMENT_CATEGORY ? (
             <Button 
               variant="contained"
               size="medium"

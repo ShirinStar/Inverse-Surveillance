@@ -10,12 +10,11 @@ export default function TableRow({ field, fieldEdit, isEditing }) {
   function renderTablePreview() {
     return (
       <>
-        <div>table rows</div>
         <table>
           <thead>
             <tr>
               {headers.map((input, idx) => (
-                <th key={idx}>{input.value}</th>
+                <th className={input.is_redacted ? "redacted" : ""}key={idx}>{input.value}</th>
               ))}
             </tr>
           </thead>

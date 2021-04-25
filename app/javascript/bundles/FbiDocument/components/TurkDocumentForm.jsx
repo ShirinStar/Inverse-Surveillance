@@ -33,11 +33,26 @@ function TurkDocumentForm(props) {
     docCat
   } = props;
 
-  const [digitalDocument, setDocument] = useState(JSON.parse(digitalDoc));
-  const [fields, setFields] = useState(JSON.parse(oldFields) || []);
 
-  const currentSerialNumber = fields.length > 0 ? fields[fields.length - 1].serial_number : ''
-  const [startSerialNumber, setStartSerialNumber] = useState(currentSerialNumber)
+  const [digitalDocument, setDocument] = useState(JSON.parse(digitalDoc));
+  const parsedFields = oldFields === null ? [] : JSON.parse(oldFields).map(field => {
+    if (field.field_type === 'INPUT') {
+      return field;
+    } else if (field.field_type === 'TABLE') {
+      const parsedTableFields = field.table_fields.map(tableField => ({
+        ...tableField,
+        isRedacted: tableField.is_redacted,
+      }));
+      const tableField = {
+        ...field,
+        table_fields: parsedTableFields,
+      };
+
+      return tableField;
+    }
+  })
+  const [fields, setFields] = useState(parsedFields || []);
+
   const [labelValue, setLabelValue] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [modalSerialOpen, setModalSerialOpen] = useState(false);
@@ -45,6 +60,14 @@ function TurkDocumentForm(props) {
   const [textBody, setTextBody] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [showHelpModal, setHelpModal] = useState(false);
+
+
+  // determine current serial number
+  const currentPageFields = fields.filter(field => field.page_number === pageNumber)
+
+  const currentSerialNumber = currentPageFields.length > 0 ? currentPageFields[currentPageFields.length - 1].serial_number : (
+    digitalDocument === null ? '' : digitalDocument.start_serial_number);
+  const [startSerialNumber, setStartSerialNumber] = useState(currentSerialNumber)
 
   // table editor state
   const [numColumns, setNumColumns] = useState(0);
@@ -129,6 +152,13 @@ function TurkDocumentForm(props) {
 
   }
 
+  function resetTableEditor() {
+    setInputRows([]);
+    setIsEditing(false);
+    reset();
+    setNumColumns(0);
+    resetStore();
+  }
   function resetEditor() {
     setLabelValue(null);
     setTextBody("");
@@ -200,20 +230,26 @@ function TurkDocumentForm(props) {
     setToken();
     const { fieldId } = tableData;
     try {
+      const inputRowsDto = inputRows.map(row => ({
+        ...row,
+        inputs: row.inputs.map(input => ({
+          ...input,
+          is_redacted: input.isRedacted,
+        }))
+      }));
       const postBody = {
-        inputRows,
+        inputRows: inputRowsDto,
         msg: 'hey there'
       };
       const resp = await axios.put(
         `/table_fields/${fieldId}`,
         postBody
       );
-      const updatedFields = convertToInputs(resp.data);
       const newFields = fields.map(field => (
         (field.id === fieldId) ? (
           {
             ...field,
-            table_fields: updatedFields[0].inputs,
+            table_fields: resp.data,
           }) : field));
       setFields(newFields);
       setInputRows([]);
@@ -236,7 +272,7 @@ function TurkDocumentForm(props) {
     try {
       const resp = await axios.post(
         `/table_fields`, {
-          digital_document_id: docId,
+          digital_document_id: digitalDocument.id,
           table_fields: postData.tableData,
           page_number: postData.page_number,
           serial_number: startSerialNumber,
@@ -280,6 +316,7 @@ function TurkDocumentForm(props) {
       setInputRows={setInputRows}
       rowCounter={rowCounter}
       setRowCounter={setRowCounter}
+      documentCategory={docCat}
     />
   );
 
@@ -290,6 +327,50 @@ function TurkDocumentForm(props) {
     setIsEditing(false);
     clearFields();
     console.log('yay');
+  }
+
+  const hasNextPage = _.some(fields, field => field.page_number > pageNumber);
+  const hasPrevPage = _.some(fields, field => field.page_number < pageNumber);
+
+  function refreshSerialNumber(newPageNumber) {
+    const newPageField = fields.find(field => field.page_number === newPageNumber);
+    setStartSerialNumber(newPageField.serial_number);
+  }
+
+  function renderPageNavButtons() {
+    return (
+      <>
+        {pageNumber === pageCount && (
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
+        )}
+        {hasNextPage && (
+          <Button
+            variant="contained"
+            onClick={() => {
+              setPageNumber(pageNumber + 1)
+              refreshSerialNumber(pageNumber + 1);
+            }}>Go To Next Page</Button>)
+        }
+        {hasPrevPage && (
+          <Button
+            variant="contained"
+            onClick={() => {
+              setPageNumber(pageNumber - 1)
+              refreshSerialNumber(pageNumber - 1);
+            }}>Go To Previous Page</Button>
+        )}
+        {!hasNextPage && (pageNumber !== pageCount) && (
+          <Button
+            variant="contained"
+            disabled={!hasFields}
+            onClick={() => setModalSerialOpen(true)}
+          > + Add New Page</Button>
+        )}
+      </>
+    );
   }
 
   return (
@@ -316,20 +397,8 @@ function TurkDocumentForm(props) {
                 pageNumber={pageNumber}
                 pageCount={pageCount} />
 
-              {(pageNumber == pageCount) ?
+              {renderPageNavButtons()}
 
-                <Button
-                  variant="contained"
-                  type="submit"
-                  onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
-
-                :
-                <Button
-                  variant="contained"
-                  disabled={!hasFields}
-                  onClick={() => setModalSerialOpen(true)}
-                > + Add New Page</Button>
-              }
             </div>
 
             <SubmitModal
@@ -339,10 +408,13 @@ function TurkDocumentForm(props) {
             />
             <div className='adding-field'>
               <div className="field-container">
-                {_.sortBy(fields, field => new Date(field.created_at)).map(field => (
+                {_.sortBy(fields, field => new Date(field.created_at))
+                    .filter(field => field.page_number === pageNumber)
+                    .map(field => (
                   <FieldRow key={field.id}
                     handleTableUpdate={updateTableField}
                     cancel={resetEditor}
+                    cancelTableUpdate={resetTableEditor}
                     updateField={updateField}
                     control={control}
                     handleSubmit={handleSubmit}

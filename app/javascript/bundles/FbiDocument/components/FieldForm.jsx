@@ -41,10 +41,11 @@ function FieldForm(props) {
     setInputRows,
     rowCounter,
     setRowCounter,
+    documentCategory,
   } = props;
 
   const existingLabels = existingFields.map(label => ({ label: label, id: -1 }))
-  const [tableView, setTableView] = useState(true);
+  const [tableView, setTableView] = useState(false);
 
   function onSubmit(formData, ev) {
     const { serialNumber } = formData;
@@ -115,6 +116,7 @@ function FieldForm(props) {
               labelValue={labelValue}
               setLabelValue={setLabelValue}
               setTextBody={setTextBody}
+              documentCategory={documentCategory}
               textBody={textBody} />
         </form>
         )}
