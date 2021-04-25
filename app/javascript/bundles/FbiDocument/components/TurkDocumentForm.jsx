@@ -150,7 +150,6 @@ function TurkDocumentForm(props) {
       setTextBody("");
       reset();
       setLabelValue(null);
-      console.log('done submitting field');
     }
 
   }
@@ -184,7 +183,6 @@ function TurkDocumentForm(props) {
       console.log(e);
     } finally {
       resetEditor();
-      console.log('done submitting field');
     }
   }
 
@@ -192,7 +190,6 @@ function TurkDocumentForm(props) {
     const raw_html = field.text_body.innerHTML;
     const parsed_body = parseTextBody(field.text_body);
     const { field_label, text_body, ...postData } = field;
-    console.log('serial number: ', startSerialNumber)
 
     const postBody = {
       ...postData,
@@ -225,7 +222,6 @@ function TurkDocumentForm(props) {
       setTextBody("");
       reset();
       finishEdit();
-      console.log('done submitting field');
     }
   }
 
@@ -260,13 +256,9 @@ function TurkDocumentForm(props) {
       reset();
       setNumColumns(0);
       finishEdit();
-      console.log('resp', resp);
     } catch (err) {
       console.log(err);
-    } finally {
-      console.log('all done');
     }
-    console.log("we gon' update a field!");
   }
 
   async function handleSaveTableField(postData) {
@@ -289,10 +281,6 @@ function TurkDocumentForm(props) {
     } catch (e) {
       console.log(e);
     }
-  }
-
-  function clearFields() {
-    setFields([]);
   }
 
   const hasFields = fields.length > 0;
@@ -328,12 +316,10 @@ function TurkDocumentForm(props) {
     setPageNumber(pageNumber + 1);
     setStartSerialNumber(pageSerialNumber)
     setIsEditing(false);
-    clearFields();
-    console.log('yay');
   }
 
   const hasNextPage = _.some(fields, field => field.page_number > pageNumber);
-  const hasPrevPage = _.some(fields, field => field.page_number < pageNumber);
+  const hasPrevPage = pageNumber > 1;
 
   function refreshSerialNumber(newPageNumber) {
     const newPageField = fields.find(field => field.page_number === newPageNumber);
