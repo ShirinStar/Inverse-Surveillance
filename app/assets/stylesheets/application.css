@@ -163,24 +163,19 @@ a:hover {
 
 .startDoc {
   display: flex;
-  width: 95%;
-  margin-left: auto 0;
-  margin-right: auto 0;
+  justify-content: space-between;
+  margin-left: 10%;
   text-align: center;
 }
-
-.leftSection{
-  width: 50%;
-  margin-left: 20%;
+.leftSection {
+  margin-right: 5%;
+  width: 750px;
 }
 
 .PDFprev {
-  border: 2px solid black;
+  border: 1px solid black;
   margin-top: 12%;
-  margin-left: 12%;
-  width: 650px;
-  height: 550px;
-  /* padding: 20px 20px; */
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .welcome {
@@ -199,12 +194,11 @@ a:hover {
   text-align: left;
   margin-top: 100px;
   margin-bottom: 8%;
-  margin-left: -60%;
   line-height: 1.6rem;
 }
 
 .btn.start {
-  margin-top: 15%;
+  margin-top: 10%;
   text-align: left;
 }
 
@@ -215,7 +209,6 @@ a:hover {
 
 .init-form {
   margin-top: 80px;
-  margin-left: -60%;
   display: flex;
   font-size: 18px;
 }
@@ -253,7 +246,7 @@ a:hover {
 }
 
 .MuiFormControl-root.MuiTextField-root {
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 .btn.saveDSN {

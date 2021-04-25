@@ -7,7 +7,7 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 import DNS from 'images/DSN.png';
 import DocumentDate from 'images/DocumentDate.png';
-import { saveAs } from 'file-saver'
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -28,12 +28,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DigitalDocumentForm(props) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
   const classes = useStyles();
   const { onSubmit } = props;
   const [openDoc, setOpenDoc] = useState(false)
 
-
+  const docDate = watch("document_date");
+  const startPageSerialNumber = watch("startPageSerialNumber");
   return (
     <div className='startDoc'>
       <div className='leftSection'>
@@ -85,6 +86,7 @@ export default function DigitalDocumentForm(props) {
                   :
                   ''
                 }
+                { docDate && (
                 <div className='initFields'>
                   <p className='form-labels'>Page Serial Number</p>
                   <Tooltip title={
@@ -102,19 +104,22 @@ export default function DigitalDocumentForm(props) {
                     name="startPageSerialNumber"
                     inputRef={register} />
                 </div>
+                )}
               </div>
+              {startPageSerialNumber && (
               <div className='btn start'>
                 <p className='btn start text'>Great! Now let's </p>
                 <Button type="submit" variant="contained" color="secondary">Start A Document</Button>
               </div>
-            </form>
+                )}
 
+            </form>
           </div>
         </div>
       </div>
 
       <div className='PDFprev'>
-        PFD preview
+        <embed src={props.docUrl} width="450px" height="550px" />
      </div>
     </div>
   );

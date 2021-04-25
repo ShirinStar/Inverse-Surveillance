@@ -13,6 +13,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import HelpModal from './HelpModal';
 import _ from 'lodash';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 function setToken() {
   const token =
@@ -51,6 +53,7 @@ function TurkDocumentForm(props) {
       return tableField;
     }
   })
+  console.log('parsed fields: ', parsedFields);
   const [fields, setFields] = useState(parsedFields || []);
 
   const [labelValue, setLabelValue] = useState(null);
@@ -338,36 +341,39 @@ function TurkDocumentForm(props) {
   }
 
   function renderPageNavButtons() {
+    console.log('fields: ', fields);
+    console.log('render page nav ' + pageNumber + ' ' + pageCount + ' ' + hasPrevPage)
     return (
       <>
-        {pageNumber === pageCount && (
-          <Button
-            variant="contained"
-            type="submit"
-            onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
-        )}
-        {hasNextPage && (
-          <Button
-            variant="contained"
-            onClick={() => {
-              setPageNumber(pageNumber + 1)
-              refreshSerialNumber(pageNumber + 1);
-            }}>Go To Next Page</Button>)
-        }
         {hasPrevPage && (
           <Button
-            variant="contained"
+            variant="outlined"
             onClick={() => {
               setPageNumber(pageNumber - 1)
               refreshSerialNumber(pageNumber - 1);
-            }}>Go To Previous Page</Button>
+            }}><ArrowBackIosIcon size="small" color="primary"></ArrowBackIosIcon></Button>
         )}
-        {!hasNextPage && (pageNumber !== pageCount) && (
+          {hasNextPage && (
+          <Button
+            variant="outlined"
+            onClick={() => {
+              setPageNumber(pageNumber + 1)
+              refreshSerialNumber(pageNumber + 1);
+            }}><ArrowForwardIosIcon size="small" color="primary"></ArrowForwardIosIcon></Button>)
+        }
+         
+         {!hasNextPage && (pageNumber !== pageCount) && (
           <Button
             variant="contained"
             disabled={!hasFields}
             onClick={() => setModalSerialOpen(true)}
           > + Add New Page</Button>
+        )}
+         {pageNumber === pageCount && (
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
         )}
       </>
     );
