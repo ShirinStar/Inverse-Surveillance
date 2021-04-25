@@ -5,13 +5,10 @@ import TableRow from './TableRow';
 export default function AdminApprovalView(props) {
   const { date, fields, page_count, doc_url, doc_id, currentPage } = props;
   const [pageNumber, setPageNumber] = useState()
-  const [serialNumber, setSerialNumber] = useState()
-
-  useEffect(() => {
-    setSerialNumber(fields[0].serial_number)
-  })
 
   const parsedFields = JSON.parse(fields);
+  const serialNumber = parsedFields.length > 0 ?
+    parsedFields[0].serial_number : 'No Serial Number Available';
 
   return (
     <div className='approval-view'>
