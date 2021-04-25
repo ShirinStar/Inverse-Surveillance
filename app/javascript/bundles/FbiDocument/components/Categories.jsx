@@ -5,6 +5,8 @@ import transcript from 'images/302c.png';
 import CORR from 'images/CORR.png';
 import GEN from 'images/GEN.png';
 import Memo from 'images/Memo.png';
+import PPL from 'images/ppl.png';
+import Table from 'images/Table.png';
 import markedSample from 'images/markedSample.png';
 import markedFields from 'images/markedFields.jpg';
 import markedRedCode from 'images/markedRedCode.png';
@@ -214,6 +216,65 @@ export default function Categories(props) {
         </p>
       </div>
     )
+  } else if (docCat == 'ORGS-PPL') {
+      return (
+        <div className='document-instruction-div'>
+          <p className='document-instruction'>
+            <span className='doc-type'>You received a document that usually contains Date, a text section and a table.</span>
+            <Tooltip title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={PPL} />
+              </React.Fragment>
+            }>
+              <HelpOutline fontSize="small"></HelpOutline>
+            </Tooltip>
+            <br />
+            <br />
+            <span className='instruction-start'>How to start?</span> <br />
+            1• Please type or select a section lable.
+            <Tooltip title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedSample} />
+              </React.Fragment>
+            }>
+              <HelpOutline fontSize="small"></HelpOutline>
+            </Tooltip>
+            <br />
+  
+            2• Then, fill the text field that will appear below
+            <Tooltip title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedFields} />
+              </React.Fragment>
+            }>
+              <HelpOutline fontSize="small"></HelpOutline>
+            </Tooltip> <br />
+  
+          3• When there is a redaction, fill the code when asked
+            <Tooltip title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedRedCode} />
+              </React.Fragment>
+            }>
+              <HelpOutline fontSize="small"></HelpOutline>
+            </Tooltip>
+            <br />
+          4• Please do that for each new field you're adding.<br />
+          5• For the table section, please click the 'add table' button and select number of columns.
+          <Tooltip title={
+            <React.Fragment>
+              <img className='hover-image instruction' src={Table} />
+            </React.Fragment>
+          }>
+            <HelpOutline fontSize="small"></HelpOutline>
+          </Tooltip>
+           <br /> Please add as much raws as needed and mark any redacted raws with attached redaction btn above each cell.
+          6• Sometimes, your document may contain addional fields before and after, please
+            include them as well.<br />
+          7• Before starting, please make sure to visit the help page (at the top right).
+        </p>
+        </div>
+      )
   }
   else {
     return 'the end'

@@ -41,6 +41,14 @@ h1, h2 {
   padding: 20px;
 }
 
+.btn.nav {
+  border-bottom: none;
+}
+
+.btn.nav:hover {
+  background-color: transparent;
+}
+
 .a.help {
   border:none;
 }
@@ -153,93 +161,103 @@ a:hover {
 
 /* Date document*/
 
-.welcome {
-  margin-top: 60px;
+.startDoc {
+  display: flex;
+  width: 95%;
+  margin-left: auto 0;
+  margin-right: auto 0;
   text-align: center;
-  width: 100%;
-  color: black;
-  line-height: 1.5rem;
 }
 
-.a.welcome {
+.leftSection{
+  width: 50%;
+  margin-left: 20%;
+}
+
+.PDFprev {
+  border: 2px solid black;
+  margin-top: 12%;
+  margin-left: 12%;
+  width: 650px;
+  height: 550px;
+  /* padding: 20px 20px; */
+}
+
+.welcome {
+  margin-top: 60px;
+  text-align: left;
   color: black;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 2px;
-  padding-right: 0;
+  line-height: 1.6rem;
+}
+
+.welcome.span {
+  font-style: italic;
+  font-weight: 600;
 }
 
 .header.initDocument {
   text-align: left;
-  margin-top: 80px;
+  margin-top: 100px;
   margin-bottom: 8%;
+  margin-left: -60%;
   line-height: 1.6rem;
-  background-color: #C8FA22;
-  display: flex;
-  padding-left: 100px;
-}
-
-.start-url-div {
-  text-align: center;
-  text-transform: uppercase;
 }
 
 .btn.start {
-  text-align: center;
-  margin-top: 12%;
+  margin-top: 15%;
+  text-align: left;
+}
+
+.btn.start.text {
+  margin-right: 20px;
+  display: inline-block;
 }
 
 .init-form {
+  margin-top: 80px;
+  margin-left: -60%;
   display: flex;
-  justify-content: center;
-  margin-top: 0 auto;
-  margin-left: 0 auto;
-  align-items: center;
+  font-size: 18px;
+}
+
+.initFields {
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .date-form {
-  width: 600px;
-  height: 350px;
-  padding: 40px;
-  top: 15%;
-  left: 30%;
   line-height: 2.2rem;
-  border: 2px solid #E0E0DA;
-  /* background-color: rgb(232, 232, 232); */
 }
 
 .start-title {
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 50px;
-  letter-spacing: 1.4px;
+  margin-bottom: 5%;
+  margin-left: -2%;
 }
 
-.first-form-fields {
-  display: flex;
+.start-open {
+  border: 1px solid #4050B5;
+  padding: 8px 8px;
+  border-radius: 5px;
+  margin: 0 15px;
 }
 
-.title-question {
-  display: flex;
-}
-
-.seperate-first-fields {
-  margin-left: 40px;
-  margin-right: 40px;
+.start-open:hover {
+  background-color: #4050B5;
+  color: white;
 }
 
 .form-labels {
-  margin-top: 10px;
   margin-bottom: 0;
   display: inline-block;
 }
 
-.form-labels.date {
-  margin-bottom: 18px;
+.MuiFormControl-root.MuiTextField-root {
+  margin-top: 5px;
 }
 
 .btn.saveDSN {
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .DSN-form {

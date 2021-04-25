@@ -17,17 +17,17 @@ function ListRow({ doc }) {
       <td>{doc.name}</td>
       <td>{doc.page_length}</td>
       <td><a target="_blank"
-        href={doc.original_doc_url}>click it</a>
+        href={doc.original_doc_url}>Open</a>
       </td>
       <td>
         {(doc.status == 'Complete') ?
           <a target="_blank"
-            href={doc.digital_doc_url}>click to view</a>
+            href={doc.digital_doc_url}>View</a>
             :
             "Not Ready"
         }
       </td>
-      <td><a href={`/turk_documents/${doc.public_id}/edit`}>Edit Document</a></td>
+      <td><a href={`/turk_documents/${doc.public_id}/edit`}>Edit</a></td>
       <td>{doc.status}</td>
     </tr>
   )
@@ -55,7 +55,7 @@ export default function AdminDocumentList(props) {
         <a href='/'>⟵Go Back</a>
       </div>
       <div className='admin-view'>
-        <h1>Admin Document List</h1>
+        <h1>Admin Documents List</h1>
         <div className="filter-buttons">
           <Select
             displayEmpty
@@ -75,7 +75,7 @@ export default function AdminDocumentList(props) {
               <th>Page Length</th>
               <th>[Original] Document URL</th>
               <th>Digitized Document URL</th>
-              <th>TESTING edit url</th>
+              <th>Edit form access</th>
               <th>Status</th>
             </tr>
           </thead>

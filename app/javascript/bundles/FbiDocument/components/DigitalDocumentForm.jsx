@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -31,51 +31,61 @@ export default function DigitalDocumentForm(props) {
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
   const { onSubmit } = props;
+  const [openDoc, setOpenDoc] = useState(false)
+
 
   return (
-    <div>
-      <div className='header initDocument'>
-        <div className='inner-header'>
-          <h1>Start Process a Document</h1>
-        </div>
-      </div>
-      <div className='init-form'>
-        <div className='date-form'>
-          <div className='start-url-div'>
-            <p className='start-title'>To start please
-            <a target="_blank" href={props.docUrl} download>view Original Document</a>
-            <br /> and fill:</p>
+    <div className='startDoc'>
+      <div className='leftSection'>
+        <div className='header initDocument'>
+          <div className='inner-header'>
+            <h1>Process a Document</h1>
           </div>
+          <div className='welcome'>
+            <p>Welcome & Thank you for taking part in this research.<br />
+            Please visit the <span className='welcome span'>Help page</span> an the top right corner of the page.</p>
+          </div>
+        </div>
+        <div className='init-form'>
+          <div className='date-form'>
+         
+              <p className='start-title'>To start
+             <a className='start-open' target="_blank" href={props.docUrl} onClick={() => setOpenDoc(true)}>Click to Open & Download the Original Document</a>
+              </p>
+       
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='first-form-fields'>
-              <div className='seperate-first-fields'>
-                <div className='title-question'>
-                  <p className='form-labels date'>Document date</p>
-                  <Tooltip
-                    title={
-                      <React.Fragment>
-                        <img className='hover-image' src={DocumentDate} />
-                      </React.Fragment>
-                    }>
-                    <HelpOutline fontSize="small"></HelpOutline>
-                  </Tooltip>
-                </div>
-                <TextField
-                  required
-                  inputRef={register}
-                  id="date"
-                  name="document_date"
-                  type="date"
-                  defaultValue=""
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </div>
-              <div className='seperate-first-fields'>
-                <div className='title-question'>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className='first-form-fields'>
+                {openDoc
+                  ?
+                  <div className='initFields'>
+                    <p className='form-labels'>Document date</p>
+                    <Tooltip
+                      title={
+                        <React.Fragment>
+                          <img className='hover-image' src={DocumentDate} />
+                        </React.Fragment>
+                      }>
+                      <HelpOutline fontSize="small"></HelpOutline>
+                    </Tooltip>
+
+                    <TextField
+                      required
+                      inputRef={register}
+                      id="date"
+                      name="document_date"
+                      type="date"
+                      defaultValue=""
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </div>
+                  :
+                  ''
+                }
+                <div className='initFields'>
                   <p className='form-labels'>Page Serial Number</p>
                   <Tooltip title={
                     <React.Fragment>
@@ -84,25 +94,28 @@ export default function DigitalDocumentForm(props) {
                   }>
                     <HelpOutline fontSize="small"></HelpOutline>
                   </Tooltip>
+
+                  <TextField
+                    required
+                    id="standard-basic"
+                    label="Document serial number"
+                    name="startPageSerialNumber"
+                    inputRef={register} />
                 </div>
-                <TextField
-                  required
-                  id="standard-basic"
-                  label="Document serial number"
-                  name="startPageSerialNumber"
-                  inputRef={register} />
               </div>
-            </div>
-            <div className='btn start'>
-              <Button type="submit" variant="contained" color="primary">Start Document</Button>
-            </div>
-          </form>
+              <div className='btn start'>
+                <p className='btn start text'>Great! Now let's </p>
+                <Button type="submit" variant="contained" color="secondary">Start A Document</Button>
+              </div>
+            </form>
+
+          </div>
         </div>
       </div>
-      <div className='welcome'>
-        <p>Welcome & Thank you for taking part in this research!<br/>
-        for any questions please visit the Help page or<a href="mailto: isp@gmail.com" className='a welcome'> contact us.</a></p>
-      </div>
+
+      <div className='PDFprev'>
+        PFD preview
+     </div>
     </div>
   );
 }
