@@ -32,7 +32,8 @@ export default function TableRowInputs(props) {
           <TextField
             placeholder={input.isRedacted ? "Insert Redaction Code" : "Enter Text"}
             multiline={true}
-            className={input.isRedacted ? 'redacted' : ''} type="text" value={input.value}
+            className={input.isRedacted ? 'redacted' : ''}
+            type="text" value={input.value}
             variant="outlined"
             onChange={(ev) => handleChange(row.id, (computeColKey(input)), 
                 ev.target.value)} />

@@ -248,7 +248,10 @@ function TurkDocumentForm(props) {
         (field.id === fieldId) ? (
           {
             ...field,
-            table_fields: resp.data,
+            table_fields: resp.data.map(tableField => ({
+              ...tableField,
+              isRedacted: tableField.is_redacted,
+            })),
           }) : field));
       setFields(newFields);
       setInputRows([]);
@@ -273,7 +276,16 @@ function TurkDocumentForm(props) {
           serial_number: startSerialNumber,
         } 
       );
-      setFields([...fields, resp.data]);
+      const parsedTableFields = resp.data.table_fields.map(tableField => ({
+        ...tableField,
+        isRedacted: tableField.is_redacted,
+      }));
+
+      const newTableField = {
+        ...resp.data,
+        table_fields: parsedTableFields,
+      };
+      setFields([...fields, newTableField]);
       setInputRows([]);
       setIsEditing(false);
       setNumColumns(0);
