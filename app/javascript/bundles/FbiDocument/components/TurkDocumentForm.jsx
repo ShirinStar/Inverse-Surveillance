@@ -53,8 +53,6 @@ function TurkDocumentForm(props) {
   })
   const [fields, setFields] = useState(parsedFields || []);
 
-  const currentSerialNumber = fields.length > 0 ? fields[fields.length - 1].serial_number : ''
-  const [startSerialNumber, setStartSerialNumber] = useState(currentSerialNumber)
   const [labelValue, setLabelValue] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [modalSerialOpen, setModalSerialOpen] = useState(false);
@@ -62,6 +60,12 @@ function TurkDocumentForm(props) {
   const [textBody, setTextBody] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [showHelpModal, setHelpModal] = useState(false);
+
+
+  // determine current serial number
+  const currentPageFields = fields.filter(field => field.page_number === pageNumber)
+  const currentSerialNumber = currentPageFields.length > 0 ? currentPageFields[currentPageFields.length - 1].serial_number : ''
+  const [startSerialNumber, setStartSerialNumber] = useState(currentSerialNumber)
 
   // table editor state
   const [numColumns, setNumColumns] = useState(0);
@@ -326,25 +330,43 @@ function TurkDocumentForm(props) {
   const hasNextPage = _.some(fields, field => field.page_number > pageNumber);
   const hasPrevPage = _.some(fields, field => field.page_number < pageNumber);
 
+  function refreshSerialNumber(newPageNumber) {
+    const newPageField = fields.find(field => field.page_number === newPageNumber);
+    setStartSerialNumber(newPageField.serial_number);
+  }
+
   function renderPageNavButtons() {
     return (
       <>
-      {pageNumber === pageCount && (
-        <Button
-          variant="contained"
-          type="submit"
-          onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
-      )}
-      {hasNextPage && (
-        <Button
-          variant="contained"
-          onClick={() => setPageNumber(pageNumber + 1)}>Go To Next Page</Button>)
-      }
-      {hasPrevPage && (
-        <Button
-          variant="contained"
-          onClick={() => setPageNumber(pageNumber - 1)}>Go To Previous Page</Button>)
+        {pageNumber === pageCount && (
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
+        )}
+        {hasNextPage && (
+          <Button
+            variant="contained"
+            onClick={() => {
+              setPageNumber(pageNumber + 1)
+              refreshSerialNumber(pageNumber + 1);
+            }}>Go To Next Page</Button>)
         }
+        {hasPrevPage && (
+          <Button
+            variant="contained"
+            onClick={() => {
+              setPageNumber(pageNumber - 1)
+              refreshSerialNumber(pageNumber - 1);
+            }}>Go To Previous Page</Button>
+        )}
+        {!hasNextPage && pageNumber !== pageCount && (
+          <Button
+            variant="contained"
+            disabled={!hasFields}
+            onClick={() => setModalSerialOpen(true)}
+          > + Add New Page</Button>
+        )}
       </>
     );
   }

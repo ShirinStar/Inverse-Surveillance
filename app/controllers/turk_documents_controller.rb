@@ -36,17 +36,17 @@ class TurkDocumentsController < ApplicationController
     end
     doc = DigitalDocument.create!(
       document_date: doc_params[:document_date],
-      document_id: doc_params[:docId]
+      document_id: doc_params[:docId],
+      start_serial_number: doc_params[:startPageSerialNumber]
     )
     doc.document.update!(status: 'In Progress')
 
     render json: doc
-
   end
 
   private
   def doc_params
-    params.permit(:document_date, :docId)
+    params.permit(:document_date, :docId, :startPageSerialNumber)
   end
 
   def complete_params
