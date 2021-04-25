@@ -147,11 +147,15 @@ function FieldRow(props) {
           setEditorView={null} />
       );
     } else {
-      return (<TableRow 
+      return (
+      <>
+      <Button color="primary" className="table-row-edit-button"><Edit>Edit Field</Edit></Button>
+      <TableRow 
         fieldEdit={fieldEdit}
         isEditing={isEditing}
         field={field} 
       /> 
+      </>
       );
     }
   }
@@ -159,7 +163,7 @@ function FieldRow(props) {
   function renderInputRow() {
     return (
       <>
-        {renderEditButton()}
+        {!isEditing && renderEditButton()}
         {isEditing && fieldEdit && fieldEdit.id === field.id ? (
           renderFieldForm())
           : (

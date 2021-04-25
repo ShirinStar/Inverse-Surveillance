@@ -98,28 +98,29 @@ function TableView(props) {
     <>
       <div className="edit-header">
         <p className="table-title">Table Edit Mode</p>
-        {isEditing && <Button onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>}
-        <div>
+        <div className="table-edit-section">
+        {isEditing ? (
+              <Button
+                color='secondary'
+                variant="contained"
+                size='small'
+                onClick={cancel}
+                value="Cancel">
+                Undo Changes
+              </Button>
+          ): (
+          <Button onClick={setEditorView}><Close></Close></Button>)}
+        {isEditing && <Button  
+          variant="contained"
+          size='small' onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>}
           {numColumns > 0 && !isEditing && (
             <Button 
               color="primary"
               variant="contained"
               onClick={() => saveTableField(inputRows)}>Save Table</Button>
           )}
-          {isEditing ? (
-            <div className='btn-unsave'>
-              <Button
-                color='secondary'
-                size='small'
-                onClick={cancel}
-                value="Cancel">
-                Undo Changes
-              </Button>
-            </div>
-          ): (
-          <Button onClick={setEditorView}><Close></Close></Button>)}
+          </div>
         </div>
-      </div>
       {renderSelect()}
       {inputRows.map(row => <TableRowInputs 
         className="table-row"

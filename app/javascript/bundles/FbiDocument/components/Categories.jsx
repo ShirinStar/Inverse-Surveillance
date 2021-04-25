@@ -220,7 +220,7 @@ export default function Categories(props) {
       return (
         <div className='document-instruction-div'>
           <p className='document-instruction'>
-            <span className='doc-type'>You received a document that usually contains Date, a text section and a table.</span>
+            <span className='doc-type'>You received a document that usually contains Date, a Text section and a Table.</span>
             <Tooltip title={
               <React.Fragment>
                 <img className='hover-image instruction' src={PPL} />

@@ -301,6 +301,7 @@ a:hover {
   border: 1px solid black;
   padding: 25px;
   margin-bottom: 20px;
+  line-height: 1.6rem;
 }
 
 .label-view {
@@ -348,4 +349,28 @@ a:hover {
   /* border: 4px solid #C8FA22; */
   background: rgb(210, 210, 210);
   min-height: 1100px;
+}
+
+.table-row-edit-button {
+  float: right;
+}
+
+.tableform {
+  margin-bottom: 15px;
+}
+
+.tableform td, .tableform th {
+  padding: 20px 20px;
+}
+
+.edit-header {
+  display: flex;
+}
+
+.section-edit {
+  display: flex;
+}
+
+.section-edit Button, .table-edit-section Button {
+  margin-right: 10px;
 }

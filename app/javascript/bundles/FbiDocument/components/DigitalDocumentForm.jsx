@@ -44,7 +44,7 @@ export default function DigitalDocumentForm(props) {
           </div>
           <div className='welcome'>
             <p>Welcome & Thank you for taking part in this research.<br />
-            Please visit the <span className='welcome span'>Help page</span> an the top right corner of the page.</p>
+            Please visit the <span className='welcome span'>Help page</span> at the top right corner of the page.</p>
           </div>
         </div>
         <div className='init-form'>

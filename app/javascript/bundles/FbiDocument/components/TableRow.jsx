@@ -10,7 +10,7 @@ export default function TableRow({ field, fieldEdit, isEditing }) {
   function renderTablePreview() {
     return (
       <>
-        <table>
+        <table className='tableform'>
           <thead>
             <tr>
               {headers.map((input, idx) => (

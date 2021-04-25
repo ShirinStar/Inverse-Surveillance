@@ -32,24 +32,24 @@ export default function Editor(props) {
               value={labelValue}
               setValue={setLabelValue} />
           )} />
-        <div className='btn-edit'>
-        {isEditing &&
-        <div className='btn-unsave'>
-        <Button
-          color='secondary'
-          size='small'
-          onClick={cancel}
-          value="Cancel">
-          Undo Changes
-        </Button>
-        </div>
+        <div className='section-edit'>
+          <div>
+          {isEditing &&
+              <Button
+                color='secondary'
+                variant="contained"
+                size='small'
+                onClick={cancel}
+                value="Cancel">
+                Undo Changes
+            </Button>
           }
           {labelValue === null && documentCategory === TABLE_DOCUMENT_CATEGORY ? (
-            <Button 
+            <Button
               variant="contained"
               size="medium"
-              onClick={() => setTableView() }>Click to Add Table</Button>
-          ): (
+              onClick={() => setTableView()}>Click to Add Table</Button>
+          ) : (
 
             <Button
               variant="contained"
@@ -59,6 +59,7 @@ export default function Editor(props) {
               Save Field
             </Button>
           )}
+        </div>
         </div>
       </div>
       <br /><br />
