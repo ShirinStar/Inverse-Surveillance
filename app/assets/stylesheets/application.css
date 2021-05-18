@@ -175,6 +175,15 @@ a:hover {
   background-color: #C8FA22;  
 }
 
+.mainAlign {
+  text-align: center;
+}
+
+.comeback {
+  display: inline-block;
+  text-align: center;
+}
+
 /* Date document*/
 
 .startDoc {

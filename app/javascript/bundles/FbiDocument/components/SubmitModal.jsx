@@ -63,7 +63,7 @@ export default function SubmitModal(props) {
       style={{display:'flex',alignItems:'center',justifyContent:'center'}}
       >
       <Card className={classes.root}>
-        <Button className='btn close' onClick={handleClose}><Close ></Close></Button>
+        <Button className='btn close' onClick={handleClose}><Close></Close></Button>
         <br/>
         <CardContent>
           <div >
