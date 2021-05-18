@@ -156,13 +156,20 @@
   display: flex;
 }
 
-// .MuiAutocomplete-input {
-//   margin-top: 10px !important;
-// }
+.close-editor-table {
+  line-height: 1.8rem;
+  margin-bottom: 50px;
+  border-bottom: 2px solid #E0E0DA;
+}
 
-// .MuiInputBase-input {
-//   padding: 30px 0 7px !important;
-// }
+.editTablePencil {
+  margin-right: 15px;
+  display: inline-flex;
+}
+
+.showTableBeforeEdit {
+  display: flex;
+}
 
 @media (max-width: 1500px) {
   .document-head-section {

@@ -51,7 +51,7 @@ function FieldRow(props) {
 
     if (field.field_type === 'INPUT') {
 
-      setLabelValue({label: field.label});
+      setLabelValue({ label: field.label });
       setTextBody(field.raw_html);
       const fieldType = field.field_type;
       const tableFields = field.table_fields;
@@ -69,7 +69,7 @@ function FieldRow(props) {
       const columnNum = (inputFields.length > 0 && inputFields[0].inputs.length > 0) ? inputFields[0].inputs.length : 0;
       setNumColumns(columnNum);
       setRowCounter(inputFields.length - 1);
-      
+
       props.beginUpdate({
         field: {
           ...field,
@@ -88,11 +88,11 @@ function FieldRow(props) {
       <div className='btn-edit'>
         <Button
           color="primary"
-          onClick={ () => {
+          onClick={() => {
             if (fieldEdit && field && (fieldEdit.id === field.id)) {
               return;
             }
-            setLabelValue({label: field.label});
+            setLabelValue({ label: field.label });
             setTextBody(field.raw_html);
             props.beginUpdate({
               field,
@@ -100,7 +100,10 @@ function FieldRow(props) {
               textBody: field.raw_html,
               textLabel: field.label,
             });
-            setIsEditing(true)}}><Edit></Edit>  </Button>
+            setIsEditing(true)
+          }}>
+            <Edit></Edit>
+          </Button>
       </div>
     );
   }
@@ -124,7 +127,7 @@ function FieldRow(props) {
         pageNumber={pageNumber}
         textBody={textBody}
         isEditing={isEditing}
-        fieldType={!!field ? field.field_type : null }
+        fieldType={!!field ? field.field_type : null}
         setTextBody={setTextBody} />
     )
   }
@@ -148,14 +151,18 @@ function FieldRow(props) {
       );
     } else {
       return (
-      <>
-      <Button color="primary" className="table-row-edit-button"><Edit>Edit Field</Edit></Button>
-      <TableRow 
-        fieldEdit={fieldEdit}
-        isEditing={isEditing}
-        field={field} 
-      /> 
-      </>
+        <div className='showTableBeforeEdit'>
+          <div className='editTablePencil'>
+          <Button color="primary" className="table-row-edit-button"><Edit></Edit></Button>
+          </div>
+          <div className='editTableShow'>
+          <TableRow
+            fieldEdit={fieldEdit}
+            isEditing={isEditing}
+            field={field}
+          />
+          </div>
+        </div>
       );
     }
   }
@@ -169,7 +176,7 @@ function FieldRow(props) {
           : (
             <>
               <p className='filled-label'>{label}:</p>
-              <p className='filled-text' dangerouslySetInnerHTML={{ __html: rawHtml  }}></p>
+              <p className='filled-text' dangerouslySetInnerHTML={{ __html: rawHtml }}></p>
             </>
           )}
       </>
@@ -177,13 +184,13 @@ function FieldRow(props) {
   }
 
   return (
-    <div className='close-editor' onClick={handleBeginEdit}>
-      { field.field_type == 'INPUT' ? renderInputRow() : renderTableRow() }
+    <div className={field.field_type == 'INPUT' ? 'close-editor': 'close-editor-table'} onClick={handleBeginEdit}>
+      { field.field_type == 'INPUT' ? renderInputRow() : renderTableRow()}
     </div>
   );
 }
 
-const beginUpdate = ({id, field, textBody, textLabel, fieldType, tableFields}) => ({
+const beginUpdate = ({ id, field, textBody, textLabel, fieldType, tableFields }) => ({
   type: 'BEGIN_UPDATE',
   payload: {
     id,

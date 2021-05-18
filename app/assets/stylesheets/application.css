@@ -144,15 +144,8 @@ td {
 
 .field-editor {
   height: 300px;
+  min-width: 700px;
 }
-
-/* .MuiInput-formControl {
-  margin-top: 0 !important;
-} */
-
-/*.MuiInputLabel-formControl {
-  transform: translate(0, 10px) scale(1) !important;
-} */
 
 .hover-image{
   height: 250px;
@@ -318,7 +311,6 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
-  /* background-color: rgb(232, 232, 232); */
   padding: 50px;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -390,7 +382,6 @@ a:hover {
   width: 100vw;
   overflow: hidden;
   z-index: 10;
-  /* border: 4px solid #C8FA22; */
   background: rgb(210, 210, 210);
   min-height: 1100px;
 }
@@ -412,7 +403,7 @@ a:hover {
 }
 
 .section-edit {
-  display: flex;
+  margin-top: 10px;
 }
 
 .section-edit Button, .table-edit-section Button {

@@ -38,7 +38,7 @@ export default function Editor(props) {
               <Button
                 color='secondary'
                 variant="contained"
-                size='small'
+                size='medium'
                 onClick={cancel}
                 value="Cancel">
                 Undo Changes
@@ -46,8 +46,8 @@ export default function Editor(props) {
           }
           {labelValue === null && documentCategory === TABLE_DOCUMENT_CATEGORY ? (
             <Button
-              variant="contained"
-              size="medium"
+            variant="outlined"
+              size="large"
               onClick={() => setTableView()}>Click to Add Table</Button>
           ) : (
 

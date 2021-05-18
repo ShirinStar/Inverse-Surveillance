@@ -110,7 +110,7 @@ function TableView(props) {
               <Button
                 color='secondary'
                 variant="contained"
-                size='small'
+                size='medium'
                 onClick={cancel}
                 value="Cancel">
                 Undo Changes
@@ -119,7 +119,7 @@ function TableView(props) {
           <Button onClick={setEditorView}><Close></Close></Button>)}
             {isEditing && <Button  
           variant="contained"
-          size='small' onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>}
+          size='medium' onClick={() => handleUpdate({fieldId: fieldEdit.id})}>Update</Button>}
           </div>
         </div>
       {renderSelect()}
