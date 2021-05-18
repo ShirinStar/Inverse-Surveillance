@@ -72,12 +72,13 @@ export default function SerialNumberModal(props) {
               <p className='sureTwo'>If yes, please enter the new page Serial Number: </p>
               <form className='DSN-form' onSubmit={handleSubmit(onSubmit)}>
                 <p className='form-labels'>New Page Serial Number </p>
-                <Tooltip title={
+                <Tooltip interactive leaveDelay={600}
+                title={
                   <React.Fragment>
                     <img className='hover-image' src={DNS} />
                   </React.Fragment>
                 }>
-                  <HelpOutline fontSize="small"></HelpOutline>
+                  <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
                 </Tooltip>
                 <br />
                 <TextField required id="standard-basic" inputRef={register} name="pageSerialNumber" label="New Page Serial Number" />

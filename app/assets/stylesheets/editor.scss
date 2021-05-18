@@ -41,6 +41,11 @@ body {
   line-height: 1.8rem;
 }
 
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(data-text);
+  color: rgb(144, 144, 144);
+}
+
 .field-editor-controls {
   display: flex;
   justify-content: space-between;
@@ -53,7 +58,8 @@ body {
 .btn-edit {
   display: flex;
   float: left;
-
+  margin-top: -15px;
+  margin-right: 10px;
 }
 
 .btn-unsave {

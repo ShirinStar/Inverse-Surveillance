@@ -100,7 +100,8 @@ function insertRedaction({ area, code, range, redactionSize }) {
             onInput={() => onChange(editableDiv.current)}
             className="editable-div"
             ref={editableDiv}
-            contentEditable="true">
+            contentEditable="true"
+            data-text="Enter text here">
           </div>
         </div>
       </>

@@ -40,34 +40,33 @@ export default function DigitalDocumentForm(props) {
       <div className='leftSection'>
         <div className='header initDocument'>
           <div className='inner-header'>
-            <h1>Process a Document</h1>
+            <h1 className='processtitle'>Process a Document</h1>
           </div>
           <div className='welcome'>
-            <p>Welcome & Thank you for taking part in this research.<br />
+            <p>Welcome & thank you for taking part in this research.<br />
             Please visit the <span className='welcome span'>Help page</span> at the top right corner of the page.</p>
           </div>
         </div>
         <div className='init-form'>
           <div className='date-form'>
-         
-              <p className='start-title'>To start
-             <a className='start-open' target="_blank" href={props.docUrl} onClick={() => setOpenDoc(true)}>Click to Open & Download the Original Document</a>
-              </p>
-       
+
+            <p className='form-labels first'><span className='number'>1.</span>
+              <a className='start-open' target="_blank" href={props.docUrl} onClick={() => setOpenDoc(true)}>Click to open & download the original document</a>
+            </p>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='first-form-fields'>
                 {openDoc
                   ?
                   <div className='initFields'>
-                    <p className='form-labels'>Document date</p>
-                    <Tooltip
+                    <p className='form-labels'><span className='number'>2.</span> Fill document date</p>
+                    <Tooltip interactive leaveDelay={600}
                       title={
                         <React.Fragment>
                           <img className='hover-image' src={DocumentDate} />
                         </React.Fragment>
                       }>
-                      <HelpOutline fontSize="small"></HelpOutline>
+                      <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
                     </Tooltip>
 
                     <TextField
@@ -86,32 +85,34 @@ export default function DigitalDocumentForm(props) {
                   :
                   ''
                 }
-                { docDate && (
-                <div className='initFields'>
-                  <p className='form-labels'>Page Serial Number</p>
-                  <Tooltip title={
-                    <React.Fragment>
-                      <img className='hover-image' src={DNS} />
-                    </React.Fragment>
-                  }>
-                    <HelpOutline fontSize="small"></HelpOutline>
-                  </Tooltip>
-
-                  <TextField
-                    required
-                    id="standard-basic"
-                    label="Document serial number"
-                    name="startPageSerialNumber"
-                    inputRef={register} />
-                </div>
+                {docDate && (
+                  <div className='initFields'>
+                    <p className='form-labels three'><span className='number'>3.</span> Fill page Serial Number</p>
+                    <Tooltip interactive leaveDelay={600}
+                      title={
+                        <React.Fragment>
+                          <img className='hover-image' src={DNS} />
+                        </React.Fragment>
+                      }>
+                      <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+                    </Tooltip>
+                    <div className='labelAlign'>
+                      <TextField
+                        required
+                        id="standard-basic"
+                        label="Document serial number"
+                        name="startPageSerialNumber"
+                        inputRef={register} />
+                    </div>
+                  </div>
                 )}
               </div>
               {startPageSerialNumber && (
-              <div className='btn start'>
-                <p className='btn start text'>Great! Now let's </p>
-                <Button type="submit" variant="contained" color="secondary">Start A Document</Button>
-              </div>
-                )}
+                <div className='btn start'>
+                  <p className='btn start text'><span className='number'>4. </span>Great! Now let's </p>
+                  <Button type="submit" variant="outlined" color="secondary">Start a Document</Button>
+                </div>
+              )}
 
             </form>
           </div>
@@ -120,7 +121,7 @@ export default function DigitalDocumentForm(props) {
 
       <div className='PDFprev'>
         <embed src={props.docUrl} width="450px" height="550px" />
-     </div>
+      </div>
     </div>
   );
 }

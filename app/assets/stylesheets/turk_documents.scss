@@ -28,7 +28,7 @@
 }
 
 .field-container{
-  border: 1px solid #aaa;
+  border: 1px solid black;
   border-bottom: none;
   width: 900px;
   min-height: 800px;
@@ -39,9 +39,33 @@
   box-shadow: 5px 2px rgba(221, 221, 221, 0.3);
 }
 
+.titlepageheader {
+  padding-bottom: 20px;
+}
+
+.fbiPageTitle {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 42px;
+  text-align: center;
+}
+
+.dotDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dot {
+  height: 35px;
+  width: 35px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 .filled-label {
   font-weight: 600;
   text-transform: capitalize;
+  margin-right: 20px;
 }
 
 .filled-text {
@@ -71,6 +95,15 @@
 
 .orginal-link:hover {
   color: black;
+}
+
+.tooltipDiv {
+  color: white;
+  display: inline-block;
+}
+
+.MuiButton-textSecondary {
+  display: contents !important;
 }
 
 .document-info {
@@ -120,11 +153,16 @@
   line-height: 1.8rem;
   margin-bottom: 50px;
   border-bottom: 2px solid #E0E0DA;
+  display: flex;
 }
 
-.btn-edit {
-  float: right;
-}
+// .MuiAutocomplete-input {
+//   margin-top: 10px !important;
+// }
+
+// .MuiInputBase-input {
+//   padding: 30px 0 7px !important;
+// }
 
 @media (max-width: 1500px) {
   .document-head-section {

@@ -270,11 +270,11 @@ function TurkDocumentForm(props) {
     try {
       const resp = await axios.post(
         `/table_fields`, {
-          digital_document_id: digitalDocument.id,
-          table_fields: postData.tableData,
-          page_number: postData.page_number,
-          serial_number: startSerialNumber,
-        } 
+        digital_document_id: digitalDocument.id,
+        table_fields: postData.tableData,
+        page_number: postData.page_number,
+        serial_number: startSerialNumber,
+      }
       );
       const parsedTableFields = resp.data.table_fields.map(tableField => ({
         ...tableField,
@@ -349,25 +349,27 @@ function TurkDocumentForm(props) {
             onClick={() => {
               setPageNumber(pageNumber - 1)
               refreshSerialNumber(pageNumber - 1);
-            }}><ArrowBackIosIcon size="small" color="primary"></ArrowBackIosIcon></Button>
+            }}><ArrowBackIosIcon size="small" color="primary"></ArrowBackIosIcon>
+            <br /><span className='pageArrow'>page {pageNumber - 1}</span></Button>
         )}
-          {hasNextPage && (
+        {hasNextPage && (
           <Button
             variant="outlined"
             onClick={() => {
               setPageNumber(pageNumber + 1)
               refreshSerialNumber(pageNumber + 1);
-            }}><ArrowForwardIosIcon size="small" color="primary"></ArrowForwardIosIcon></Button>)
+            }}><span className='pageArrow'>page {pageNumber + 1}</span><ArrowForwardIosIcon size="small" color="primary"></ArrowForwardIosIcon>
+            <br /></Button>)
         }
-         
-         {!hasNextPage && (pageNumber !== pageCount) && (
+
+        {!hasNextPage && (pageNumber !== pageCount) && (
           <Button
             variant="contained"
             disabled={!hasFields}
             onClick={() => setModalSerialOpen(true)}
           > + Add New Page</Button>
         )}
-         {pageNumber === pageCount && (
+        {pageNumber === pageCount && (
           <Button
             variant="contained"
             type="submit"
@@ -412,36 +414,44 @@ function TurkDocumentForm(props) {
             />
             <div className='adding-field'>
               <div className="field-container">
+
+                <div className='titlepageheader'>
+                  <div className='dotDiv'>
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                  </div>
+                  <h1 className='fbiPageTitle'>FEDERAL BUREAU OF INVESTIGATION</h1>
+                </div>
                 {_.sortBy(fields, field => new Date(field.created_at))
-                    .filter(field => field.page_number === pageNumber)
-                    .map(field => (
-                  <FieldRow key={field.id}
-                    handleTableUpdate={updateTableField}
-                    cancel={resetEditor}
-                    cancelTableUpdate={resetTableEditor}
-                    updateField={updateField}
-                    control={control}
-                    handleSubmit={handleSubmit}
-                    setValue={setValue}
-                    reset={reset}
-                    labelValue={labelValue}
-                    setLabelValue={setLabelValue}
-                    existingFields={existingFields}
-                    saveField={updateField}
-                    setStartSerialNumber={setStartSerialNumber}
-                    pageNumber={pageNumber}
-                    textBody={textBody}
-                    setTextBody={setTextBody}
-                    isEditing={isEditing}
-                    setIsEditing={setIsEditing}
-                    numColumns={numColumns}
-                    setNumColumns={setNumColumns}
-                    inputRows={inputRows}
-                    setInputRows={setInputRows}
-                    rowCounter={rowCounter}
-                    setRowCounter={setRowCounter}
-                    field={field} />
-                ))}
+                  .filter(field => field.page_number === pageNumber)
+                  .map(field => (
+                    <FieldRow key={field.id}
+                      handleTableUpdate={updateTableField}
+                      cancel={resetEditor}
+                      cancelTableUpdate={resetTableEditor}
+                      updateField={updateField}
+                      control={control}
+                      handleSubmit={handleSubmit}
+                      setValue={setValue}
+                      reset={reset}
+                      labelValue={labelValue}
+                      setLabelValue={setLabelValue}
+                      existingFields={existingFields}
+                      saveField={updateField}
+                      setStartSerialNumber={setStartSerialNumber}
+                      pageNumber={pageNumber}
+                      textBody={textBody}
+                      setTextBody={setTextBody}
+                      isEditing={isEditing}
+                      setIsEditing={setIsEditing}
+                      numColumns={numColumns}
+                      setNumColumns={setNumColumns}
+                      inputRows={inputRows}
+                      setInputRows={setInputRows}
+                      rowCounter={rowCounter}
+                      setRowCounter={setRowCounter}
+                      field={field} />
+                  ))}
                 {!isEditing && renderForm()}
                 <SerialNumberModal
                   open={modalSerialOpen}

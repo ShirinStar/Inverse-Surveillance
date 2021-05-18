@@ -1,6 +1,8 @@
 import React from 'react';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
+
 import transcript from 'images/302c.png';
 import CORR from 'images/CORR.png';
 import GEN from 'images/GEN.png';
@@ -11,6 +13,7 @@ import markedSample from 'images/markedSample.png';
 import markedFields from 'images/markedFields.jpg';
 import markedRedCode from 'images/markedRedCode.png';
 
+
 export default function Categories(props) {
   const { docCat } = props
 
@@ -19,42 +22,46 @@ export default function Categories(props) {
       <div className='document-instruction-div'>
         <p className='document-instruction'>
           <span className='doc-type'>You received a document that usually contains Date, a main section and a buttom section.</span>
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={transcript} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={transcript} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
           <br />
           <span className='instruction-start'>How to start?</span> <br />
           1• Please type or select a section lable.
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedSample} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedSample} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
 
           2• Then, fill the text field that will appear below
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedFields} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedFields} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip> <br />
 
         3• When there is a redaction, fill the code when asked
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedRedCode} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedRedCode} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
         4• Please do that for each new field you're adding.<br />
@@ -72,41 +79,45 @@ export default function Categories(props) {
       <div className='document-instruction-div'>
         <p className='document-instruction'>
           <span className='doc-type'> Your type of document is letter format.</span>
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={CORR} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={CORR} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'> <HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
           <br />
 
-        <span className='instruction-start'>How to start?</span> <br />
+          <span className='instruction-start'>How to start?</span> <br />
         1• Please type or select a section lable.
-        <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedSample} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+        <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedSample} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
         2• Then, fill the text field that will appear below
-        <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedFields} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+        <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedFields} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip> <br />
         3• When there is a redaction, fill the code when asked
-        <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedRedCode} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+        <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedRedCode} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
         4• Please do that for each new field you're adding.<br />
@@ -124,41 +135,45 @@ export default function Categories(props) {
       <div className='document-instruction-div'>
         <p className='document-instruction'>
           <span className='doc-type'>  Your type of document containd labels and fields.</span>
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={GEN} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={GEN} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
           <br />
 
           <span className='instruction-start'>How to start?</span> <br />
           1• Please type or select a section lable.
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedSample} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedSample} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
           2• Then, fill the text field that will appear below
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedFields} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedFields} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip> <br />
          3• When there is a redaction, fill the code when asked
-         <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedRedCode} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+         <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedRedCode} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
           4• Please do that for each new field you're adding.<br />
@@ -173,41 +188,45 @@ export default function Categories(props) {
       <div className='document-instruction-div'>
         <p className='document-instruction'>
           <span className='doc-type'> Your type of document containd labels and fields. </span>
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={Memo} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={Memo} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'> <HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
           <br />
 
           <span className='instruction-start'>How to start?</span> <br />
         1• Please type or select a section lable.
-         <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedSample} />
-            </React.Fragment>
-           }>
-            <HelpOutline fontSize="small"></HelpOutline>
+        <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedSample} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
         2• Then, fill the text field that will appear below
-         <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedFields} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+        <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedFields} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip> <br />
         3• When there is a redaction, fill the code when asked
-         <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={markedRedCode} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+        <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={markedRedCode} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
           <br />
         4• Please do that for each new field you're adding.<br />
@@ -217,67 +236,72 @@ export default function Categories(props) {
       </div>
     )
   } else if (docCat == 'ORGS-PPL') {
-      return (
-        <div className='document-instruction-div'>
-          <p className='document-instruction'>
-            <span className='doc-type'>You received a document that usually contains Date, a Text section and a Table.</span>
-            <Tooltip title={
+    return (
+      <div className='document-instruction-div'>
+        <p className='document-instruction'>
+          <span className='doc-type'>You received a document that usually contains Date, a Text section and a Table.</span>
+          <Tooltip interactive leaveDelay={600}
+            title={
               <React.Fragment>
                 <img className='hover-image instruction' src={PPL} />
               </React.Fragment>
             }>
-              <HelpOutline fontSize="small"></HelpOutline>
-            </Tooltip>
-            <br />
-            <br />
-            <span className='instruction-start'>How to start?</span> <br />
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+          </Tooltip>
+          <br />
+          <br />
+          <span className='instruction-start'>How to start?</span> <br />
             1• Please type or select a section lable.
-            <Tooltip title={
+            <Tooltip interactive leaveDelay={600}
+            title={
               <React.Fragment>
                 <img className='hover-image instruction' src={markedSample} />
               </React.Fragment>
             }>
-              <HelpOutline fontSize="small"></HelpOutline>
-            </Tooltip>
-            <br />
-  
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+          </Tooltip>
+          <br />
+
             2• Then, fill the text field that will appear below
-            <Tooltip title={
+            <Tooltip interactive leaveDelay={600}
+            title={
               <React.Fragment>
                 <img className='hover-image instruction' src={markedFields} />
               </React.Fragment>
             }>
-              <HelpOutline fontSize="small"></HelpOutline>
-            </Tooltip> <br />
-  
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+          </Tooltip> <br />
+
           3• When there is a redaction, fill the code when asked
-            <Tooltip title={
+          <Tooltip interactive leaveDelay={600}
+            title={
               <React.Fragment>
                 <img className='hover-image instruction' src={markedRedCode} />
               </React.Fragment>
             }>
-              <HelpOutline fontSize="small"></HelpOutline>
-            </Tooltip>
-            <br />
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+          </Tooltip>
+          <br />
           4• Please do that for each new field you're adding.<br />
           5• For the table section, please click the 'add table' button and select number of columns.
-          <Tooltip title={
-            <React.Fragment>
-              <img className='hover-image instruction' src={Table} />
-            </React.Fragment>
-          }>
-            <HelpOutline fontSize="small"></HelpOutline>
+          <Tooltip interactive leaveDelay={600}
+            title={
+              <React.Fragment>
+                <img className='hover-image instruction' src={Table} />
+              </React.Fragment>
+            }>
+            <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
           </Tooltip>
-           <br /> Please add as much raws as needed and mark any redacted raws with attached redaction btn above each cell.
+          <br /> Please add as much raws as needed and mark any redacted raws with attached redaction btn above each cell.
           6• Sometimes, your document may contain addional fields before and after, please
             include them as well.<br />
           7• Before starting, please make sure to visit the help page (at the top right).
         </p>
-        </div>
-      )
+      </div>
+    )
   }
   else {
-    return 'the end'
+    return ''
   }
 
 }

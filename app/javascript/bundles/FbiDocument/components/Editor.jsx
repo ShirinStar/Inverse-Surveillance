@@ -57,7 +57,7 @@ export default function Editor(props) {
             <Button
               variant="contained"
               disabled={labelValue === null}
-              size='small'
+              size="medium"
               type="submit"
               value="Save">
               Save Field

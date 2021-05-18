@@ -14,7 +14,7 @@ export default function InstructionInfo(props) {
   return (
     <>
       <div className='document-titles'>
-        <h2>Document Form</h2>
+        <h2 className='instructionTitle'>Document Form</h2>
         <p >
           <a className='orginal-link' target="_blank" href={docUrl}>Link of the Original Document</a>
         </p>

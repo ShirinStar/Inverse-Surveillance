@@ -52,10 +52,12 @@ export default function RedactionModal(props) {
   const classes = useStyles();
   const [ modalStyle ] = useState(getModalStyle);
   const [ redactionCode, setRedactionCode ] = useState('');
+  const [hasCode, setHasCode] = useState(false)
 
   const handleChange = (ev) => {
     const { value } = ev.target;
     setRedactionCode(value);
+    setHasCode(true)
   }
 
   return (
@@ -76,27 +78,32 @@ export default function RedactionModal(props) {
         <Button className='btn close' onClick={handleClose}><Close ></Close></Button>
         <CardContent>
           <TextField 
+            required
             onChange={handleChange}
             value={redactionCode}
             name="redactionCode" 
             autoFocus
             label="Redaction code"/>
-             <Tooltip title={
+             <Tooltip interactive leaveDelay={600}
+              title={
                   <React.Fragment>
                     <img className='hover-image instruction' src={markedRedCode} />
                   </React.Fragment>
                 }>
-                  <HelpOutline fontSize="small"></HelpOutline>
+                 <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
                 </Tooltip>
             <br/>
             <br/>
+            { hasCode ?
           <Button className='btn saveDSN'
             onClick={() => {
               onSubmit({ redactionCode, redactionSize, range })
               setRedactionCode('');
+              setHasCode(false)
             }}
             variant="contained"
             type="submit">Save Code</Button>
+          : '' }
         </CardContent>
       </Card>
     </Modal>

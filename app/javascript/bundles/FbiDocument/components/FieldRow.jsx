@@ -100,7 +100,7 @@ function FieldRow(props) {
               textBody: field.raw_html,
               textLabel: field.label,
             });
-            setIsEditing(true)}}><Edit>Edit Field</Edit></Button>
+            setIsEditing(true)}}><Edit></Edit>  </Button>
       </div>
     );
   }
@@ -168,7 +168,7 @@ function FieldRow(props) {
           renderFieldForm())
           : (
             <>
-              <p className='filled-label'>{label}</p>
+              <p className='filled-label'>{label}:</p>
               <p className='filled-text' dangerouslySetInnerHTML={{ __html: rawHtml  }}></p>
             </>
           )}
