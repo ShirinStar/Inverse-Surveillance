@@ -27,6 +27,11 @@
   }
 }
 
+.misscode {
+  font-size: 12px;
+  margin-left: -2px;
+}
+
 .field-container{
   border: 1px solid black;
   border-bottom: none;
@@ -70,6 +75,7 @@
 
 .filled-text {
   margin-bottom: 30px;
+  width: 700px;
 }
 
 .document-head-section {
@@ -154,6 +160,8 @@
   margin-bottom: 50px;
   border-bottom: 2px solid #E0E0DA;
   display: flex;
+  width: 600px;
+  margin-left: -10px;
 }
 
 .close-editor-table {
@@ -179,6 +187,14 @@
   .field-container{ 
     width: 750px;
   }
+
+  .close-editor {
+    width: 600px;
+  }
+
+  .filled-text {
+    width: 600px;
+  }
 }
 
 @media (max-width: 1260px) {
@@ -193,5 +209,14 @@
 
   .orginal-link {
   font-size: 18px;
+  }
+
+  .close-editor {
+    width: 500px;
+  }
+
+
+  .filled-text {
+    width: 500px;
   }
 }

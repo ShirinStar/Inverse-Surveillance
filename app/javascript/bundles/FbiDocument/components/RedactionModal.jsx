@@ -92,6 +92,7 @@ export default function RedactionModal(props) {
                 }>
                  <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
                 </Tooltip>
+                <p className='misscode'>If you can not match a code please write "MISS"</p>
             <br/>
             <br/>
             { hasCode ?
