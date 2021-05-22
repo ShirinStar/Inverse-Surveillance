@@ -163,11 +163,12 @@
 }
 
 .close-editor {
+  overflow: auto;
   line-height: 1.8rem;
   margin-bottom: 50px;
   border-bottom: 2px solid #E0E0DA;
   display: flex;
-  width: 600px;
+  width: 800px;
   margin-left: -10px;
 }
 
@@ -196,7 +197,7 @@
   }
 
   .close-editor {
-    width: 600px;
+    width: 700px;
   }
 
   .filled-text {
@@ -219,7 +220,7 @@
   }
 
   .close-editor {
-    width: 500px;
+    width: 700px;
   }
 
 
