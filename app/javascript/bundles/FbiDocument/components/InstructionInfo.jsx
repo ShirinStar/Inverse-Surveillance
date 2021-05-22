@@ -1,5 +1,6 @@
 import React from 'react';
 import Categories from './Categories';
+import moment from 'moment';
 
 export default function InstructionInfo(props) {
   const {
@@ -10,6 +11,8 @@ export default function InstructionInfo(props) {
     pageCount,
     docCat
   } = props;
+  const date = moment(digitalDocument.document_date);
+  const formattedDate = date.format('MM/DD/YYYY');
 
   return (
     <>
@@ -20,7 +23,7 @@ export default function InstructionInfo(props) {
         </p>
       </div>
       <div className='document-info'>
-        <p><strong>Document Date:</strong> {digitalDocument.document_date}</p>
+        <p><strong>Document Date:</strong> {formattedDate}</p>
         <p><strong>Serial Number:</strong> {startSerialNumber}</p>
         <p className='document-info-last'><strong>Current page:</strong> {pageNumber} / {pageCount}</p>
       </div>
