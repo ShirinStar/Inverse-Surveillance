@@ -11,7 +11,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Close from '@material-ui/icons/Close';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import Tooltip from '@material-ui/core/Tooltip';
-import transcriptRedact from 'images/302_code.png';
+import transcriptRedact from 'images/302c_code.png';
 
 function getModalStyle() {
   const top = 50;

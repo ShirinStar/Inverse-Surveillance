@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import transcript from 'images/302c.png';
 import transcriptLabel from 'images/302c_labels.png';
 import transcriptText from 'images/302c_text.png';
-import transcriptRedact from 'images/302_code.png';
+import transcriptRedact from 'images/302c_code.png';
 
 import CORR from 'images/CORR.png';
 import corrLabel from 'images/CORR_labels.png';
