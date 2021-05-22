@@ -5,8 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import Tooltip from '@material-ui/core/Tooltip';
-import DNS from 'images/DSN.png';
-import DocumentDate from 'images/DocumentDate.png';
+import DNS from 'images/serialNumber.png';
+import DocumentDate from 'images/Date.png';
 
 
 const useStyles = makeStyles((theme) => ({

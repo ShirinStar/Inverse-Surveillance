@@ -11,8 +11,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Close from '@material-ui/icons/Close';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import Tooltip from '@material-ui/core/Tooltip';
-import markedRedCode from 'images/markedRedCode.png';
-
+import transcriptRedact from 'images/302_code.png';
 
 function getModalStyle() {
   const top = 50;
@@ -84,10 +83,10 @@ export default function RedactionModal(props) {
             name="redactionCode" 
             autoFocus
             label="Redaction code"/>
-             <Tooltip interactive leaveDelay={600}
+             <Tooltip leaveDelay={600}
               title={
                   <React.Fragment>
-                    <img className='hover-image instruction' src={markedRedCode} />
+                    <img className='hover-image redact' src={transcriptRedact} />
                   </React.Fragment>
                 }>
                  <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>

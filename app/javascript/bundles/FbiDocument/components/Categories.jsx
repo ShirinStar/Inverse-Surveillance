@@ -4,14 +4,31 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 
 import transcript from 'images/302c.png';
+import transcriptLabel from 'images/302c_labels.png';
+import transcriptText from 'images/302c_text.png';
+import transcriptRedact from 'images/302_code.png';
+
 import CORR from 'images/CORR.png';
+import corrLabel from 'images/CORR_labels.png';
+import corrText from 'images/CORR_text.png';
+import corrRedact from 'images/CORR_code.png';
+
 import GEN from 'images/GEN.png';
+import genLablel from 'images/GEN_labels.png';
+import genText from 'images/GEN_text.png';
+import genRedact from 'images/GEN_code.png';
+
 import Memo from 'images/Memo.png';
+import memoLabel from 'images/Memo_labels.png';
+import memoText from 'images/Memo_text.png';
+import memoRedact from 'images/Memo_code.png';
+
 import PPL from 'images/ppl.png';
-import Table from 'images/Table.png';
-import markedSample from 'images/markedSample.png';
-import markedFields from 'images/markedFields.jpg';
-import markedRedCode from 'images/markedRedCode.png';
+import pplLabel from 'images/ppl_labels.png';
+import pplText from 'images/ppl_text.png';
+import pplRedact from 'images/ppl_code.png';
+import pplTable from 'images/ppl_table.png';
+
 import { FormatItalic } from '@material-ui/icons';
 
 
@@ -39,7 +56,7 @@ export default function Categories(props) {
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedSample} />
+                <img className='hover-image instruction' src={transcriptLabel} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -50,7 +67,7 @@ export default function Categories(props) {
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedFields} />
+                <img className='hover-image instruction' src={transcriptText} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -61,7 +78,7 @@ export default function Categories(props) {
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedRedCode} />
+                <img className='hover-image instruction' src={transcriptRedact} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -96,7 +113,7 @@ export default function Categories(props) {
         <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedSample} />
+                <img className='hover-image instruction' src={corrLabel} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -106,7 +123,7 @@ export default function Categories(props) {
         <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedFields} />
+                <img className='hover-image instruction' src={corrText} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -116,7 +133,7 @@ export default function Categories(props) {
         <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedRedCode} />
+                <img className='hover-image instruction' src={corrRedact} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -151,7 +168,7 @@ export default function Categories(props) {
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedSample} />
+                <img className='hover-image instruction' src={genLablel} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -161,7 +178,7 @@ export default function Categories(props) {
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedFields} />
+                <img className='hover-image instruction' src={genText} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -171,7 +188,7 @@ export default function Categories(props) {
          <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedRedCode} />
+                <img className='hover-image instruction' src={genRedact} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -206,7 +223,7 @@ export default function Categories(props) {
         <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedSample} />
+                <img className='hover-image instruction' src={memoLabel} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -216,7 +233,7 @@ export default function Categories(props) {
         <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedFields} />
+                <img className='hover-image instruction' src={memoText} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -226,7 +243,7 @@ export default function Categories(props) {
         <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedRedCode} />
+                <img className='hover-image instruction' src={memoRedact} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -259,7 +276,7 @@ export default function Categories(props) {
             <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedSample} />
+                <img className='hover-image instruction' src={pplLabel} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -270,7 +287,7 @@ export default function Categories(props) {
             <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedFields} />
+                <img className='hover-image instruction' src={pplText} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -281,7 +298,7 @@ export default function Categories(props) {
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={markedRedCode} />
+                <img className='hover-image instruction' src={pplRedact} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
@@ -292,7 +309,7 @@ export default function Categories(props) {
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
-                <img className='hover-image instruction' src={Table} />
+                <img className='hover-image instruction' src={pplTable} />
               </React.Fragment>
             }>
             <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>

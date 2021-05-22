@@ -151,8 +151,15 @@
 }
 
 .hover-image.instruction {
+  height: 400px;
+  margin-left: 1%;
+  margin-top: 2%;
+}
+
+.hover-image.redact {
   height: 500px;
-  margin-left: 0;
+  margin-left: 25%;
+  margin-top: 20%;
 }
 
 .close-editor {
