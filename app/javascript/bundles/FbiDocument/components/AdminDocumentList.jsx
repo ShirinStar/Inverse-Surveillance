@@ -3,6 +3,7 @@ import Login from './Login'
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import moment from 'moment-timezone';
 
 const STATUSES = {
   COMPLETE: "Complete",
@@ -11,6 +12,11 @@ const STATUSES = {
 };
 
 function ListRow({ doc }) {
+  let date = null;
+  if (doc.completion_date !== null) {
+    date = moment(doc.completion_date)
+    date = date.tz('America/Chicago').format('MMMM Do YYYY, h:mm:ss a')
+  }
   return (
     <tr>
       <td>{doc.category}</td>
@@ -29,6 +35,7 @@ function ListRow({ doc }) {
       </td>
       <td><a href={`/turk_documents/${doc.public_id}/edit`}>Edit</a></td>
       <td>{doc.status}</td>
+      <td>{date}</td>
     </tr>
   )
 }
@@ -77,6 +84,7 @@ export default function AdminDocumentList(props) {
               <th>Digitized Document URL</th>
               <th>Edit form access</th>
               <th>Status</th>
+              <th>Completion Date</th>
             </tr>
           </thead>
           <tbody>
