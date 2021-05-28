@@ -207,6 +207,10 @@
   .filled-text {
     width: 600px;
   }
+  .MuiButton-containedSizeLarge {
+    width: 100% !important;
+    margin-left: 50px !important;
+   }
 }
 
 @media (max-width: 1260px) {
@@ -227,8 +231,12 @@
     width: 700px;
   }
 
-
   .filled-text {
     width: 500px;
   }
+
+  .MuiButton-containedSizeLarge {
+    width: 100% !important;
+    margin-left: 30px !important;
+   }
 }
