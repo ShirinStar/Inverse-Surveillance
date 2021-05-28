@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_234710) do
+ActiveRecord::Schema.define(version: 2021_05_28_025035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_234710) do
     t.string "category"
     t.string "status", default: "Not Started"
     t.uuid "public_id", default: -> { "uuid_generate_v4()" }, null: false
+    t.datetime "completion_date"
   end
 
   create_table "fields", force: :cascade do |t|

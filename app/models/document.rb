@@ -42,6 +42,7 @@ class Document < ApplicationRecord
       digital_doc_url: "/admin/documents/#{id}/approval",
       public_id: public_id,
       status: status,
+      completion_date: completion_date
   }.to_json
   end
 =begin

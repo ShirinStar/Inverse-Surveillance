@@ -5,7 +5,10 @@ class DigitalDocument < ApplicationRecord
   validates_uniqueness_of :document_id
 
   def complete
-    document.update!(status: "Complete")
+    Time.zone = 'Central Time (US & Canada)'
+    now = Time.current
+
+    document.update!(status: "Complete", completion_date: now)
   end
 
 end
