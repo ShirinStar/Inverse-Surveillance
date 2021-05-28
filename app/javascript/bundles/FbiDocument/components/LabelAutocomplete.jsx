@@ -1,4 +1,5 @@
 import React from 'react';
+import capitalize from 'capitalize';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
@@ -19,21 +20,20 @@ export default function LabelAutocomplete(props) {
       onChange={(event, newValue) => {
         if (typeof newValue === 'string') {
           setValue({
-            label: newValue,
+            label: capitalize.words(newValue),
           });
         } else if (newValue && newValue.inputValue) {
           setValue({
-            label: newValue.inputValue
+            label: capitalize.words(newValue.inputValue)
           });
         } else {
-          console.log(newValue);
           setValue(newValue);
         }
       }}
 
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
-        if (params.inputValue !== '' && !_.find(filtered, (label) => label.label === params.inputValue)) {
+        if (params.inputValue !== '' && !_.find(filtered, (label) => label.label.toLowerCase() === params.inputValue.toLowerCase())) {
           filtered.push({
             inputValue: params.inputValue,
             label: `Add "${params.inputValue}"`,
