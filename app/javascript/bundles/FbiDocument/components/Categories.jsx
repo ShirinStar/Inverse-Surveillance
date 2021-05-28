@@ -41,7 +41,7 @@ export default function Categories(props) {
     return (
       <div className='document-instruction-div'>
         <p className='document-instruction'>
-          <span className='doc-type'>You are working on a document that includes three areas that you will need to populate: Date, Main Section and a Footer. </span>
+          <span className='doc-type'>You are working on a document that includes three areas that you will need to populate, such as Date, Main Section and a Footer. </span>
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
@@ -91,7 +91,7 @@ export default function Categories(props) {
         5• Please consider the main body of the document as one long field and give it the label<strong>"main section".</strong><br />
         6• Continue to copy the text and redactions as they appear in the  document, adding new fields as appropriate.<br />
         7• For the footer section, please fill out labels for each row.<br />
-        8•  Sometimes, your document may contain additional, please include these as well and try your best to replicate the document as it appears.
+        8• Sometimes, your document may contain additional, please include these as well and try your best to replicate the document as it appears.
       </p>
       </div>
     )
@@ -154,7 +154,7 @@ export default function Categories(props) {
     return (
       <div className='document-instruction-div'>
         <p className='document-instruction'>
-          <span className='doc-type'> You are working on a document that includes three areas that you will need to populate: labels and fields.</span>
+          <span className='doc-type'> You are working on a document that mostly includes labels and fields.</span>
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
@@ -209,7 +209,7 @@ export default function Categories(props) {
 
       <div className='document-instruction-div'>
         <p className='document-instruction'>
-          <span className='doc-type'> You are working on a document that includes three areas that you will need to populate: labels and fields.</span>
+          <span className='doc-type'> You are working on a document that mostly includes labels and fields.</span>
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>
@@ -263,7 +263,7 @@ export default function Categories(props) {
     return (
       <div className='document-instruction-div'>
         <p className='document-instruction'>
-          <span className='doc-type'>You are working on a document that includes three areas that you will need to populate: Date, a Text section and a Table.</span>
+          <span className='doc-type'>You are working on a document that mostly includes labels, fields and a table section.</span>
           <Tooltip interactive leaveDelay={600}
             title={
               <React.Fragment>

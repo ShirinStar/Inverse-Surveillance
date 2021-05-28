@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import HelpOutline from '@material-ui/icons/HelpOutline';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import Tooltip from '@material-ui/core/Tooltip';
 import DNS from 'images/serialNumber.png';
 import DocumentDate from 'images/Date.png';
@@ -67,7 +68,7 @@ export default function DigitalDocumentForm(props) {
                           <img className='hover-image' src={DocumentDate} />
                         </React.Fragment>
                       }>
-                      <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+                      <Button color='secondary'><LiveHelpIcon fontSize="small"></LiveHelpIcon></Button>
                     </Tooltip>
 
                     <TextField
@@ -89,7 +90,7 @@ export default function DigitalDocumentForm(props) {
                           <img className='hover-image' src={DocumentDateTwo} />
                         </React.Fragment>
                       }>
-                      <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+                      <Button color='secondary'><LiveHelpIcon fontSize="small"></LiveHelpIcon></Button>
                     </Tooltip>
                   </div>
                   :
@@ -104,7 +105,7 @@ export default function DigitalDocumentForm(props) {
                           <img className='hover-image' src={DNS} />
                         </React.Fragment>
                       }>
-                      <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+                      <Button color='secondary'><LiveHelpIcon fontSize="small"></LiveHelpIcon></Button>
                     </Tooltip>
                     <div className='labelAlign'>
                       <TextField
