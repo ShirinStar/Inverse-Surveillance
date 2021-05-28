@@ -343,38 +343,6 @@ function TurkDocumentForm(props) {
     console.log('render page nav ' + pageNumber + ' ' + pageCount + ' ' + hasPrevPage)
     return (
       <>
-        {hasPrevPage && (
-          <Button
-            variant="outlined"
-            onClick={() => {
-              setPageNumber(pageNumber - 1)
-              refreshSerialNumber(pageNumber - 1);
-            }}><ArrowBackIosIcon size="small" color="primary"></ArrowBackIosIcon>
-            <br /><span className='pageArrow'>page {pageNumber - 1}</span></Button>
-        )}
-        {hasNextPage && (
-          <Button
-            variant="outlined"
-            onClick={() => {
-              setPageNumber(pageNumber + 1)
-              refreshSerialNumber(pageNumber + 1);
-            }}><span className='pageArrow'>page {pageNumber + 1}</span><ArrowForwardIosIcon size="small" color="primary"></ArrowForwardIosIcon>
-            <br /></Button>)
-        }
-
-        {!hasNextPage && (pageNumber !== pageCount) && (
-          <Button
-            variant="contained"
-            disabled={!hasFields}
-            onClick={() => setModalSerialOpen(true)}
-          > + Add New Page</Button>
-        )}
-        {pageNumber === pageCount && (
-          <Button
-            variant="contained"
-            type="submit"
-            onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
-        )}
       </>
     );
   }
@@ -462,6 +430,50 @@ function TurkDocumentForm(props) {
                     setModalSerialOpen(false)
                   }} />
               </div>
+              <div className='divPages'>
+                <div className='backPage'>
+                  {hasPrevPage && (
+                    <Button
+                      color="primary"
+                      onClick={() => {
+                        setPageNumber(pageNumber - 1)
+                        refreshSerialNumber(pageNumber - 1);
+                      }}><ArrowBackIosIcon size="small" color="primary"></ArrowBackIosIcon>
+                      <br /><span className='pageArrow'>page {pageNumber - 1}</span></Button>
+                  )}
+                </div>
+                <div className='addNewPage'>
+                  <div className='addNewPageInner'>
+                    {!hasNextPage && (pageNumber !== pageCount) && (
+                      <Button
+                        variant="contained"
+                        disabled={!hasFields}
+                        onClick={() => setModalSerialOpen(true)}
+                      > + Add New Page</Button>
+                    )}
+                  </div>
+                </div>
+                <div className='nextPage'>
+                  {hasNextPage && (
+                    <Button
+                      color="primary"
+                      onClick={() => {
+                        setPageNumber(pageNumber + 1)
+                        refreshSerialNumber(pageNumber + 1);
+                      }}><span className='pageArrow'>page {pageNumber + 1}</span><ArrowForwardIosIcon size="small" color="primary"></ArrowForwardIosIcon>
+                      <br /></Button>)
+                  }
+                </div>
+                
+              </div>
+              {pageNumber === pageCount && (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size='large'
+                  type="submit"
+                  onClick={() => setSubmitModelOpen(true)}>SUBMIT</Button>
+              )}
             </div>
           </>
         )}

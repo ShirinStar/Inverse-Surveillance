@@ -7,6 +7,7 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 import DNS from 'images/serialNumber.png';
 import DocumentDate from 'images/Date.png';
+import DocumentDateTwo from 'images/Date2.png';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -81,12 +82,21 @@ export default function DigitalDocumentForm(props) {
                         shrink: true,
                       }}
                     />
+                    <p className='secondDate'>If the document is missing a date, please fill in the date that appears on the stamp.</p>
+                    <Tooltip interactive leaveDelay={600}
+                      title={
+                        <React.Fragment>
+                          <img className='hover-image' src={DocumentDateTwo} />
+                        </React.Fragment>
+                      }>
+                      <Button color='secondary'><HelpOutline fontSize="small"></HelpOutline></Button>
+                    </Tooltip>
                   </div>
                   :
                   ''
                 }
                 {docDate && (
-                  <div className='initFields'>
+                  <div className='initFields three'>
                     <p className='form-labels three'><span className='number'>3.</span> Fill page Serial Number</p>
                     <Tooltip interactive leaveDelay={600}
                       title={
@@ -104,6 +114,7 @@ export default function DigitalDocumentForm(props) {
                         name="startPageSerialNumber"
                         inputRef={register} />
                     </div>
+                    <p className='secondDate'>If the document is missing a serial number, please fill in "MISSING".</p>
                   </div>
                 )}
               </div>

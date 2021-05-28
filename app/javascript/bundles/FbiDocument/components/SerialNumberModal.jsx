@@ -82,6 +82,7 @@ export default function SerialNumberModal(props) {
                 </Tooltip>
                 <br />
                 <TextField required id="standard-basic" inputRef={register} name="pageSerialNumber" label="New Page Serial Number" />
+                <p className='secondDate serial'>If the document is missing a serial number, please fill in "MISSING".</p>
                 <br /><br />
                 <Button className='btn saveDSN' variant="contained" type="submit">Save and Start New Page</Button>
               </form>

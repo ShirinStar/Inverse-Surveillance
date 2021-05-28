@@ -85,7 +85,7 @@ export default function LabelAutocomplete(props) {
       renderOption={(option) => option.label}
       freesolo="true"
       renderInput={(params) => (
-        <TextField { ...params } label="Type or choose a section " variant="outlined" />
+        <TextField { ...params } label="Type or choose a label" variant="outlined" />
       )}
     />
   )

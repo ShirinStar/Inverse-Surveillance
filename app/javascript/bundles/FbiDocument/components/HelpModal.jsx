@@ -7,12 +7,14 @@ export default function HelpModal(props) {
   const [showModal, setModal] = useState(false);
   return (
     <div scroll="no">
-      <Button variant="outlined" onClick={() => setModal(true)}><Help fontSize="large" ></Help></Button>
+      <Button onClick={() => setModal(true)}><Help fontSize="large" ></Help></Button>
       {showModal && (
         <div className="modal-help">
 
-          <Button variant="outlined" onClick={() => setModal(false)}><Close fontSize="large" ></Close></Button>
-
+          <div className='closeHelp'>
+            <Button onClick={() => setModal(false)}><Close fontSize="large" ></Close></Button>
+          </div>
+          
           <div className='help-cointainer'>
             <div className='help-view'>
               <h1 className='help-title'>Help & tips</h1>

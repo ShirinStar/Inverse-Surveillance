@@ -77,6 +77,11 @@ h1, h2 {
   padding: 20px;
 }
 
+.closeHelp {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
 .login-section{
   float: right;
   padding: 20px;
@@ -202,6 +207,18 @@ a:hover {
   width: 750px;
 }
 
+.secondDate {
+  font-size: 13px;
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.secondDate.serial {
+  margin-top: 10px;
+}
+
 .PDFprev {
   border: 1px solid black;
   margin-top: 12%;
@@ -247,6 +264,10 @@ a:hover {
   margin-top: 20px;
 }
 
+.initFields.three {
+  margin-top: 15px;
+}
+
 .date-form {
   line-height: 2.2rem;
 }
@@ -272,6 +293,30 @@ a:hover {
   background-color: white;
   color: #F50257; 
   border-bottom: 2px solid black;
+}
+
+.divPages{
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.backPage {
+  float: left;
+}
+
+.nextPage {
+  float: right;
+}
+
+.addNewPage {
+ display: flex;
+ justify-content: center;
+ /* width: 500px; */
+}
+
+.addNewPageInner {
+  margin-left: -50px;
 }
 
 .pageArrow {
@@ -392,8 +437,9 @@ a:hover {
   top: 0;
   left: 0;
   margin: 0; 
-  height: 100vh; 
-  width: 100vw;
+  height: 100%; 
+  width: 100%;
+  padding-bottom: 400px;
   overflow: hidden;
   z-index: 10;
   background: rgb(210, 210, 210);
